@@ -5,6 +5,9 @@ import pl.marczynski.seriesapp.config.Constants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
+import pl.marczynski.seriesapp.domain.jhipster.AbstractAuditingEntity;
+import pl.marczynski.seriesapp.domain.jhipster.Authority;
+
 import javax.validation.constraints.Email;
 
 import javax.persistence.*;

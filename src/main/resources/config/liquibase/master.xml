@@ -5,6 +5,15 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181201151122_added_entity_Series.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181201151123_added_entity_Season.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181201151124_added_entity_Episode.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181201151125_added_entity_FollowedSeries.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181201151126_added_entity_WatchedEpisode.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20181201151123_added_entity_constraints_Season.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181201151124_added_entity_constraints_Episode.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181201151125_added_entity_constraints_FollowedSeries.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181201151126_added_entity_constraints_WatchedEpisode.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

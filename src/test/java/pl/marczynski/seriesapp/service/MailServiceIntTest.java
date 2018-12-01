@@ -18,6 +18,7 @@ import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.thymeleaf.spring5.SpringTemplateEngine;
+import pl.marczynski.seriesapp.service.jhipster.MailService;
 
 import javax.mail.Multipart;
 import javax.mail.internet.MimeBodyPart;

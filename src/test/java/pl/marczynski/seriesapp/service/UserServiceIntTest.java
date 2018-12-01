@@ -4,8 +4,8 @@ import pl.marczynski.seriesapp.SeriesappApp;
 import pl.marczynski.seriesapp.config.Constants;
 import pl.marczynski.seriesapp.domain.User;
 import pl.marczynski.seriesapp.repository.UserRepository;
-import pl.marczynski.seriesapp.service.dto.UserDTO;
-import pl.marczynski.seriesapp.service.util.RandomUtil;
+import pl.marczynski.seriesapp.service.jhipster.dto.UserDTO;
+import pl.marczynski.seriesapp.service.jhipster.util.RandomUtil;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;

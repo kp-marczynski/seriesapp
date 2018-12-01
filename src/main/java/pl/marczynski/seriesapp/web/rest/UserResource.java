@@ -4,14 +4,14 @@ import pl.marczynski.seriesapp.config.Constants;
 import pl.marczynski.seriesapp.domain.User;
 import pl.marczynski.seriesapp.repository.UserRepository;
 import pl.marczynski.seriesapp.security.AuthoritiesConstants;
-import pl.marczynski.seriesapp.service.MailService;
+import pl.marczynski.seriesapp.service.jhipster.MailService;
 import pl.marczynski.seriesapp.service.UserService;
-import pl.marczynski.seriesapp.service.dto.UserDTO;
+import pl.marczynski.seriesapp.service.jhipster.dto.UserDTO;
 import pl.marczynski.seriesapp.web.rest.errors.BadRequestAlertException;
 import pl.marczynski.seriesapp.web.rest.errors.EmailAlreadyUsedException;
 import pl.marczynski.seriesapp.web.rest.errors.LoginAlreadyUsedException;
-import pl.marczynski.seriesapp.web.rest.util.HeaderUtil;
-import pl.marczynski.seriesapp.web.rest.util.PaginationUtil;
+import pl.marczynski.seriesapp.web.rest.jhipster.util.HeaderUtil;
+import pl.marczynski.seriesapp.web.rest.jhipster.util.PaginationUtil;
 import com.codahale.metrics.annotation.Timed;
 import io.github.jhipster.web.util.ResponseUtil;
 

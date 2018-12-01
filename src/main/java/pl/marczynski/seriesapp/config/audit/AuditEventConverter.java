@@ -1,6 +1,6 @@
 package pl.marczynski.seriesapp.config.audit;
 
-import pl.marczynski.seriesapp.domain.PersistentAuditEvent;
+import pl.marczynski.seriesapp.domain.jhipster.PersistentAuditEvent;
 
 import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;

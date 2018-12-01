@@ -3,7 +3,7 @@ package pl.marczynski.seriesapp.repository;
 import pl.marczynski.seriesapp.SeriesappApp;
 import pl.marczynski.seriesapp.config.Constants;
 import pl.marczynski.seriesapp.config.audit.AuditEventConverter;
-import pl.marczynski.seriesapp.domain.PersistentAuditEvent;
+import pl.marczynski.seriesapp.domain.jhipster.PersistentAuditEvent;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +15,8 @@ import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+import pl.marczynski.seriesapp.repository.jhipster.CustomAuditEventRepository;
+import pl.marczynski.seriesapp.repository.jhipster.PersistenceAuditEventRepository;
 
 import javax.servlet.http.HttpSession;
 import java.time.Instant;
@@ -23,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static pl.marczynski.seriesapp.repository.CustomAuditEventRepository.EVENT_DATA_COLUMN_MAX_LENGTH;
+import static pl.marczynski.seriesapp.repository.jhipster.CustomAuditEventRepository.EVENT_DATA_COLUMN_MAX_LENGTH;
 
 /**
  * Test class for the CustomAuditEventRepository class.

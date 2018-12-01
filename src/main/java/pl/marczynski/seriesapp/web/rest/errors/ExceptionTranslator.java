@@ -1,6 +1,6 @@
 package pl.marczynski.seriesapp.web.rest.errors;
 
-import pl.marczynski.seriesapp.web.rest.util.HeaderUtil;
+import pl.marczynski.seriesapp.web.rest.jhipster.util.HeaderUtil;
 
 import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.http.ResponseEntity;

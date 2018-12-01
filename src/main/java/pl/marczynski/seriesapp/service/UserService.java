@@ -1,14 +1,14 @@
 package pl.marczynski.seriesapp.service;
 
 import pl.marczynski.seriesapp.config.Constants;
-import pl.marczynski.seriesapp.domain.Authority;
+import pl.marczynski.seriesapp.domain.jhipster.Authority;
 import pl.marczynski.seriesapp.domain.User;
-import pl.marczynski.seriesapp.repository.AuthorityRepository;
+import pl.marczynski.seriesapp.repository.jhipster.AuthorityRepository;
 import pl.marczynski.seriesapp.repository.UserRepository;
 import pl.marczynski.seriesapp.security.AuthoritiesConstants;
 import pl.marczynski.seriesapp.security.SecurityUtils;
-import pl.marczynski.seriesapp.service.dto.UserDTO;
-import pl.marczynski.seriesapp.service.util.RandomUtil;
+import pl.marczynski.seriesapp.service.jhipster.dto.UserDTO;
+import pl.marczynski.seriesapp.service.jhipster.util.RandomUtil;
 import pl.marczynski.seriesapp.web.rest.errors.*;
 
 import org.slf4j.Logger;

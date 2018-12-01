@@ -1,16 +1,17 @@
 package pl.marczynski.seriesapp.web.rest;
 
 import pl.marczynski.seriesapp.SeriesappApp;
-import pl.marczynski.seriesapp.domain.Authority;
+import pl.marczynski.seriesapp.domain.jhipster.Authority;
 import pl.marczynski.seriesapp.domain.User;
 import pl.marczynski.seriesapp.repository.UserRepository;
 import pl.marczynski.seriesapp.security.AuthoritiesConstants;
-import pl.marczynski.seriesapp.service.MailService;
+import pl.marczynski.seriesapp.service.jhipster.MailService;
 import pl.marczynski.seriesapp.service.UserService;
-import pl.marczynski.seriesapp.service.dto.UserDTO;
-import pl.marczynski.seriesapp.service.mapper.UserMapper;
+import pl.marczynski.seriesapp.service.jhipster.dto.UserDTO;
+import pl.marczynski.seriesapp.service.jhipster.mapper.UserMapper;
 import pl.marczynski.seriesapp.web.rest.errors.ExceptionTranslator;
-import pl.marczynski.seriesapp.web.rest.vm.ManagedUserVM;
+import pl.marczynski.seriesapp.web.rest.jhipster.TestUtil;
+import pl.marczynski.seriesapp.web.rest.jhipster.vm.ManagedUserVM;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
