@@ -12,7 +12,11 @@
         },
         {
             "fieldName": "title",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 150
         },
         {
             "fieldName": "releaseDate",

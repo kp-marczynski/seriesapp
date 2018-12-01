@@ -29,7 +29,8 @@ public class Season implements Serializable {
     @Column(name = "jhi_number", nullable = false)
     private Integer number;
 
-    @Column(name = "description")
+    @Size(max = 1000)
+    @Column(name = "description", length = 1000)
     private String description;
 
     @NotNull

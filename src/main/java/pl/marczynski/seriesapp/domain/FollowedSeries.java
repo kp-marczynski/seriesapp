@@ -27,7 +27,8 @@ public class FollowedSeries implements Serializable {
     @Column(name = "rate")
     private Rate rate;
 
-    @Column(name = "jhi_comment")
+    @Size(max = 500)
+    @Column(name = "jhi_comment", length = 500)
     private String comment;
 
     @ManyToOne(optional = false)

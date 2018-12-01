@@ -3,32 +3,32 @@ enum Rate {
 }
 
 entity Series {
-	name String required,
+	name String maxlength(150) required,
 	releaseYear Integer required min(1926),
-	description String
+	description String maxlength(1000)
 }
 
 entity Season {
 	number Integer required min(1),
-	description String,
+	description String maxlength(1000),
 	releaseYear Integer required min(1926),
 }
 
 entity Episode{
 	number Integer required min(0),
-  	title String,
+  	title String maxlength(150),
   	releaseDate LocalDate,
   	duration Integer min(1),
 }
 
 entity FollowedSeries{
   	rate Rate,
-  	comment String,
+  	comment String maxlength(500),
 }
 
 entity WatchedEpisode {
   	rate Rate,
-  	comment String,
+  	comment String maxlength(500),
 }
 
 relationship ManyToOne {

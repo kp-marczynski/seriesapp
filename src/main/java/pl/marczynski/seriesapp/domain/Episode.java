@@ -27,7 +27,8 @@ public class Episode implements Serializable {
     @Column(name = "jhi_number", nullable = false)
     private Integer number;
 
-    @Column(name = "title")
+    @Size(max = 150)
+    @Column(name = "title", length = 150)
     private String title;
 
     @Column(name = "release_date")

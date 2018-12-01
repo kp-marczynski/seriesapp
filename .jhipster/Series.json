@@ -5,8 +5,10 @@
             "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
+                "maxlength",
                 "required"
-            ]
+            ],
+            "fieldValidateRulesMaxlength": 150
         },
         {
             "fieldName": "releaseYear",
@@ -19,7 +21,11 @@
         },
         {
             "fieldName": "description",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 1000
         }
     ],
     "relationships": [

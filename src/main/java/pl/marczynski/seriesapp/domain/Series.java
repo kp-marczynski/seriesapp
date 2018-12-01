@@ -24,7 +24,8 @@ public class Series implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false)
+    @Size(max = 150)
+    @Column(name = "name", length = 150, nullable = false)
     private String name;
 
     @NotNull
@@ -32,7 +33,8 @@ public class Series implements Serializable {
     @Column(name = "release_year", nullable = false)
     private Integer releaseYear;
 
-    @Column(name = "description")
+    @Size(max = 1000)
+    @Column(name = "description", length = 1000)
     private String description;
 
     @OneToMany(mappedBy = "series")
