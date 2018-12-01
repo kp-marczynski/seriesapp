@@ -1,0 +1,41 @@
+enum Rate {
+	BAD, MEDIOCRE, AVERAGE, GOOD, AWESOME
+}
+
+entity Series {
+	name String required,
+	releaseYear Integer required min(1926),
+	description String
+}
+
+entity Season {
+	number Integer required min(1),
+	description String,
+	releaseYear Integer required min(1926),
+}
+
+entity Episode{
+	number Integer required min(0),
+  	title String,
+  	releaseDate LocalDate,
+  	duration Integer min(1),
+}
+
+entity FollowedSeries{
+  	rate Rate,
+  	comment String,
+}
+
+entity WatchedEpisode {
+  	rate Rate,
+  	comment String,
+}
+
+relationship ManyToOne {
+	Season{series required} to Series{season},
+	Episode{season required} to Season{episode},
+	FollowedSeries{user required} to User,
+	FollowedSeries{series required} to Series,
+	WatchedEpisode{user required} to User,
+	WatchedEpisode{episode required} to Episode
+}
