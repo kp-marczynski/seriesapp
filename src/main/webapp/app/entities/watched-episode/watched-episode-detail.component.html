@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="watchedEpisode">
+            <h2><span>Watched Episode</span> {{watchedEpisode.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Rate</span></dt>
+                <dd>
+                    <span>{{watchedEpisode.rate}}</span>
+                </dd>
+                <dt><span>Comment</span></dt>
+                <dd>
+                    <span>{{watchedEpisode.comment}}</span>
+                </dd>
+                <dt><span>User</span></dt>
+                <dd>
+                    {{watchedEpisode.user?.id}}
+                </dd>
+                <dt><span>Episode</span></dt>
+                <dd>
+                    <div *ngIf="watchedEpisode.episode">
+                        <a [routerLink]="['/episode', watchedEpisode.episode?.id, 'view']">{{watchedEpisode.episode?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/watched-episode', watchedEpisode.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

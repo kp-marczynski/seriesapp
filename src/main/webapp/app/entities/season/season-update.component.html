@@ -1,0 +1,80 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-season-heading">Create or edit a Season</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!season.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="season.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_number">Number</label>
+                    <input type="number" class="form-control" name="number" id="field_number"
+                        [(ngModel)]="season.number" required min="1" jhiMin="1"/>
+                    <div [hidden]="!(editForm.controls.number?.dirty && editForm.controls.number?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.number?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.number?.errors?.min">
+                            This field should be at least 1.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.number?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="season.description" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_releaseYear">Release Year</label>
+                    <input type="number" class="form-control" name="releaseYear" id="field_releaseYear"
+                        [(ngModel)]="season.releaseYear" required min="1926" jhiMin="1926"/>
+                    <div [hidden]="!(editForm.controls.releaseYear?.dirty && editForm.controls.releaseYear?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.releaseYear?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.releaseYear?.errors?.min">
+                            This field should be at least 1926.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.releaseYear?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_series">Series</label>
+                    <select class="form-control" id="field_series" name="series" [(ngModel)]="season.series"  required>
+                        <option *ngIf="!editForm.value.series" [ngValue]="null" selected></option>
+                        <option [ngValue]="seriesOption.id === season.series?.id ? season.series : seriesOption" *ngFor="let seriesOption of series; trackBy: trackSeriesById">{{seriesOption.id}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.series?.dirty && editForm.controls.series?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.series?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
