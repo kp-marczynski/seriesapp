@@ -2,7 +2,7 @@ package pl.marczynski.seriesapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import pl.marczynski.seriesapp.domain.FollowedSeries;
-import pl.marczynski.seriesapp.repository.FollowedSeriesRepository;
+import pl.marczynski.seriesapp.service.FollowedSeriesService;
 import pl.marczynski.seriesapp.web.rest.errors.BadRequestAlertException;
 import pl.marczynski.seriesapp.web.rest.jhipster.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -29,10 +29,10 @@ public class FollowedSeriesResource {
 
     private static final String ENTITY_NAME = "followedSeries";
 
-    private final FollowedSeriesRepository followedSeriesRepository;
+    private final FollowedSeriesService followedSeriesService;
 
-    public FollowedSeriesResource(FollowedSeriesRepository followedSeriesRepository) {
-        this.followedSeriesRepository = followedSeriesRepository;
+    public FollowedSeriesResource(FollowedSeriesService followedSeriesService) {
+        this.followedSeriesService = followedSeriesService;
     }
 
     /**
@@ -49,7 +49,7 @@ public class FollowedSeriesResource {
         if (followedSeries.getId() != null) {
             throw new BadRequestAlertException("A new followedSeries cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        FollowedSeries result = followedSeriesRepository.save(followedSeries);
+        FollowedSeries result = followedSeriesService.save(followedSeries);
         return ResponseEntity.created(new URI("/api/followed-series/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -71,7 +71,7 @@ public class FollowedSeriesResource {
         if (followedSeries.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        FollowedSeries result = followedSeriesRepository.save(followedSeries);
+        FollowedSeries result = followedSeriesService.save(followedSeries);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, followedSeries.getId().toString()))
             .body(result);
@@ -86,7 +86,7 @@ public class FollowedSeriesResource {
     @Timed
     public List<FollowedSeries> getAllFollowedSeries() {
         log.debug("REST request to get all FollowedSeries");
-        return followedSeriesRepository.findAll();
+        return followedSeriesService.findAll();
     }
 
     /**
@@ -99,7 +99,7 @@ public class FollowedSeriesResource {
     @Timed
     public ResponseEntity<FollowedSeries> getFollowedSeries(@PathVariable Long id) {
         log.debug("REST request to get FollowedSeries : {}", id);
-        Optional<FollowedSeries> followedSeries = followedSeriesRepository.findById(id);
+        Optional<FollowedSeries> followedSeries = followedSeriesService.findById(id);
         return ResponseUtil.wrapOrNotFound(followedSeries);
     }
 
@@ -114,7 +114,7 @@ public class FollowedSeriesResource {
     public ResponseEntity<Void> deleteFollowedSeries(@PathVariable Long id) {
         log.debug("REST request to delete FollowedSeries : {}", id);
 
-        followedSeriesRepository.deleteById(id);
+        followedSeriesService.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

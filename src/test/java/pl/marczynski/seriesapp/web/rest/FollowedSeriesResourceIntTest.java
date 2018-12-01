@@ -6,6 +6,7 @@ import pl.marczynski.seriesapp.domain.FollowedSeries;
 import pl.marczynski.seriesapp.domain.User;
 import pl.marczynski.seriesapp.domain.Series;
 import pl.marczynski.seriesapp.repository.FollowedSeriesRepository;
+import pl.marczynski.seriesapp.service.FollowedSeriesService;
 import pl.marczynski.seriesapp.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -54,6 +55,9 @@ public class FollowedSeriesResourceIntTest {
     private FollowedSeriesRepository followedSeriesRepository;
 
     @Autowired
+    private FollowedSeriesService followedSeriesService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -72,7 +76,7 @@ public class FollowedSeriesResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final FollowedSeriesResource followedSeriesResource = new FollowedSeriesResource(followedSeriesRepository);
+        final FollowedSeriesResource followedSeriesResource = new FollowedSeriesResource(followedSeriesService);
         this.restFollowedSeriesMockMvc = MockMvcBuilders.standaloneSetup(followedSeriesResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

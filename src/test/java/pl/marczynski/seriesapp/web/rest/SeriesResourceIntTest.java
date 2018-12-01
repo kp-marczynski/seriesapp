@@ -4,6 +4,7 @@ import pl.marczynski.seriesapp.SeriesappApp;
 
 import pl.marczynski.seriesapp.domain.Series;
 import pl.marczynski.seriesapp.repository.SeriesRepository;
+import pl.marczynski.seriesapp.service.SeriesService;
 import pl.marczynski.seriesapp.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -53,6 +54,9 @@ public class SeriesResourceIntTest {
     private SeriesRepository seriesRepository;
 
     @Autowired
+    private SeriesService seriesService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -71,7 +75,7 @@ public class SeriesResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final SeriesResource seriesResource = new SeriesResource(seriesRepository);
+        final SeriesResource seriesResource = new SeriesResource(seriesService);
         this.restSeriesMockMvc = MockMvcBuilders.standaloneSetup(seriesResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

@@ -2,7 +2,7 @@ package pl.marczynski.seriesapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import pl.marczynski.seriesapp.domain.Season;
-import pl.marczynski.seriesapp.repository.SeasonRepository;
+import pl.marczynski.seriesapp.service.SeasonService;
 import pl.marczynski.seriesapp.web.rest.errors.BadRequestAlertException;
 import pl.marczynski.seriesapp.web.rest.jhipster.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -29,10 +29,10 @@ public class SeasonResource {
 
     private static final String ENTITY_NAME = "season";
 
-    private final SeasonRepository seasonRepository;
+    private final SeasonService seasonService;
 
-    public SeasonResource(SeasonRepository seasonRepository) {
-        this.seasonRepository = seasonRepository;
+    public SeasonResource(SeasonService seasonService) {
+        this.seasonService = seasonService;
     }
 
     /**
@@ -49,7 +49,7 @@ public class SeasonResource {
         if (season.getId() != null) {
             throw new BadRequestAlertException("A new season cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Season result = seasonRepository.save(season);
+        Season result = seasonService.save(season);
         return ResponseEntity.created(new URI("/api/seasons/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -71,7 +71,7 @@ public class SeasonResource {
         if (season.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Season result = seasonRepository.save(season);
+        Season result = seasonService.save(season);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, season.getId().toString()))
             .body(result);
@@ -86,7 +86,7 @@ public class SeasonResource {
     @Timed
     public List<Season> getAllSeasons() {
         log.debug("REST request to get all Seasons");
-        return seasonRepository.findAll();
+        return seasonService.findAll();
     }
 
     /**
@@ -99,7 +99,7 @@ public class SeasonResource {
     @Timed
     public ResponseEntity<Season> getSeason(@PathVariable Long id) {
         log.debug("REST request to get Season : {}", id);
-        Optional<Season> season = seasonRepository.findById(id);
+        Optional<Season> season = seasonService.findById(id);
         return ResponseUtil.wrapOrNotFound(season);
     }
 
@@ -114,7 +114,7 @@ public class SeasonResource {
     public ResponseEntity<Void> deleteSeason(@PathVariable Long id) {
         log.debug("REST request to delete Season : {}", id);
 
-        seasonRepository.deleteById(id);
+        seasonService.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

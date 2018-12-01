@@ -6,6 +6,7 @@ import pl.marczynski.seriesapp.domain.WatchedEpisode;
 import pl.marczynski.seriesapp.domain.User;
 import pl.marczynski.seriesapp.domain.Episode;
 import pl.marczynski.seriesapp.repository.WatchedEpisodeRepository;
+import pl.marczynski.seriesapp.service.WatchedEpisodeService;
 import pl.marczynski.seriesapp.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -54,6 +55,9 @@ public class WatchedEpisodeResourceIntTest {
     private WatchedEpisodeRepository watchedEpisodeRepository;
 
     @Autowired
+    private WatchedEpisodeService watchedEpisodeService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -72,7 +76,7 @@ public class WatchedEpisodeResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final WatchedEpisodeResource watchedEpisodeResource = new WatchedEpisodeResource(watchedEpisodeRepository);
+        final WatchedEpisodeResource watchedEpisodeResource = new WatchedEpisodeResource(watchedEpisodeService);
         this.restWatchedEpisodeMockMvc = MockMvcBuilders.standaloneSetup(watchedEpisodeResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

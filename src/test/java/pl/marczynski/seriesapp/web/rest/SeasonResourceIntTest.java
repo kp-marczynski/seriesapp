@@ -5,6 +5,7 @@ import pl.marczynski.seriesapp.SeriesappApp;
 import pl.marczynski.seriesapp.domain.Season;
 import pl.marczynski.seriesapp.domain.Series;
 import pl.marczynski.seriesapp.repository.SeasonRepository;
+import pl.marczynski.seriesapp.service.SeasonService;
 import pl.marczynski.seriesapp.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -54,6 +55,9 @@ public class SeasonResourceIntTest {
     private SeasonRepository seasonRepository;
 
     @Autowired
+    private SeasonService seasonService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -72,7 +76,7 @@ public class SeasonResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final SeasonResource seasonResource = new SeasonResource(seasonRepository);
+        final SeasonResource seasonResource = new SeasonResource(seasonService);
         this.restSeasonMockMvc = MockMvcBuilders.standaloneSetup(seasonResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

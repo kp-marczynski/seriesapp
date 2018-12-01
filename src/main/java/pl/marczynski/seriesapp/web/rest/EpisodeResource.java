@@ -2,7 +2,7 @@ package pl.marczynski.seriesapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import pl.marczynski.seriesapp.domain.Episode;
-import pl.marczynski.seriesapp.repository.EpisodeRepository;
+import pl.marczynski.seriesapp.service.EpisodeService;
 import pl.marczynski.seriesapp.web.rest.errors.BadRequestAlertException;
 import pl.marczynski.seriesapp.web.rest.jhipster.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -29,10 +29,10 @@ public class EpisodeResource {
 
     private static final String ENTITY_NAME = "episode";
 
-    private final EpisodeRepository episodeRepository;
+    private final EpisodeService episodeService;
 
-    public EpisodeResource(EpisodeRepository episodeRepository) {
-        this.episodeRepository = episodeRepository;
+    public EpisodeResource(EpisodeService episodeService) {
+        this.episodeService = episodeService;
     }
 
     /**
@@ -49,7 +49,7 @@ public class EpisodeResource {
         if (episode.getId() != null) {
             throw new BadRequestAlertException("A new episode cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Episode result = episodeRepository.save(episode);
+        Episode result = episodeService.save(episode);
         return ResponseEntity.created(new URI("/api/episodes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -71,7 +71,7 @@ public class EpisodeResource {
         if (episode.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Episode result = episodeRepository.save(episode);
+        Episode result = episodeService.save(episode);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, episode.getId().toString()))
             .body(result);
@@ -86,7 +86,7 @@ public class EpisodeResource {
     @Timed
     public List<Episode> getAllEpisodes() {
         log.debug("REST request to get all Episodes");
-        return episodeRepository.findAll();
+        return episodeService.findAll();
     }
 
     /**
@@ -99,7 +99,7 @@ public class EpisodeResource {
     @Timed
     public ResponseEntity<Episode> getEpisode(@PathVariable Long id) {
         log.debug("REST request to get Episode : {}", id);
-        Optional<Episode> episode = episodeRepository.findById(id);
+        Optional<Episode> episode = episodeService.findById(id);
         return ResponseUtil.wrapOrNotFound(episode);
     }
 
@@ -114,7 +114,7 @@ public class EpisodeResource {
     public ResponseEntity<Void> deleteEpisode(@PathVariable Long id) {
         log.debug("REST request to delete Episode : {}", id);
 
-        episodeRepository.deleteById(id);
+        episodeService.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

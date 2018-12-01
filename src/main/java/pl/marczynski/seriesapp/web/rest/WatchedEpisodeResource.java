@@ -2,7 +2,7 @@ package pl.marczynski.seriesapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import pl.marczynski.seriesapp.domain.WatchedEpisode;
-import pl.marczynski.seriesapp.repository.WatchedEpisodeRepository;
+import pl.marczynski.seriesapp.service.WatchedEpisodeService;
 import pl.marczynski.seriesapp.web.rest.errors.BadRequestAlertException;
 import pl.marczynski.seriesapp.web.rest.jhipster.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -29,10 +29,10 @@ public class WatchedEpisodeResource {
 
     private static final String ENTITY_NAME = "watchedEpisode";
 
-    private final WatchedEpisodeRepository watchedEpisodeRepository;
+    private final WatchedEpisodeService watchedEpisodeService;
 
-    public WatchedEpisodeResource(WatchedEpisodeRepository watchedEpisodeRepository) {
-        this.watchedEpisodeRepository = watchedEpisodeRepository;
+    public WatchedEpisodeResource(WatchedEpisodeService watchedEpisodeService) {
+        this.watchedEpisodeService = watchedEpisodeService;
     }
 
     /**
@@ -49,7 +49,7 @@ public class WatchedEpisodeResource {
         if (watchedEpisode.getId() != null) {
             throw new BadRequestAlertException("A new watchedEpisode cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        WatchedEpisode result = watchedEpisodeRepository.save(watchedEpisode);
+        WatchedEpisode result = watchedEpisodeService.save(watchedEpisode);
         return ResponseEntity.created(new URI("/api/watched-episodes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -71,7 +71,7 @@ public class WatchedEpisodeResource {
         if (watchedEpisode.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        WatchedEpisode result = watchedEpisodeRepository.save(watchedEpisode);
+        WatchedEpisode result = watchedEpisodeService.save(watchedEpisode);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, watchedEpisode.getId().toString()))
             .body(result);
@@ -86,7 +86,7 @@ public class WatchedEpisodeResource {
     @Timed
     public List<WatchedEpisode> getAllWatchedEpisodes() {
         log.debug("REST request to get all WatchedEpisodes");
-        return watchedEpisodeRepository.findAll();
+        return watchedEpisodeService.findAll();
     }
 
     /**
@@ -99,7 +99,7 @@ public class WatchedEpisodeResource {
     @Timed
     public ResponseEntity<WatchedEpisode> getWatchedEpisode(@PathVariable Long id) {
         log.debug("REST request to get WatchedEpisode : {}", id);
-        Optional<WatchedEpisode> watchedEpisode = watchedEpisodeRepository.findById(id);
+        Optional<WatchedEpisode> watchedEpisode = watchedEpisodeService.findById(id);
         return ResponseUtil.wrapOrNotFound(watchedEpisode);
     }
 
@@ -114,7 +114,7 @@ public class WatchedEpisodeResource {
     public ResponseEntity<Void> deleteWatchedEpisode(@PathVariable Long id) {
         log.debug("REST request to delete WatchedEpisode : {}", id);
 
-        watchedEpisodeRepository.deleteById(id);
+        watchedEpisodeService.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }
