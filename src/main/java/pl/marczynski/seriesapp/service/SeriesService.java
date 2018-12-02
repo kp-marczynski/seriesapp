@@ -9,25 +9,29 @@ import java.util.Optional;
 
 @Service
 public class SeriesService {
-    private SeriesRepository SeriesRepository;
+    private SeriesRepository seriesRepository;
 
     public SeriesService(SeriesRepository SeriesRepository) {
-        this.SeriesRepository = SeriesRepository;
+        this.seriesRepository = SeriesRepository;
     }
 
     public Series save(Series Series) {
-        return SeriesRepository.save(Series);
+        return seriesRepository.save(Series);
     }
 
     public List<Series> findAll() {
-        return SeriesRepository.findAll();
+        return seriesRepository.findAll();
     }
 
     public Optional<Series> findById(Long id) {
-        return SeriesRepository.findById(id);
+        return seriesRepository.findById(id);
     }
 
     public void deleteById(Long id) {
-        SeriesRepository.deleteById(id);
+        seriesRepository.deleteById(id);
+    }
+
+    public Series update(Series series) {
+        return seriesRepository.save(series);
     }
 }

@@ -30,4 +30,8 @@ public class EpisodeService {
     public void deleteById(Long id) {
         episodeRepository.deleteById(id);
     }
+
+    public Episode update(Episode episode) {
+        return episodeRepository.save(episode);
+    }
 }

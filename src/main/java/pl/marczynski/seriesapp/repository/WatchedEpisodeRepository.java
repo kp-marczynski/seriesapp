@@ -1,10 +1,15 @@
 package pl.marczynski.seriesapp.repository;
 
+import pl.marczynski.seriesapp.config.Constants;
 import pl.marczynski.seriesapp.domain.WatchedEpisode;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Spring Data  repository for the WatchedEpisode entity.
@@ -16,4 +21,5 @@ public interface WatchedEpisodeRepository extends JpaRepository<WatchedEpisode, 
     @Query("select watched_episode from WatchedEpisode watched_episode where watched_episode.user.login = ?#{principal.username}")
     List<WatchedEpisode> findByUserIsCurrentUser();
 
+    Optional<WatchedEpisode> findByUserLoginAndEpisodeId(@NotNull @Pattern(regexp = Constants.LOGIN_REGEX) @Size(min = 1, max = 50) String user_login, Long episode_id);
 }

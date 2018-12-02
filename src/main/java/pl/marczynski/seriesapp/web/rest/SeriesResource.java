@@ -1,7 +1,9 @@
 package pl.marczynski.seriesapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import org.springframework.security.access.prepost.PreAuthorize;
 import pl.marczynski.seriesapp.domain.Series;
+import pl.marczynski.seriesapp.security.AuthoritiesConstants;
 import pl.marczynski.seriesapp.service.SeriesService;
 import pl.marczynski.seriesapp.web.rest.errors.BadRequestAlertException;
 import pl.marczynski.seriesapp.web.rest.jhipster.util.HeaderUtil;
@@ -44,6 +46,7 @@ public class SeriesResource {
      */
     @PostMapping("/series")
     @Timed
+    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Series> createSeries(@Valid @RequestBody Series series) throws URISyntaxException {
         log.debug("REST request to save Series : {}", series);
         if (series.getId() != null) {
@@ -66,12 +69,13 @@ public class SeriesResource {
      */
     @PutMapping("/series")
     @Timed
+    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Series> updateSeries(@Valid @RequestBody Series series) throws URISyntaxException {
         log.debug("REST request to update Series : {}", series);
         if (series.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Series result = seriesService.save(series);
+        Series result = seriesService.update(series);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, series.getId().toString()))
             .body(result);
@@ -111,6 +115,7 @@ public class SeriesResource {
      */
     @DeleteMapping("/series/{id}")
     @Timed
+    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Void> deleteSeries(@PathVariable Long id) {
         log.debug("REST request to delete Series : {}", id);
 

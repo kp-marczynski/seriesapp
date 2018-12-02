@@ -1,7 +1,9 @@
 package pl.marczynski.seriesapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import org.springframework.security.access.prepost.PreAuthorize;
 import pl.marczynski.seriesapp.domain.WatchedEpisode;
+import pl.marczynski.seriesapp.security.AuthoritiesConstants;
 import pl.marczynski.seriesapp.service.WatchedEpisodeService;
 import pl.marczynski.seriesapp.web.rest.errors.BadRequestAlertException;
 import pl.marczynski.seriesapp.web.rest.jhipster.util.HeaderUtil;
@@ -71,7 +73,7 @@ public class WatchedEpisodeResource {
         if (watchedEpisode.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        WatchedEpisode result = watchedEpisodeService.save(watchedEpisode);
+        WatchedEpisode result = watchedEpisodeService.update(watchedEpisode);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, watchedEpisode.getId().toString()))
             .body(result);

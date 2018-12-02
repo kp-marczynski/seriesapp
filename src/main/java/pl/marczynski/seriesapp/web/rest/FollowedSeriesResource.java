@@ -1,7 +1,9 @@
 package pl.marczynski.seriesapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import org.springframework.security.access.prepost.PreAuthorize;
 import pl.marczynski.seriesapp.domain.FollowedSeries;
+import pl.marczynski.seriesapp.security.AuthoritiesConstants;
 import pl.marczynski.seriesapp.service.FollowedSeriesService;
 import pl.marczynski.seriesapp.web.rest.errors.BadRequestAlertException;
 import pl.marczynski.seriesapp.web.rest.jhipster.util.HeaderUtil;
@@ -71,7 +73,7 @@ public class FollowedSeriesResource {
         if (followedSeries.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        FollowedSeries result = followedSeriesService.save(followedSeries);
+        FollowedSeries result = followedSeriesService.update(followedSeries);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, followedSeries.getId().toString()))
             .body(result);

@@ -1,7 +1,9 @@
 package pl.marczynski.seriesapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import org.springframework.security.access.prepost.PreAuthorize;
 import pl.marczynski.seriesapp.domain.Episode;
+import pl.marczynski.seriesapp.security.AuthoritiesConstants;
 import pl.marczynski.seriesapp.service.EpisodeService;
 import pl.marczynski.seriesapp.web.rest.errors.BadRequestAlertException;
 import pl.marczynski.seriesapp.web.rest.jhipster.util.HeaderUtil;
@@ -44,6 +46,7 @@ public class EpisodeResource {
      */
     @PostMapping("/episodes")
     @Timed
+    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Episode> createEpisode(@Valid @RequestBody Episode episode) throws URISyntaxException {
         log.debug("REST request to save Episode : {}", episode);
         if (episode.getId() != null) {
@@ -66,12 +69,13 @@ public class EpisodeResource {
      */
     @PutMapping("/episodes")
     @Timed
+    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Episode> updateEpisode(@Valid @RequestBody Episode episode) throws URISyntaxException {
         log.debug("REST request to update Episode : {}", episode);
         if (episode.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Episode result = episodeService.save(episode);
+        Episode result = episodeService.update(episode);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, episode.getId().toString()))
             .body(result);
@@ -111,6 +115,7 @@ public class EpisodeResource {
      */
     @DeleteMapping("/episodes/{id}")
     @Timed
+    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Void> deleteEpisode(@PathVariable Long id) {
         log.debug("REST request to delete Episode : {}", id);
 

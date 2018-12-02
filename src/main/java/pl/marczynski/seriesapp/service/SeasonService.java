@@ -9,25 +9,29 @@ import java.util.Optional;
 
 @Service
 public class SeasonService {
-    private SeasonRepository SeasonRepository;
+    private SeasonRepository seasonRepository;
 
     public SeasonService(SeasonRepository SeasonRepository) {
-        this.SeasonRepository = SeasonRepository;
+        this.seasonRepository = SeasonRepository;
     }
 
     public Season save(Season Season) {
-        return SeasonRepository.save(Season);
+        return seasonRepository.save(Season);
     }
 
     public List<Season> findAll() {
-        return SeasonRepository.findAll();
+        return seasonRepository.findAll();
     }
 
     public Optional<Season> findById(Long id) {
-        return SeasonRepository.findById(id);
+        return seasonRepository.findById(id);
     }
 
     public void deleteById(Long id) {
-        SeasonRepository.deleteById(id);
+        seasonRepository.deleteById(id);
+    }
+
+    public Season update(Season season) {
+        return seasonRepository.save(season);
     }
 }

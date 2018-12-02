@@ -1,7 +1,9 @@
 package pl.marczynski.seriesapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import org.springframework.security.access.prepost.PreAuthorize;
 import pl.marczynski.seriesapp.domain.Season;
+import pl.marczynski.seriesapp.security.AuthoritiesConstants;
 import pl.marczynski.seriesapp.service.SeasonService;
 import pl.marczynski.seriesapp.web.rest.errors.BadRequestAlertException;
 import pl.marczynski.seriesapp.web.rest.jhipster.util.HeaderUtil;
@@ -44,6 +46,7 @@ public class SeasonResource {
      */
     @PostMapping("/seasons")
     @Timed
+    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Season> createSeason(@Valid @RequestBody Season season) throws URISyntaxException {
         log.debug("REST request to save Season : {}", season);
         if (season.getId() != null) {
@@ -66,12 +69,13 @@ public class SeasonResource {
      */
     @PutMapping("/seasons")
     @Timed
+    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Season> updateSeason(@Valid @RequestBody Season season) throws URISyntaxException {
         log.debug("REST request to update Season : {}", season);
         if (season.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Season result = seasonService.save(season);
+        Season result = seasonService.update(season);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, season.getId().toString()))
             .body(result);
@@ -111,6 +115,7 @@ public class SeasonResource {
      */
     @DeleteMapping("/seasons/{id}")
     @Timed
+    @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Void> deleteSeason(@PathVariable Long id) {
         log.debug("REST request to delete Season : {}", id);
 
