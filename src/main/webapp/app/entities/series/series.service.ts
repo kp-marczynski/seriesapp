@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { ISeries } from 'app/shared/model/series.model';
+import {IFollowedSeries} from "app/shared/model/followed-series.model";
 
 type EntityResponseType = HttpResponse<ISeries>;
 type EntityArrayResponseType = HttpResponse<ISeries[]>;
@@ -25,6 +26,11 @@ export class SeriesService {
 
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<ISeries>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    }
+
+    findFollowed(id: number): Observable<EntityResponseType>{
+        return this.http
+            .get<IFollowedSeries>(`${this.resourceUrl}/${id}/followed`, { observe: 'response' });
     }
 
     query(req?: any): Observable<EntityArrayResponseType> {

@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IEpisode } from 'app/shared/model/episode.model';
+import {IWatchedEpisode} from "app/shared/model/watched-episode.model";
 
 type EntityResponseType = HttpResponse<IEpisode>;
 type EntityArrayResponseType = HttpResponse<IEpisode[]>;
@@ -35,6 +36,12 @@ export class EpisodeService {
     find(id: number): Observable<EntityResponseType> {
         return this.http
             .get<IEpisode>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
+
+    findWatched(id: number): Observable<EntityResponseType>{
+        return this.http
+            .get<IWatchedEpisode>(`${this.resourceUrl}/${id}/watched`, { observe: 'response' })
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 

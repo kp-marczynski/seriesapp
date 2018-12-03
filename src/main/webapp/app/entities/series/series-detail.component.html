@@ -17,6 +17,13 @@
                 <dd>
                     <span>{{series.description}}</span>
                 </dd>
+                <dt><span>FollowedSeries</span></dt>
+                <dd>
+                    <div *ngIf="followedSeries">
+                        Rate:{{followedSeries.rate}}
+                        Comment:{{followedSeries.comment}}
+                    </div>
+                </dd>
                 <dt *ngIf="series.seasons.length > 0"><span>Seasons</span></dt>
                 <dd id="accordion" *ngFor="let season of series.seasons">
                     <div class="card">

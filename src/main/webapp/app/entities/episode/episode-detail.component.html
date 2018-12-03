@@ -27,6 +27,13 @@
                         <a [routerLink]="['/season', episode.season?.id, 'view']">{{episode.season?.id}}</a>
                     </div>
                 </dd>
+                <dt><span>WatchedEpisode</span></dt>
+                <dd>
+                    <div *ngIf="watchedEpisode">
+                        Rate:{{watchedEpisode.rate}}
+                        Comment:{{watchedEpisode.comment}}
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

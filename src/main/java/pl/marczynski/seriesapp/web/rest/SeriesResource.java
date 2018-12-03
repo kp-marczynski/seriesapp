@@ -2,6 +2,7 @@ package pl.marczynski.seriesapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import org.springframework.security.access.prepost.PreAuthorize;
+import pl.marczynski.seriesapp.domain.FollowedSeries;
 import pl.marczynski.seriesapp.domain.Series;
 import pl.marczynski.seriesapp.security.AuthoritiesConstants;
 import pl.marczynski.seriesapp.service.SeriesService;
@@ -104,6 +105,20 @@ public class SeriesResource {
     public ResponseEntity<Series> getSeries(@PathVariable Long id) {
         log.debug("REST request to get Series : {}", id);
         Optional<Series> series = seriesService.findById(id);
+        return ResponseUtil.wrapOrNotFound(series);
+    }
+
+    /**
+     * GET  /series/:id/followed : get the "id" series.
+     *
+     * @param id the id of the series to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the series, or with status 404 (Not Found)
+     */
+    @GetMapping("/series/{id}/followed")
+    @Timed
+    public ResponseEntity<FollowedSeries> getFollowedSeriesForSeriesId(@PathVariable Long id) {
+        log.debug("REST request to get Series : {}", id);
+        Optional<FollowedSeries> series = seriesService.findFollowedBySeriesId(id);
         return ResponseUtil.wrapOrNotFound(series);
     }
 

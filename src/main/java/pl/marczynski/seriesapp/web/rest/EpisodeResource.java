@@ -3,6 +3,7 @@ package pl.marczynski.seriesapp.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import org.springframework.security.access.prepost.PreAuthorize;
 import pl.marczynski.seriesapp.domain.Episode;
+import pl.marczynski.seriesapp.domain.WatchedEpisode;
 import pl.marczynski.seriesapp.security.AuthoritiesConstants;
 import pl.marczynski.seriesapp.service.EpisodeService;
 import pl.marczynski.seriesapp.web.rest.errors.BadRequestAlertException;
@@ -105,6 +106,20 @@ public class EpisodeResource {
         log.debug("REST request to get Episode : {}", id);
         Optional<Episode> episode = episodeService.findById(id);
         return ResponseUtil.wrapOrNotFound(episode);
+    }
+
+    /**
+     * GET  /episodes/:id/watched : get the "id" watchedEpisode.
+     *
+     * @param id the id of the episode in the watchedEpisode to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the watchedEpisode, or with status 404 (Not Found)
+     */
+    @GetMapping("/episodes/{id}/watched")
+    @Timed
+    public ResponseEntity<WatchedEpisode> getWatchedEpisodeForEpisodeId(@PathVariable Long id) {
+        log.debug("REST request to get WatchedEpisode by Episode: {}", id);
+        Optional<WatchedEpisode> watchedEpisode = episodeService.findWatchedByEpisodeId(id);
+        return ResponseUtil.wrapOrNotFound(watchedEpisode);
     }
 
     /**
