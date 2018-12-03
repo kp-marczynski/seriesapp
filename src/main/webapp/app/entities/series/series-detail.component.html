@@ -17,6 +17,21 @@
                 <dd>
                     <span>{{series.description}}</span>
                 </dd>
+                <dt *ngIf="series.seasons.length > 0"><span>Seasons</span></dt>
+                <dd id="accordion" *ngFor="let season of series.seasons">
+                    <div class="card">
+                        <div class="card-header" (click)="setVisible(season.number)">
+                            <span class="card-link" data-toggle="collapse">
+                                Season {{season.number}} : {{season.releaseYear}}
+                            </span>
+                        </div>
+                        <div id="{{ 'collapse-' + season.number }}" class="collapse" [ngClass]="{'show':season.number == visibleSeason}" data-parent="#accordion">
+                            <div class="card-body">
+                                <jhi-season-detail [season]="season"></jhi-season-detail>
+                            </div>
+                        </div>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"
@@ -25,7 +40,7 @@
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
             </button>
 
-            <button type="button"
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button"
                     [routerLink]="['/series', series.id, 'edit']"
                     class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>

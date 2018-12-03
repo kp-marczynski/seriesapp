@@ -43,7 +43,7 @@ public class Season implements Serializable {
     @JsonIgnoreProperties("seasons")
     private Series series;
 
-    @OneToMany(mappedBy = "season")
+    @OneToMany(mappedBy = "season", fetch = FetchType.EAGER)
     private Set<Episode> episodes = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {

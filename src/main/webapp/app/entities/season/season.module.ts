@@ -18,6 +18,7 @@ const ENTITY_STATES = [...seasonRoute, ...seasonPopupRoute];
     imports: [SeriesappSharedModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [SeasonComponent, SeasonDetailComponent, SeasonUpdateComponent, SeasonDeleteDialogComponent, SeasonDeletePopupComponent],
     entryComponents: [SeasonComponent, SeasonUpdateComponent, SeasonDeleteDialogComponent, SeasonDeletePopupComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    exports: [SeasonDetailComponent]
 })
 export class SeriesappSeasonModule {}

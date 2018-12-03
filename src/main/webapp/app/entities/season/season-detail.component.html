@@ -23,6 +23,14 @@
                         <a [routerLink]="['/series', season.series?.id, 'view']">{{season.series?.id}}</a>
                     </div>
                 </dd>
+                <dt *ngIf="season.episodes.length > 0"><span>Episodes</span></dt>
+                <dd *ngFor="let episode of season.episodes">
+                    <button type="submit"
+                            [routerLink]="['/episode', episode.id, 'view' ]"
+                            class="btn btn-info btn-sm">
+                        <span>Episode {{episode.number}} : {{episode.releaseDate}}</span>
+                    </button>
+                </dd>
             </dl>
 
             <button type="submit"
@@ -31,8 +39,8 @@
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/season', season.id, 'edit']"
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button"
+                    [routerLink]="['/season', season.id, 'view']"
                     class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
             </button>

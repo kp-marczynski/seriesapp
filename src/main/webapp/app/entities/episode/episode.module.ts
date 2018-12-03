@@ -24,6 +24,6 @@ const ENTITY_STATES = [...episodeRoute, ...episodePopupRoute];
         EpisodeDeletePopupComponent
     ],
     entryComponents: [EpisodeComponent, EpisodeUpdateComponent, EpisodeDeleteDialogComponent, EpisodeDeletePopupComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SeriesappEpisodeModule {}

@@ -1,21 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit, Input} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { ISeason } from 'app/shared/model/season.model';
+import {ISeason, Season} from 'app/shared/model/season.model';
 
 @Component({
     selector: 'jhi-season-detail',
     templateUrl: './season-detail.component.html'
 })
 export class SeasonDetailComponent implements OnInit {
-    season: ISeason;
+    @Input() season: ISeason;
 
     constructor(private activatedRoute: ActivatedRoute) {}
 
     ngOnInit() {
-        this.activatedRoute.data.subscribe(({ season }) => {
-            this.season = season;
-        });
+        if (this.season == null) {
+            this.activatedRoute.data.subscribe(({season}) => {
+                this.season = season;
+                console.log(season);
+            });
+        }
     }
 
     previousState() {
