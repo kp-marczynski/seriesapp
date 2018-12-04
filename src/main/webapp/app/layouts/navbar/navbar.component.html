@@ -193,7 +193,8 @@
 <aside class="sidebar-fixed position-fixed sidebar">
     <div class="sidebar-header">
         <a class="logo-wrapper waves-effect">
-            <img src="/content/images/outline_watch.png" class="img-fluid" alt="">
+            <fa-icon [icon]="['far', 'clock']"></fa-icon>
+            <!--<img src="/content/images/outline_watch.png" class="img-fluid" alt="">-->
         </a>
 
         <div [ngSwitch]="isAuthenticated()">

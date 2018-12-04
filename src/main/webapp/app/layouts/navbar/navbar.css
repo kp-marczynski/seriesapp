@@ -132,3 +132,6 @@ Logo styles
 .list-group {
     margin-bottom: 2rem;
 }
+.logo-wrapper fa-icon{
+    font-size: 3.5rem;
+}
