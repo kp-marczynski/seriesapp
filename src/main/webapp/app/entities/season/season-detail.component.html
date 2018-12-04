@@ -1,41 +1,50 @@
 <div class="row justify-content-center">
-    <div class="col-8">
+    <div class="col-11">
         <div *ngIf="season">
-            <h2><span>Season</span> {{season.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
+            <div *ngIf="standaloneView">
+                <h2><span>Season</span> {{season.id}}</h2>
+                <hr>
+                <jhi-alert-error></jhi-alert-error>
+                <dl class="row-md jh-entity-details">
+                    <dt><span>Number</span></dt>
+                    <dd>
+                        <span>{{season.number}}</span>
+                    </dd>
+                    <dt><span>Description</span></dt>
+                    <dd>
+                        <span>{{season.description}}</span>
+                    </dd>
+                    <dt><span>Release Year</span></dt>
+                    <dd>
+                        <span>{{season.releaseYear}}</span>
+                    </dd>
+                    <dt><span>Series</span></dt>
+                    <dd>
+                        <div *ngIf="season.series">
+                            <a [routerLink]="['/series', season.series?.id, 'view']">{{season.series?.id}}</a>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
             <dl class="row-md jh-entity-details">
-                <dt><span>Number</span></dt>
-                <dd>
-                    <span>{{season.number}}</span>
-                </dd>
                 <dt><span>Description</span></dt>
                 <dd>
                     <span>{{season.description}}</span>
                 </dd>
-                <dt><span>Release Year</span></dt>
-                <dd>
-                    <span>{{season.releaseYear}}</span>
-                </dd>
-                <dt><span>Series</span></dt>
-                <dd>
-                    <div *ngIf="season.series">
-                        <a [routerLink]="['/series', season.series?.id, 'view']">{{season.series?.id}}</a>
-                    </div>
-                </dd>
                 <dt *ngIf="season.episodes.length > 0"><span>Episodes</span></dt>
-                <dd *ngFor="let episode of season.episodes">
-                    <button type="submit"
-                            [routerLink]="['/episode', episode.id, 'view' ]"
-                            class="btn btn-info btn-sm">
-                        <span>Episode {{episode.number}} : {{episode.releaseDate}}</span>
-                    </button>
+                <dd class="list-group">
+                    <a class="list-group-item waves-effect" *ngFor="let episode of season.episodes"
+                            [routerLink]="['/episode', episode.id, 'view' ]">
+                        <div class="float-left">Episode {{episode.number}}</div>
+                        <div class="float-right">{{episode.releaseDate}}</div>
+                        <!--<span>Episode {{episode.number}} : {{episode.releaseDate}}</span>-->
+                    </a>
                 </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
-                    class="btn btn-info">
+                    class="btn btn-info" *ngIf="standaloneView">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
             </button>
 

@@ -9,6 +9,7 @@ import {ISeason, Season} from 'app/shared/model/season.model';
 })
 export class SeasonDetailComponent implements OnInit {
     @Input() season: ISeason;
+    private  standaloneView: boolean = false;
 
     constructor(private activatedRoute: ActivatedRoute) {}
 
@@ -18,6 +19,9 @@ export class SeasonDetailComponent implements OnInit {
                 this.season = season;
                 console.log(season);
             });
+            this.standaloneView = true;
+        } else{
+            this.standaloneView = false;
         }
     }
 
