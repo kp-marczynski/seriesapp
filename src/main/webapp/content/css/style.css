@@ -26,12 +26,12 @@
         /*max-width: 50%;*/
     }
 
-@media (min-width: 1200px) {
+@media (min-width: 1024px) {
   .navbar,
   .page-footer,
   main {
     padding-left: 270px; } }
 
-@media (max-width: 1199.98px) {
+@media (max-width: 1024px) {
   .sidebar-fixed {
     display: none; } }

@@ -50,13 +50,13 @@ Navbar
     color: #fff;
 }
 
-@media screen and (min-width: 768px) {
-    .jh-navbar-toggler {
+@media screen and (min-width: 1024px) {
+    .jh-navbar-toggler, .jh-navbar-responsive {
         display: none;
     }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1024px) {
     .jh-logo-container {
         width: 100%;
     }
