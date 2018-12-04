@@ -19,7 +19,7 @@
                 </dd>
                 <dt><span>FollowedSeries</span></dt>
                 <dd>
-                    <div *ngIf="followedSeries">
+                    <div *ngIf="followedSeries && followedSeries.id">
                         Rate:{{followedSeries.rate}}
                         Comment:{{followedSeries.comment}}
                     </div>

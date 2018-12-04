@@ -29,7 +29,7 @@
                 </dd>
                 <dt><span>WatchedEpisode</span></dt>
                 <dd>
-                    <div *ngIf="watchedEpisode">
+                    <div *ngIf="watchedEpisode && watchedEpisode.id">
                         Rate:{{watchedEpisode.rate}}
                         Comment:{{watchedEpisode.comment}}
                     </div>

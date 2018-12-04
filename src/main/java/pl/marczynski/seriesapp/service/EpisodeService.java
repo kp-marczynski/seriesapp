@@ -2,8 +2,10 @@ package pl.marczynski.seriesapp.service;
 
 import org.springframework.stereotype.Service;
 import pl.marczynski.seriesapp.domain.Episode;
+import pl.marczynski.seriesapp.domain.User;
 import pl.marczynski.seriesapp.domain.WatchedEpisode;
 import pl.marczynski.seriesapp.repository.EpisodeRepository;
+import pl.marczynski.seriesapp.repository.UserRepository;
 import pl.marczynski.seriesapp.repository.WatchedEpisodeRepository;
 import pl.marczynski.seriesapp.security.SecurityUtils;
 
@@ -14,10 +16,12 @@ import java.util.Optional;
 public class EpisodeService {
     private EpisodeRepository episodeRepository;
     private WatchedEpisodeRepository watchedEpisodeRepository;
+    private UserRepository userRepository;
 
-    public EpisodeService(EpisodeRepository episodeRepository, WatchedEpisodeRepository watchedEpisodeRepository) {
+    public EpisodeService(EpisodeRepository episodeRepository, WatchedEpisodeRepository watchedEpisodeRepository, UserRepository userRepository) {
         this.episodeRepository = episodeRepository;
         this.watchedEpisodeRepository = watchedEpisodeRepository;
+        this.userRepository = userRepository;
     }
 
     public Episode save(Episode episode) {
@@ -45,6 +49,13 @@ public class EpisodeService {
         Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
         if (currentUserLogin.isPresent()) {
             result = watchedEpisodeRepository.findByUserLoginAndEpisodeId(currentUserLogin.get(), id);
+            if(!result.isPresent()){
+                Optional<User> user = userRepository.findOneByLogin(currentUserLogin.get());
+                Optional<Episode> episode = episodeRepository.findById(id);
+                if(user.isPresent() && episode.isPresent()){
+                    result = Optional.of(new WatchedEpisode().user(user.get()).episode(episode.get()));
+                }
+            }
         }
         return result;
     }

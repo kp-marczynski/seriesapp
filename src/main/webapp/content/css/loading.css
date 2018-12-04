@@ -86,7 +86,8 @@
 }
 
 .app-loading {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /*font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
+    font-family: 'Roboto', sans-serif;
     position: relative;
     display: flex;
     flex-direction: column;
