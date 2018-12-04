@@ -87,3 +87,7 @@ Logo styles
     vertical-align: middle;
     width: 70px;
 }
+
+.list-group {
+    margin-bottom: 2rem;
+}
