@@ -178,7 +178,7 @@
     <div class="list-group list-group-flush" [ngSwitch]="isAuthenticated()">
         <span *jhiHasAnyAuthority="'ROLE_ADMIN'" class="list-group" routerLinkActive="active" ngbDropdown
               [routerLinkActiveOptions]="{exact: true}">
-            <a class="list-group-item-heading" ngbDropdownToggle id="admin-menu">
+            <a class="list-group-item-heading" ngbDropdownToggle> <!--id="admin-menu"-->>
                     <span>
                         <fa-icon icon="user-plus"></fa-icon>
                         <span>Administration</span>
@@ -245,7 +245,7 @@
             </span>
         </span>
         <span routerLinkActive="active" class="list-group" ngbDropdown [routerLinkActiveOptions]="{exact: true}">
-            <a class="list-group-item-heading" id="account-menu" ngbDropdownToggle>
+            <a class="list-group-item-heading" ngbDropdownToggle> <!--id="account-menu" >-->
                   <span *ngIf="!getImageUrl()">
                     <fa-icon icon="user"></fa-icon>
                     <span>
@@ -272,13 +272,13 @@
                     </a>
                 </span>
                 <span *ngSwitchCase="true">
-                    <a class="list-group-item list-group-item-action waves-effect" (click)="logout()" id="logout">
+                    <a class="list-group-item list-group-item-action waves-effect" (click)="logout()" ><!--id="logout">-->
                         <fa-icon icon="sign-out-alt" fixedWidth="true"></fa-icon>
                         <span>Sign out</span>
                     </a>
                 </span>
                 <span *ngSwitchCase="false">
-                    <a class="list-group-item list-group-item-action waves-effect" (click)="login()" id="login">
+                    <a class="list-group-item list-group-item-action waves-effect" (click)="login()"> <!--id="login">-->
                         <fa-icon icon="sign-in-alt" fixedWidth="true"></fa-icon>
                         <span>Sign in</span>
                     </a>
@@ -303,7 +303,7 @@
         </span>
         <span *ngSwitchCase="true" class="list-group" routerLinkActive="active"
               [routerLinkActiveOptions]="{exact: true}">
-        <span class="list-group-item-heading" id="entity-menu">
+        <span class="list-group-item-heading"> <!--id="entity-menu">-->
                     <span>
                         <fa-icon icon="th-list"></fa-icon>
                         <span>
