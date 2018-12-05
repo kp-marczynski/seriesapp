@@ -1,59 +1,83 @@
 <div class="row justify-content-center">
     <div class="col-11">
-        <div *ngIf="series">
-            <h2><span>Series</span> {{series.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span>Name</span></dt>
-                <dd>
-                    <span>{{series.name}}</span>
-                </dd>
-                <dt><span>Release Year</span></dt>
-                <dd>
-                    <span>{{series.releaseYear}}</span>
-                </dd>
-                <dt><span>Description</span></dt>
-                <dd>
-                    <span>{{series.description}}</span>
-                </dd>
-                <dt><span>FollowedSeries</span></dt>
-                <dd>
+        <div *ngIf="series" class="row">
+            <div class="col-md-9">
+                <h2><span>Series</span> {{series.id}}</h2>
+                <hr>
+                <jhi-alert-error></jhi-alert-error>
+                <dl class="row-md jh-entity-details">
+                    <dt><span>Name</span></dt>
+                    <dd>
+                        <span>{{series.name}}</span>
+                    </dd>
+                    <dt><span>Release Year</span></dt>
+                    <dd>
+                        <span>{{series.releaseYear}}</span>
+                    </dd>
+                    <dt><span>Description</span></dt>
+                    <dd>
+                        <span>{{series.description}}</span>
+                    </dd>
+                    <dt *ngIf="series.seasons.length > 0"><span>Seasons</span></dt>
+                    <dd id="accordion" *ngFor="let season of series.seasons">
+                        <div class="card no-padding">
+                            <div class="card-header" (click)="setVisible(season.number)">
+                                <div class="card-link" data-toggle="collapse">
+                                    <div class="float-left">Season {{season.number}}</div>
+                                    <div class="float-right">{{season.releaseYear}}</div>
+                                    <!--Season {{season.number}} : {{season.releaseYear}}-->
+                                </div>
+                            </div>
+                            <div id="{{ 'collapse-' + season.number }}" class="collapse"
+                                 [ngClass]="{'show':season.number == visibleSeason}" data-parent="#accordion">
+                                <div class="card-body">
+                                    <jhi-season-detail [season]="season"></jhi-season-detail>
+                                </div>
+                            </div>
+                        </div>
+                    </dd>
+                </dl>
+
+                <button type="submit"
+                        (click)="previousState()"
+                        class="btn btn-info">
+                    <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+                </button>
+
+                <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button"
+                        [routerLink]="['/series', series.id, 'edit']"
+                        class="btn btn-primary">
+                    <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+                </button>
+            </div>
+            <div class="col-md-3">
+                <div class="card opinion">
+                    <span>FollowedSeries</span>
                     <div *ngIf="followedSeries && followedSeries.id">
-                        Rate:{{followedSeries.rate}}
-                        Comment:{{followedSeries.comment}}
-                    </div>
-                </dd>
-                <dt *ngIf="series.seasons.length > 0"><span>Seasons</span></dt>
-                <dd id="accordion" class="row" *ngFor="let season of series.seasons">
-                    <div class="card col-8 no-padding">
-                        <div class="card-header" (click)="setVisible(season.number)">
-                            <div class="card-link" data-toggle="collapse">
-                                <div class="float-left">Season {{season.number}}</div>
-                                <div class="float-right">{{season.releaseYear}}</div>
-                                <!--Season {{season.number}} : {{season.releaseYear}}-->
-                            </div>
+                        <div>
+                            Rate:{{followedSeries.rate}}
                         </div>
-                        <div id="{{ 'collapse-' + season.number }}" class="collapse" [ngClass]="{'show':season.number == visibleSeason}" data-parent="#accordion">
-                            <div class="card-body">
-                                <jhi-season-detail [season]="season"></jhi-season-detail>
-                            </div>
+                        <div class="row">
+                            <fa-icon class="col-2" [icon]="['far','star']"></fa-icon>
+                            <fa-icon class="col-2" [icon]="['far','star']"></fa-icon>
+                            <fa-icon class="col-2" [icon]="['far','star']"></fa-icon>
+                            <fa-icon class="col-2" [icon]="['far','star']"></fa-icon>
+                            <fa-icon class="col-2" [icon]="['far','star']"></fa-icon>
                         </div>
+                        <form>
+                            <div class="form-group">
+                                <label for="comment">Comment:</label>
+                                <textarea class="form-control" rows="5"
+                                          id="comment"
+                                          [disabled]="followedSeries.comment">{{followedSeries.comment}}</textarea>
+                                <button type="submit" class="btn btn-primary" [disabled]="followedSeries.comment">Submit
+                                    comment
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                </dd>
-            </dl>
-
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
-            </button>
-
-            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button"
-                    [routerLink]="['/series', series.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
-            </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

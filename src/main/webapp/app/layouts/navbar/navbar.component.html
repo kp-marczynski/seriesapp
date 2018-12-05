@@ -192,10 +192,10 @@
 
 <aside class="sidebar-fixed position-fixed sidebar">
     <div class="sidebar-header">
-        <a class="logo-wrapper waves-effect">
-            <fa-icon [icon]="['far', 'clock']"></fa-icon>
+        <span class="logo-wrapper waves-effect">
+            <fa-icon [icon]="['far', 'clock']" routerLink="/"></fa-icon>
             <!--<img src="/content/images/outline_watch.png" class="img-fluid" alt="">-->
-        </a>
+        </span>
 
         <div [ngSwitch]="isAuthenticated()">
         <span *jhiHasAnyAuthority="'ROLE_ADMIN'" class="list-group" routerLinkActive="active" ngbDropdown
