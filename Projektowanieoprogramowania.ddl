@@ -1,25 +1,25 @@
 CREATE TABLE `User` (
     id LONG NOT NULL AUTO_INCREMENT,
-    login STRING NOT NULL UNIQUE,
-    password STRING NOT NULL,
-    email STRING NOT NULL UNIQUE,
+    login VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
     PRIMARY KEY (id)
 );
 CREATE TABLE Series (
     id          LONG    NOT NULL AUTO_INCREMENT,
-    name STRING NOT NULL,
+    name VARCHAR(255) NOT NULL,
     releaseYear INTEGER NOT NULL,
-    description STRING,
+    description VARCHAR(255),
     PRIMARY KEY (id)
 );
 CREATE TABLE Rate (
-    rate STRING NOT NULL,
+    rate VARCHAR(255) NOT NULL,
     PRIMARY KEY (rate)
 );
 CREATE TABLE FollowedSeries (
     id       LONG NOT NULL AUTO_INCREMENT,
-    rate STRING,
-    comment STRING,
+    rate VARCHAR(255),
+    comment VARCHAR(255),
     userId   LONG NOT NULL,
     seriesId LONG NOT NULL,
     PRIMARY KEY (id)
@@ -27,7 +27,7 @@ CREATE TABLE FollowedSeries (
 CREATE TABLE Season (
     id          LONG    NOT NULL AUTO_INCREMENT,
     number      INTEGER NOT NULL,
-    description STRING,
+    description VARCHAR(255),
     releaseYear INTEGER NOT NULL,
     seriesId    LONG    NOT NULL,
     PRIMARY KEY (id)
@@ -35,7 +35,7 @@ CREATE TABLE Season (
 CREATE TABLE Episode (
     id       LONG    NOT NULL AUTO_INCREMENT,
     number   INTEGER NOT NULL,
-    title STRING NOT NULL,
+    title VARCHAR(255) NOT NULL,
     releaseDate LocalDate NULL,
     duration INTEGER,
     seasonId LONG    NOT NULL,
@@ -43,8 +43,8 @@ CREATE TABLE Episode (
 );
 CREATE TABLE WatchedEpisode (
     id        LONG NOT NULL AUTO_INCREMENT,
-    rate STRING,
-    comment STRING,
+    rate VARCHAR(255),
+    comment VARCHAR(255),
     userId    LONG NOT NULL,
     episodeId LONG NOT NULL,
     PRIMARY KEY (id)
