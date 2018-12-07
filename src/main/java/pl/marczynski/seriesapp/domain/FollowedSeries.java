@@ -41,6 +41,16 @@ public class FollowedSeries implements Serializable {
     @JsonIgnoreProperties("")
     private Series series;
 
+    public FollowedSeries() {
+    }
+
+    public FollowedSeries(Rate rate, String comment, User user, Series series) {
+        this.rate = rate;
+        this.comment = comment;
+        this.user = user;
+        this.series = series;
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -54,22 +64,12 @@ public class FollowedSeries implements Serializable {
         return rate;
     }
 
-    public FollowedSeries rate(Rate rate) {
-        this.rate = rate;
-        return this;
-    }
-
     public void setRate(Rate rate) {
         this.rate = rate;
     }
 
     public String getComment() {
         return comment;
-    }
-
-    public FollowedSeries comment(String comment) {
-        this.comment = comment;
-        return this;
     }
 
     public void setComment(String comment) {
@@ -80,22 +80,12 @@ public class FollowedSeries implements Serializable {
         return user;
     }
 
-    public FollowedSeries user(User user) {
-        this.user = user;
-        return this;
-    }
-
     public void setUser(User user) {
         this.user = user;
     }
 
     public Series getSeries() {
         return series;
-    }
-
-    public FollowedSeries series(Series series) {
-        this.series = series;
-        return this;
     }
 
     public void setSeries(Series series) {

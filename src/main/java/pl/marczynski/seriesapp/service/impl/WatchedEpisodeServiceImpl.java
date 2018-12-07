@@ -5,6 +5,7 @@ import pl.marczynski.seriesapp.domain.FollowedSeries;
 import pl.marczynski.seriesapp.domain.Series;
 import pl.marczynski.seriesapp.domain.User;
 import pl.marczynski.seriesapp.domain.WatchedEpisode;
+import pl.marczynski.seriesapp.domain.builder.FollowedSeriesBuilder;
 import pl.marczynski.seriesapp.repository.UserRepository;
 import pl.marczynski.seriesapp.repository.WatchedEpisodeRepository;
 import pl.marczynski.seriesapp.security.AuthoritiesConstants;
@@ -40,7 +41,7 @@ public class WatchedEpisodeServiceImpl implements WatchedEpisodeService {
                 watchedEpisode.setUser(user.get());
                 result = watchedEpisodeRepository.save(watchedEpisode);
                 Series series = watchedEpisode.getEpisode().getSeason().getSeries();
-                FollowedSeries followedSeries = new FollowedSeries().series(series).user(user.get());
+                FollowedSeries followedSeries = new FollowedSeriesBuilder().series(series).user(user.get()).build();
                 followedSeriesService.save(followedSeries);
             }
         }

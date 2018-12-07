@@ -2,6 +2,7 @@ package pl.marczynski.seriesapp.service.impl;
 
 import org.springframework.stereotype.Service;
 import pl.marczynski.seriesapp.domain.*;
+import pl.marczynski.seriesapp.domain.builder.FollowedSeriesBuilder;
 import pl.marczynski.seriesapp.repository.FollowedSeriesRepository;
 import pl.marczynski.seriesapp.repository.SeriesRepository;
 import pl.marczynski.seriesapp.repository.UserRepository;
@@ -48,11 +49,11 @@ public class SeriesServiceImpl implements SeriesService {
         Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
         if (currentUserLogin.isPresent()) {
             result = followedSeriesRepository.findByUserLoginAndSeriesId(currentUserLogin.get(), id);
-            if(!result.isPresent()){
+            if (!result.isPresent()) {
                 Optional<User> user = userRepository.findOneByLogin(currentUserLogin.get());
                 Optional<Series> series = seriesRepository.findById(id);
-                if(user.isPresent() && series.isPresent()){
-                    result = Optional.of(new FollowedSeries().user(user.get()).series(series.get()));
+                if (user.isPresent() && series.isPresent()) {
+                    result = Optional.of(new FollowedSeriesBuilder().user(user.get()).series(series.get()).build());
                 }
             }
         }

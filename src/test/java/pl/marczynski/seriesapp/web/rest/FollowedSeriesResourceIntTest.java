@@ -5,6 +5,7 @@ import pl.marczynski.seriesapp.SeriesappApp;
 import pl.marczynski.seriesapp.domain.FollowedSeries;
 import pl.marczynski.seriesapp.domain.User;
 import pl.marczynski.seriesapp.domain.Series;
+import pl.marczynski.seriesapp.domain.builder.FollowedSeriesBuilder;
 import pl.marczynski.seriesapp.repository.FollowedSeriesRepository;
 import pl.marczynski.seriesapp.service.FollowedSeriesService;
 import pl.marczynski.seriesapp.web.rest.errors.ExceptionTranslator;
@@ -91,9 +92,9 @@ public class FollowedSeriesResourceIntTest {
      * if they test an entity which requires the current entity.
      */
     public static FollowedSeries createEntity(EntityManager em) {
-        FollowedSeries followedSeries = new FollowedSeries()
+        FollowedSeries followedSeries = new FollowedSeriesBuilder()
             .rate(DEFAULT_RATE)
-            .comment(DEFAULT_COMMENT);
+            .comment(DEFAULT_COMMENT).build();
         // Add required entity
         User user = UserResourceIntTest.createEntity(em);
         em.persist(user);
@@ -200,9 +201,8 @@ public class FollowedSeriesResourceIntTest {
         FollowedSeries updatedFollowedSeries = followedSeriesRepository.findById(followedSeries.getId()).get();
         // Disconnect from session so that the updates on updatedFollowedSeries are not directly saved in db
         em.detach(updatedFollowedSeries);
-        updatedFollowedSeries
-            .rate(UPDATED_RATE)
-            .comment(UPDATED_COMMENT);
+        updatedFollowedSeries.setRate(UPDATED_RATE);
+        updatedFollowedSeries.setComment(UPDATED_COMMENT);
 
         restFollowedSeriesMockMvc.perform(put("/api/followed-series")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)

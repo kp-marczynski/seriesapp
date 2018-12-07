@@ -5,6 +5,7 @@ import pl.marczynski.seriesapp.SeriesappApp;
 import pl.marczynski.seriesapp.domain.WatchedEpisode;
 import pl.marczynski.seriesapp.domain.User;
 import pl.marczynski.seriesapp.domain.Episode;
+import pl.marczynski.seriesapp.domain.builder.WatchedEpisodeBuilder;
 import pl.marczynski.seriesapp.repository.WatchedEpisodeRepository;
 import pl.marczynski.seriesapp.service.WatchedEpisodeService;
 import pl.marczynski.seriesapp.web.rest.errors.ExceptionTranslator;
@@ -86,14 +87,14 @@ public class WatchedEpisodeResourceIntTest {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static WatchedEpisode createEntity(EntityManager em) {
-        WatchedEpisode watchedEpisode = new WatchedEpisode()
+        WatchedEpisode watchedEpisode = new WatchedEpisodeBuilder()
             .rate(DEFAULT_RATE)
-            .comment(DEFAULT_COMMENT);
+            .comment(DEFAULT_COMMENT).build();
         // Add required entity
         User user = UserResourceIntTest.createEntity(em);
         em.persist(user);
@@ -164,7 +165,7 @@ public class WatchedEpisodeResourceIntTest {
             .andExpect(jsonPath("$.[*].rate").value(hasItem(DEFAULT_RATE.toString())))
             .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getWatchedEpisode() throws Exception {
@@ -200,9 +201,8 @@ public class WatchedEpisodeResourceIntTest {
         WatchedEpisode updatedWatchedEpisode = watchedEpisodeRepository.findById(watchedEpisode.getId()).get();
         // Disconnect from session so that the updates on updatedWatchedEpisode are not directly saved in db
         em.detach(updatedWatchedEpisode);
-        updatedWatchedEpisode
-            .rate(UPDATED_RATE)
-            .comment(UPDATED_COMMENT);
+        updatedWatchedEpisode.setRate(UPDATED_RATE);
+        updatedWatchedEpisode.setComment(UPDATED_COMMENT);
 
         restWatchedEpisodeMockMvc.perform(put("/api/watched-episodes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)

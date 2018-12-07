@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.marczynski.seriesapp.domain.Episode;
 import pl.marczynski.seriesapp.domain.User;
 import pl.marczynski.seriesapp.domain.WatchedEpisode;
+import pl.marczynski.seriesapp.domain.builder.WatchedEpisodeBuilder;
 import pl.marczynski.seriesapp.repository.EpisodeRepository;
 import pl.marczynski.seriesapp.repository.UserRepository;
 import pl.marczynski.seriesapp.repository.WatchedEpisodeRepository;
@@ -50,11 +51,11 @@ public class EpisodeServiceImpl implements EpisodeService {
         Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
         if (currentUserLogin.isPresent()) {
             result = watchedEpisodeRepository.findByUserLoginAndEpisodeId(currentUserLogin.get(), id);
-            if(!result.isPresent()){
+            if (!result.isPresent()) {
                 Optional<User> user = userRepository.findOneByLogin(currentUserLogin.get());
                 Optional<Episode> episode = episodeRepository.findById(id);
-                if(user.isPresent() && episode.isPresent()){
-                    result = Optional.of(new WatchedEpisode().user(user.get()).episode(episode.get()));
+                if (user.isPresent() && episode.isPresent()) {
+                    result = Optional.of(new WatchedEpisodeBuilder().user(user.get()).episode(episode.get()).build());
                 }
             }
         }

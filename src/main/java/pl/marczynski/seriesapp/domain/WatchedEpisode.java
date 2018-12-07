@@ -41,6 +41,16 @@ public class WatchedEpisode implements Serializable {
     @JsonIgnoreProperties("")
     private Episode episode;
 
+    public WatchedEpisode() {
+    }
+
+    public WatchedEpisode(Rate rate, String comment, User user, Episode episode) {
+        this.rate = rate;
+        this.comment = comment;
+        this.user = user;
+        this.episode = episode;
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -54,22 +64,12 @@ public class WatchedEpisode implements Serializable {
         return rate;
     }
 
-    public WatchedEpisode rate(Rate rate) {
-        this.rate = rate;
-        return this;
-    }
-
     public void setRate(Rate rate) {
         this.rate = rate;
     }
 
     public String getComment() {
         return comment;
-    }
-
-    public WatchedEpisode comment(String comment) {
-        this.comment = comment;
-        return this;
     }
 
     public void setComment(String comment) {
@@ -80,22 +80,12 @@ public class WatchedEpisode implements Serializable {
         return user;
     }
 
-    public WatchedEpisode user(User user) {
-        this.user = user;
-        return this;
-    }
-
     public void setUser(User user) {
         this.user = user;
     }
 
     public Episode getEpisode() {
         return episode;
-    }
-
-    public WatchedEpisode episode(Episode episode) {
-        this.episode = episode;
-        return this;
     }
 
     public void setEpisode(Episode episode) {
