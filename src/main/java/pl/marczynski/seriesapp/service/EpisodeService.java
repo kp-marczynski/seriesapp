@@ -1,63 +1,22 @@
 package pl.marczynski.seriesapp.service;
 
-import org.springframework.stereotype.Service;
 import pl.marczynski.seriesapp.domain.Episode;
-import pl.marczynski.seriesapp.domain.User;
 import pl.marczynski.seriesapp.domain.WatchedEpisode;
-import pl.marczynski.seriesapp.repository.EpisodeRepository;
-import pl.marczynski.seriesapp.repository.UserRepository;
-import pl.marczynski.seriesapp.repository.WatchedEpisodeRepository;
-import pl.marczynski.seriesapp.security.SecurityUtils;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class EpisodeService {
-    private EpisodeRepository episodeRepository;
-    private WatchedEpisodeRepository watchedEpisodeRepository;
-    private UserRepository userRepository;
+public interface EpisodeService {
 
-    public EpisodeService(EpisodeRepository episodeRepository, WatchedEpisodeRepository watchedEpisodeRepository, UserRepository userRepository) {
-        this.episodeRepository = episodeRepository;
-        this.watchedEpisodeRepository = watchedEpisodeRepository;
-        this.userRepository = userRepository;
-    }
+    Episode save(Episode episode);
 
-    public Episode save(Episode episode) {
-        return episodeRepository.save(episode);
-    }
+    List<Episode> findAll();
 
-    public List<Episode> findAll() {
-        return episodeRepository.findAll();
-    }
+    Optional<Episode> findById(Long id);
 
-    public Optional<Episode> findById(Long id) {
-        return episodeRepository.findById(id);
-    }
+    void deleteById(Long id);
 
-    public void deleteById(Long id) {
-        episodeRepository.deleteById(id);
-    }
+    Episode update(Episode episode);
 
-    public Episode update(Episode episode) {
-        return episodeRepository.save(episode);
-    }
-
-    public Optional<WatchedEpisode> findWatchedByEpisodeId(Long id) {
-        Optional<WatchedEpisode> result = Optional.empty();
-        Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
-        if (currentUserLogin.isPresent()) {
-            result = watchedEpisodeRepository.findByUserLoginAndEpisodeId(currentUserLogin.get(), id);
-            if(!result.isPresent()){
-                Optional<User> user = userRepository.findOneByLogin(currentUserLogin.get());
-                Optional<Episode> episode = episodeRepository.findById(id);
-                if(user.isPresent() && episode.isPresent()){
-                    result = Optional.of(new WatchedEpisode().user(user.get()).episode(episode.get()));
-                }
-            }
-        }
-        return result;
-    }
-
+    Optional<WatchedEpisode> findWatchedByEpisodeId(Long id);
 }

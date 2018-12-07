@@ -1,37 +1,19 @@
 package pl.marczynski.seriesapp.service;
 
-import org.springframework.stereotype.Service;
 import pl.marczynski.seriesapp.domain.Season;
-import pl.marczynski.seriesapp.repository.SeasonRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class SeasonService {
-    private SeasonRepository seasonRepository;
+public interface SeasonService {
 
-    public SeasonService(SeasonRepository SeasonRepository) {
-        this.seasonRepository = SeasonRepository;
-    }
+    Season save(Season Season);
 
-    public Season save(Season Season) {
-        return seasonRepository.save(Season);
-    }
+    List<Season> findAll();
 
-    public List<Season> findAll() {
-        return seasonRepository.findAll();
-    }
+    Optional<Season> findById(Long id);
 
-    public Optional<Season> findById(Long id) {
-        return seasonRepository.findById(id);
-    }
+    void deleteById(Long id);
 
-    public void deleteById(Long id) {
-        seasonRepository.deleteById(id);
-    }
-
-    public Season update(Season season) {
-        return seasonRepository.save(season);
-    }
+    Season update(Season season);
 }
