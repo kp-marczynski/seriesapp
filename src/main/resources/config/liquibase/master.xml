@@ -16,4 +16,5 @@
     <include file="config/liquibase/changelog/20181201151125_added_entity_constraints_FollowedSeries.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181201151126_added_entity_constraints_WatchedEpisode.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <include file="config/liquibase/changelog/20181208134900_domain_unique_constraints.xml"  relativeToChangelogFile="false"/>
 </databaseChangeLog>
