@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added Series and Season and Episode.
+    -->
+    <changeSet id="20181208190000-1" author="marutan">
+        <insert tableName="series">
+            <column name="id">1</column>
+            <column name="name">Star Trek</column>
+            <column name="release_year">1966</column>
+            <column name="description">Star Trek is an American space opera media franchise based on the science fiction television series created by Gene Roddenberry.</column>
+        </insert>
+        <insert tableName="season">
+            <column name="id">10</column>
+            <column name="jhi_number">1</column>
+            <column name="release_year">1966</column>
+            <column name="series_id">1</column>
+        </insert>
+        <insert tableName="season">
+            <column name="id">11</column>
+            <column name="jhi_number">2</column>
+            <column name="release_year">1967</column>
+            <column name="series_id">1</column>
+        </insert>
+        <insert tableName="season">
+            <column name="id">12</column>
+            <column name="jhi_number">3</column>
+            <column name="release_year">1968</column>
+            <column name="series_id">1</column>
+        </insert>
+        <insert tableName="episode">
+            <column name="id">100</column>
+            <column name="jhi_number">1</column>
+            <column name="title">The Man Trap</column>
+            <column name="release_date">1966-09-08</column>
+            <column name="duration">42</column>
+            <column name="season_id">10</column>
+        </insert>
+    </changeSet>
+
+
+</databaseChangeLog>
