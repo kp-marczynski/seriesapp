@@ -8,7 +8,7 @@
     -->
     <changeSet id="20181208141100-1" author="marutan">
 
-        <addUniqueConstraint     columnNames="jhi_number, id"
+        <addUniqueConstraint     columnNames="jhi_number, season_id"
                                  tableName="episode"
                                  constraintName="unique_episode"/>
 
