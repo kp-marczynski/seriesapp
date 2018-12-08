@@ -67,7 +67,7 @@
             <column name="id">104</column>
             <column name="jhi_number">2</column>
             <column name="title">What Are Little Girls Made Of?</column>
-            <column name="release_date">1966-10-11</column>
+            <column name="release_date">1966-11-11</column>
             <column name="duration">41</column>
             <column name="season_id">12</column>
         </insert>
