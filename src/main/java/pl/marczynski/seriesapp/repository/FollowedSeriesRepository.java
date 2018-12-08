@@ -1,5 +1,6 @@
 package pl.marczynski.seriesapp.repository;
 
+import org.springframework.data.repository.query.Param;
 import pl.marczynski.seriesapp.config.Constants;
 import pl.marczynski.seriesapp.domain.FollowedSeries;
 import org.springframework.data.jpa.repository.*;
@@ -22,4 +23,13 @@ public interface FollowedSeriesRepository extends JpaRepository<FollowedSeries, 
     List<FollowedSeries> findByUserIsCurrentUser();
 
     Optional<FollowedSeries> findByUserLoginAndSeriesId(@NotNull @Pattern(regexp = Constants.LOGIN_REGEX) @Size(min = 1, max = 50) String user_login, Long series_id);
+
+    @Query("select avg(case followed_series.rate " +
+        "when 'BAD' then 1 " +
+        "when 'MEDIOCRE' then 2 " +
+        "when 'AVERAGE' then 3 " +
+        "when 'GOOD' then 4 " +
+        "when 'AWESOME' then 5 " +
+        "else 0 END) from FollowedSeries as followed_series where followed_series.series.id = :seriesId and followed_series.rate is not null")
+    Float getAverageRateBySeriesId(@Param("seriesId") Long seriesId);
 }

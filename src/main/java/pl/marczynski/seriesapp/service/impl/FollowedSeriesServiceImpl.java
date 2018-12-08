@@ -57,4 +57,8 @@ public class FollowedSeriesServiceImpl implements FollowedSeriesService {
     public FollowedSeries update(FollowedSeries followedSeries) {
         return save(followedSeries);
     }
+
+    public Float getAverageRate(Long seriesId){
+        return followedSeriesRepository.getAverageRateBySeriesId(seriesId);
+    }
 }

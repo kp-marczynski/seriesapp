@@ -67,4 +67,8 @@ public class WatchedEpisodeServiceImpl implements WatchedEpisodeService {
     public WatchedEpisode update(WatchedEpisode watchedEpisode) {
         return save(watchedEpisode);
     }
+
+    public Float getAverageRate(Long episodeId){
+        return watchedEpisodeRepository.getAverageRateByEpisodeId(episodeId);
+    }
 }
