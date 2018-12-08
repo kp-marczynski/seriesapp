@@ -6,7 +6,7 @@
     <!--
         Added Users.
     -->
-    <changeSet id="20181208181500-1" author="marutan">
+    <changeSet id="20181208220001-1" author="marutan">
         <insert tableName="jhi_user">
             <column name="id" value="100"></column>
             <column name="login" value="ola"></column>
@@ -31,7 +31,7 @@
         </insert>
     </changeSet>
 
-    <changeSet id="20181208181500-2" author="marutan">
+    <changeSet id="20181208220001-2" author="marutan">
         <insert tableName="jhi_user">
             <column name="id" value="101"></column>
             <column name="login" value="jtkirk"></column>
@@ -54,7 +54,7 @@
         </insert>
     </changeSet>
 
-    <changeSet id="20181208181500-3" author="marutan">
+    <changeSet id="20181208220001-3" author="marutan">
         <insert tableName="jhi_user">
             <column name="id" value="102"></column>
             <column name="login" value="bones"></column>
@@ -77,7 +77,7 @@
         </insert>
     </changeSet>
 
-    <changeSet id="20181208181500-4" author="marutan">
+    <changeSet id="20181208220001-4" author="marutan">
         <insert tableName="jhi_user">
             <column name="id" value="103"></column>
             <column name="login" value="scotty"></column>
@@ -100,7 +100,7 @@
         </insert>
     </changeSet>
 
-    <changeSet id="20181208181500-5" author="marutan">
+    <changeSet id="20181208220001-5" author="marutan">
         <insert tableName="jhi_user">
             <column name="id" value="104"></column>
             <column name="login" value="sulu"></column>

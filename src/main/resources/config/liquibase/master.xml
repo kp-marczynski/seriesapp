@@ -17,8 +17,8 @@
     <include file="config/liquibase/changelog/20181201151126_added_entity_constraints_WatchedEpisode.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <include file="config/liquibase/changelog/20181208134900_domain_unique_constraints.xml"  relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20181208181500_add_users.xml"  relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20181208210100_add_series_season_episode.xml"  relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20181208210200_add_followed_watched.xml"  relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181208220001_add_users.xml"  relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181208220002_add_series_season_episode.xml"  relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181208220003_add_followed_watched.xml"  relativeToChangelogFile="false"/>
 
 </databaseChangeLog>

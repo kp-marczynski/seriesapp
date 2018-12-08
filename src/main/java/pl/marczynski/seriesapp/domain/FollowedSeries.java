@@ -32,6 +32,7 @@ public class FollowedSeries implements Serializable {
     private String comment;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     @NotNull
     @JsonIgnoreProperties("")
     private User user;

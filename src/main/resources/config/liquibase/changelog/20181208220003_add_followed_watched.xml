@@ -6,7 +6,7 @@
     <!--
         Added followed and watched. 20181208210200_add_followed_watched
     -->
-    <changeSet id="20181208210200-1" author="marutan">
+    <changeSet id="20181208220003-1" author="marutan">
         <insert tableName="followed_series">
             <column name="id">1</column>
             <column name="rate">GOOD</column>
@@ -86,7 +86,7 @@
         </insert>
     </changeSet>
 
-    <changeSet id="20181208210200-2" author="marutan">
+    <changeSet id="20181208220003-2" author="marutan">
         <insert tableName="followed_series">
             <column name="id">3</column>
             <column name="user_id">102</column>
@@ -113,7 +113,7 @@
         </insert>
     </changeSet>
 
-    <changeSet id="20181208210200-3" author="marutan">
+    <changeSet id="20181208220003-3" author="marutan">
         <insert tableName="followed_series">
             <column name="id">7</column>
             <column name="user_id">103</column>
@@ -131,7 +131,7 @@
         </insert>
     </changeSet>
 
-    <changeSet id="20181208210200-4" author="marutan">
+    <changeSet id="20181208220003-4" author="marutan">
         <insert tableName="followed_series">
             <column name="id">8</column>
             <column name="user_id">104</column>
