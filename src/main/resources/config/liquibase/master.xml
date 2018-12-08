@@ -19,4 +19,6 @@
     <include file="config/liquibase/changelog/20181208134900_domain_unique_constraints.xml"  relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181208181500_add_users.xml"  relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181208190000_add_series_season_episode.xml"  relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181208201000_add_followed_watched"  relativeToChangelogFile="false"/>
+
 </databaseChangeLog>
