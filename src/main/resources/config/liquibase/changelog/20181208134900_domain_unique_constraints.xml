@@ -23,8 +23,12 @@
         <addUniqueConstraint     columnNames="jhi_number, season_id"
                                  tableName="episode"
                                  constraintName="unique_episode"/>
-
     </changeSet>
 
+    <changeSet id="201812081633" author="kp-marczynski">
+        <addUniqueConstraint tableName="series"
+                             columnNames="name, release_year"
+                             constraintName="unique_series"/>
+    </changeSet>
 
 </databaseChangeLog>
