@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added followed and watched.
+    -->
+    <changeSet id="20181208220003-1" author="marutan">
+        <insert tableName="followed_series">
+            <column name="id">1</column>
+            <column name="rate">GOOD</column>
+            <column name="jhi_comment">So good good :)</column>
+            <column name="user_id">101</column>
+            <column name="series_id">1</column>
+        </insert>
+        <insert tableName="followed_series">
+            <column name="id">2</column>
+            <column name="rate">BAD</column>
+            <column name="jhi_comment">Horrible</column>
+            <column name="user_id">101</column>
+            <column name="series_id">2</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">1</column>
+            <column name="rate">AWESOME</column>
+            <column name="jhi_comment">First one, memorable one</column>
+            <column name="user_id">101</column>
+            <column name="episode_id">100</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">2</column>
+            <column name="rate">AWESOME</column>
+            <column name="jhi_comment">Second</column>
+            <column name="user_id">101</column>
+            <column name="episode_id">101</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">3</column>
+            <column name="rate">AWESOME</column>
+            <column name="jhi_comment">Lorem</column>
+            <column name="user_id">101</column>
+            <column name="episode_id">102</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">4</column>
+            <column name="rate">AVERAGE</column>
+            <column name="jhi_comment">Lorem 1</column>
+            <column name="user_id">101</column>
+            <column name="episode_id">103</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">5</column>
+            <column name="rate">GOOD</column>
+            <column name="jhi_comment">Lorem 2</column>
+            <column name="user_id">101</column>
+            <column name="episode_id">104</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">6</column>
+            <column name="rate">GOOD</column>
+            <column name="jhi_comment">Lorem sdf 2</column>
+            <column name="user_id">101</column>
+            <column name="episode_id">106</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">7</column>
+            <column name="rate">MEDIOCRE</column>
+            <column name="jhi_comment">So so</column>
+            <column name="user_id">101</column>
+            <column name="episode_id">107</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">8</column>
+            <column name="rate">BAD</column>
+            <column name="jhi_comment">Destroy this</column>
+            <column name="user_id">101</column>
+            <column name="episode_id">108</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">9</column>
+            <column name="rate">BAD</column>
+            <column name="jhi_comment">Burn this</column>
+            <column name="user_id">101</column>
+            <column name="episode_id">109</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="20181208220003-2" author="marutan">
+        <insert tableName="followed_series">
+            <column name="id">3</column>
+            <column name="user_id">102</column>
+            <column name="series_id">1</column>
+        </insert>
+        <insert tableName="followed_series">
+            <column name="id">4</column>
+            <column name="rate">BAD</column>
+            <column name="jhi_comment">Horrible</column>
+            <column name="user_id">102</column>
+            <column name="series_id">2</column>
+        </insert>
+        <insert tableName="followed_series">
+            <column name="id">5</column>
+            <column name="rate">BAD</column>
+            <column name="jhi_comment">Very horrible</column>
+            <column name="user_id">102</column>
+            <column name="series_id">3</column>
+        </insert>
+        <insert tableName="followed_series">
+            <column name="id">6</column>
+            <column name="user_id">102</column>
+            <column name="series_id">4</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="20181208220003-3" author="marutan">
+        <insert tableName="followed_series">
+            <column name="id">7</column>
+            <column name="user_id">103</column>
+            <column name="series_id">5</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">10</column>
+            <column name="user_id">103</column>
+            <column name="episode_id">124</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">11</column>
+            <column name="user_id">103</column>
+            <column name="episode_id">126</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="20181208220003-4" author="marutan">
+        <insert tableName="followed_series">
+            <column name="id">8</column>
+            <column name="user_id">104</column>
+            <column name="series_id">1</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">12</column>
+            <column name="rate">GOOD</column>
+            <column name="jhi_comment">This is made by god</column>
+            <column name="user_id">104</column>
+            <column name="episode_id">100</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">13</column>
+            <column name="rate">MEDIOCRE</column>
+            <column name="jhi_comment">This is made by satan</column>
+            <column name="user_id">104</column>
+            <column name="episode_id">101</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="20181208220003-5" author="marutan">
+        <insert tableName="followed_series">
+            <column name="id">9</column>
+            <column name="rate">GOOD</column>
+            <column name="jhi_comment">Very impressive</column>
+            <column name="user_id">4</column>
+            <column name="series_id">1</column>
+        </insert>
+        <insert tableName="followed_series">
+            <column name="id">10</column>
+            <column name="rate">BAD</column>
+            <column name="jhi_comment">I hate it</column>
+            <column name="user_id">4</column>
+            <column name="series_id">2</column>
+        </insert>
+        <insert tableName="followed_series">
+            <column name="id">11</column>
+            <column name="user_id">4</column>
+            <column name="series_id">4</column>
+        </insert>
+        <insert tableName="followed_series">
+            <column name="id">12</column>
+            <column name="jhi_comment">I dont know yet</column>
+            <column name="user_id">4</column>
+            <column name="series_id">5</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">14</column>
+            <column name="rate">AWESOME</column>
+            <column name="jhi_comment">Not bad for a start</column>
+            <column name="user_id">4</column>
+            <column name="episode_id">100</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">15</column>
+            <column name="rate">AVERAGE</column>
+            <column name="jhi_comment">Music 19 min</column>
+            <column name="user_id">4</column>
+            <column name="episode_id">101</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">16</column>
+            <column name="rate">AWESOME</column>
+            <column name="user_id">4</column>
+            <column name="episode_id">102</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">17</column>
+            <column name="jhi_comment">I didnt hate it</column>
+            <column name="user_id">4</column>
+            <column name="episode_id">103</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">18</column>
+            <column name="rate">GOOD</column>
+            <column name="jhi_comment">LOL</column>
+            <column name="user_id">4</column>
+            <column name="episode_id">104</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">19</column>
+            <column name="rate">AWESOME</column>
+            <column name="jhi_comment">I dont want to believe that Kirk do THAT</column>
+            <column name="user_id">4</column>
+            <column name="episode_id">106</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">20</column>
+            <column name="rate">MEDIOCRE</column>
+            <column name="jhi_comment">Do not SPOIL yourself this episode</column>
+            <column name="user_id">4</column>
+            <column name="episode_id">107</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">21</column>
+            <column name="rate">BAD</column>
+            <column name="jhi_comment">cliffhanger SUCKS</column>
+            <column name="user_id">4</column>
+            <column name="episode_id">108</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">22</column>
+            <column name="rate">BAD</column>
+            <column name="user_id">4</column>
+            <column name="episode_id">109</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">23</column>
+            <column name="rate">BAD</column>
+            <column name="user_id">4</column>
+            <column name="episode_id">124</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">24</column>
+            <column name="rate">GOOD</column>
+            <column name="user_id">4</column>
+            <column name="episode_id">125</column>
+        </insert>
+        <insert tableName="watched_episode">
+            <column name="id">25</column>
+            <column name="rate">BAD</column>
+            <column name="user_id">4</column>
+            <column name="episode_id">126</column>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

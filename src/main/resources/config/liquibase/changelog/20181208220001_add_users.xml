@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added Users.
+        Password for all: "user"
+    -->
+    <changeSet id="20181208220001-1" author="marutan">
+        <insert tableName="jhi_user">
+            <column name="id" value="100"></column>
+            <column name="login" value="ola"></column>
+            <column name="password_hash" value="$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K"></column>
+            <column name="first_name" value="Ola"></column>
+            <column name="last_name" value="Nowak"></column>
+            <column name="email" value="olanowak@onet.pl"></column>
+            <column name="activated" value="TRUE"></column>
+            <column name="lang_key" value="en"></column>
+            <column name="created_by" value="admin"></column>
+            <column name="created_date" value="2018-12-08 16:31:30.861"></column>
+            <column name="reset_date" value="2018-12-08 16:31:30.759"></column>
+            <column name="last_modified_by" value="admin"></column>
+            <column name="last_modified_date" value="2018-12-08 16:31:30.861"></column>
+        </insert>
+        <insert tableName="jhi_user_authority">
+            <column name="user_id" value="100"></column>
+            <column name="authority_name" value="ROLE_USER"></column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="20181208220001-2" author="marutan">
+        <insert tableName="jhi_user">
+            <column name="id" value="101"></column>
+            <column name="login" value="jtkirk"></column>
+            <column name="password_hash" value="$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K"></column>
+            <column name="first_name" value="James Tiberius"></column>
+            <column name="last_name" value="Kirk"></column>
+            <column name="email" value="kirk@space"></column>
+            <column name="activated" value="TRUE"></column>
+            <column name="lang_key" value="en"></column>
+            <column name="created_by" value="admin"></column>
+            <column name="created_date" value="2018-12-08 17:29:06.328"></column>
+            <column name="reset_date" value="2018-12-08 17:29:06.265"></column>
+            <column name="last_modified_by" value="admin"></column>
+            <column name="last_modified_date" value="2018-12-08 17:29:06.328"></column>
+        </insert>
+        <insert tableName="jhi_user_authority">
+            <column name="user_id" value="101"></column>
+            <column name="authority_name" value="ROLE_USER"></column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="20181208220001-3" author="marutan">
+        <insert tableName="jhi_user">
+            <column name="id" value="102"></column>
+            <column name="login" value="bones"></column>
+            <column name="password_hash" value="$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K"></column>
+            <column name="first_name" value="Leonard"></column>
+            <column name="last_name" value="McCoy"></column>
+            <column name="email" value="bones@space"></column>
+            <column name="activated" value="TRUE"></column>
+            <column name="lang_key" value="en"></column>
+            <column name="created_by" value="admin"></column>
+            <column name="created_date" value="2018-12-08 17:30:49.127"></column>
+            <column name="reset_date" value="2018-12-08 17:30:49.126"></column>
+            <column name="last_modified_by" value="admin"></column>
+            <column name="last_modified_date" value="2018-12-08 17:30:49.127"></column>
+        </insert>
+        <insert tableName="jhi_user_authority">
+            <column name="user_id" value="102"></column>
+            <column name="authority_name" value="ROLE_USER"></column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="20181208220001-4" author="marutan">
+        <insert tableName="jhi_user">
+            <column name="id" value="103"></column>
+            <column name="login" value="scotty"></column>
+            <column name="password_hash" value="$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K"></column>
+            <column name="first_name" value="Montgomery"></column>
+            <column name="last_name" value="Scott"></column>
+            <column name="email" value="scotty@space"></column>
+            <column name="activated" value="TRUE"></column>
+            <column name="lang_key" value="en"></column>
+            <column name="created_by" value="admin"></column>
+            <column name="created_date" value="2018-12-08 17:31:57.13"></column>
+            <column name="reset_date" value="2018-12-08 17:31:57.129"></column>
+            <column name="last_modified_by" value="admin"></column>
+            <column name="last_modified_date" value="2018-12-08 17:31:57.13"></column>
+        </insert>
+        <insert tableName="jhi_user_authority">
+            <column name="user_id" value="103"></column>
+            <column name="authority_name" value="ROLE_USER"></column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="20181208220001-5" author="marutan">
+        <insert tableName="jhi_user">
+            <column name="id" value="104"></column>
+            <column name="login" value="sulu"></column>
+            <column name="password_hash" value="$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K"></column>
+            <column name="first_name" value="hikaru"></column>
+            <column name="last_name" value="sulu"></column>
+            <column name="email" value="sulu@space"></column>
+            <column name="activated" value="TRUE"></column>
+            <column name="lang_key" value="en"></column>
+            <column name="created_by" value="admin"></column>
+            <column name="created_date" value="2018-12-08 17:32:33.261"></column>
+            <column name="reset_date" value="2018-12-08 17:32:33.26"></column>
+            <column name="last_modified_by" value="admin"></column>
+            <column name="last_modified_date" value="2018-12-08 17:32:33.261"></column>
+        </insert>
+        <insert tableName="jhi_user_authority">
+            <column name="user_id" value="104"></column>
+            <column name="authority_name" value="ROLE_USER"></column>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
