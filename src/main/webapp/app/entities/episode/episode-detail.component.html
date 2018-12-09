@@ -2,39 +2,46 @@
     <div class="col-11 no-padding">
         <div *ngIf="episode" class="row">
             <div class="col-md-9">
-                <h2><span>Episode</span> {{episode.id}}
-                    <fa-icon *ngIf="watchedEpisode"
+                <h2 class="d-block">
+                    <div class="row">
+                        <span class="col-10">Episode {{episode.number}}</span>
+                    <fa-icon class="col-2" *ngIf="watchedEpisode"
                              [icon]="watchedEpisode.id?['fas','check-circle']:['far','check-circle']"
                              (click)="setFollowed()"></fa-icon>
+                    </div>
                 </h2>
                 <hr>
                 <jhi-alert-error></jhi-alert-error>
+                <!--<h3>-->
+                    <!--<span>{{episode.title}}</span>-->
+                <!--</h3>-->
                 <dl class="row-md jh-entity-details">
-                    <dt><span>Number</span></dt>
-                    <dd>
-                        <span>{{episode.number}}</span>
-                    </dd>
+                    <!--<dt><span>Number</span></dt>-->
+                    <!--<dd>-->
+                        <!--<span>{{episode.number}}</span>-->
+                    <!--</dd>-->
                     <dt><span>Title</span></dt>
                     <dd>
                         <span>{{episode.title}}</span>
                     </dd>
                     <dt><span>Release Date</span></dt>
                     <dd>
-                        <span>{{episode.releaseDate}}</span>
+                        <span>{{episode.releaseDate | date : 'medium'}}</span>
                     </dd>
                     <dt><span>Duration</span></dt>
                     <dd>
-                        <span>{{episode.duration}}</span>
+                        <span *ngIf="episode.duration">{{episode.duration}}</span>
+                        <span *ngIf="!episode.duration">N/A</span>
                     </dd>
-                    <dt><span>Season</span></dt>
-                    <dd>
-                        <div *ngIf="episode.season">
-                            <a [routerLink]="['/season', episode.season?.id, 'view']">{{episode.season?.id}}</a>
-                        </div>
-                    </dd>
+                    <!--<dt><span>Season</span></dt>-->
+                    <!--<dd>-->
+                        <!--<div *ngIf="episode.season">-->
+                            <!--<a [routerLink]="['/season', episode.season?.id, 'view']">{{episode.season?.id}}</a>-->
+                        <!--</div>-->
+                    <!--</dd>-->
                 </dl>
 
-                <button type="submit"
+                <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
                         (click)="previousState()"
                         class="btn btn-info">
                     <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
@@ -48,18 +55,18 @@
             </div>
             <div class="col-md-3">
                 <div class="card opinion" *ngIf="watchedEpisode">
-                    <span>WatchedEpisode</span>
+                    <!--<span>WatchedEpisode</span>-->
                     <div>
-                        <div>
-                            Average: {{averageRate | number : '1.2-2'}}
-                        </div>
+                        <h3>
+                            <fa-icon [icon]="['fas','star']"></fa-icon> {{averageRate | number : '1.2-2'}}
+                        </h3>
                         <div>
                             Votes: {{rateCount}}
                         </div>
                         <div>
-                            Rate:{{watchedEpisode.rate}}
+                            Rate: {{watchedEpisode.rate}}
                         </div>
-                        <div>
+                        <div class="stars">
                             <fa-icon *ngFor="let i of [1,2,3,4,5]"
                                      [icon]="shouldStarBeFilled(i)?['fas','star']:['far','star']"
                                      (click)="setRate(i)"></fa-icon>
