@@ -16,4 +16,6 @@ public interface FollowedSeriesService {
     void deleteById(Long id);
 
     FollowedSeries update(FollowedSeries followedSeries);
+
+    Float getAverageRate(Long seriesId);
 }

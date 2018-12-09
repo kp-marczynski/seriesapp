@@ -106,6 +106,19 @@ public class FollowedSeriesResource {
     }
 
     /**
+     * GET  /followed-series/:id : get the "id" followedSeries.
+     *
+     * @param id the id of the followedSeries to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the followedSeries, or with status 404 (Not Found)
+     */
+    @GetMapping("/followed-series/{id}/average-rate")
+    @Timed
+    public Float getAverageRate(@PathVariable Long id) {
+        log.debug("REST request to get FollowedSeries : {}", id);
+        return followedSeriesService.getAverageRate(id);
+    }
+
+    /**
      * DELETE  /followed-series/:id : delete the "id" followedSeries.
      *
      * @param id the id of the followedSeries to delete

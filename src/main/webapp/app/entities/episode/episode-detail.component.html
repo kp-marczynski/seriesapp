@@ -43,18 +43,18 @@
                 </button>
             </div>
             <div class="col-md-3">
-                <div class="card opinion">
+                <div class="card opinion" *ngIf="watchedEpisode">
                     <span>WatchedEpisode</span>
                     <div>
+                        <div>
+                            Average: {{averageRate | number : '1.2-2'}}
+                        </div>
                         <div>
                             Rate:{{watchedEpisode.rate}}
                         </div>
                         <div class="row">
-                            <fa-icon class="col-2" [icon]="['far','star']"></fa-icon>
-                            <fa-icon class="col-2" [icon]="['far','star']"></fa-icon>
-                            <fa-icon class="col-2" [icon]="['far','star']"></fa-icon>
-                            <fa-icon class="col-2" [icon]="['far','star']"></fa-icon>
-                            <fa-icon class="col-2" [icon]="['far','star']"></fa-icon>
+                            <fa-icon *ngFor="let i of [1,2,3,4,5]" class="col-2"
+                                     [icon]="shouldStarBeFilled(i)?['fas','star']:['far','star']"></fa-icon>
                         </div>
                         <form>
                             <div class="form-group">

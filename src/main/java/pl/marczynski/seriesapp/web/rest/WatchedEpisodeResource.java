@@ -106,6 +106,19 @@ public class WatchedEpisodeResource {
     }
 
     /**
+     * GET  /watched-episodes/:id/average-rate : get the "id" watchedEpisode.
+     *
+     * @param id the id of the watchedEpisode to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the watchedEpisode, or with status 404 (Not Found)
+     */
+    @GetMapping("/watched-episodes/{id}/average-rate")
+    @Timed
+    public Float getAverageRate(@PathVariable Long id) {
+        log.debug("REST request to get WatchedEpisode : {}", id);
+        return watchedEpisodeService.getAverageRate(id);
+    }
+
+    /**
      * DELETE  /watched-episodes/:id : delete the "id" watchedEpisode.
      *
      * @param id the id of the watchedEpisode to delete

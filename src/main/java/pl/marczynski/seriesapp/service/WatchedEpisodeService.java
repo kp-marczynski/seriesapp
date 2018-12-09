@@ -16,4 +16,6 @@ public interface WatchedEpisodeService {
     void deleteById(Long id);
 
     WatchedEpisode update(WatchedEpisode watchedEpisode);
+
+    Float getAverageRate(Long episodeId);
 }
