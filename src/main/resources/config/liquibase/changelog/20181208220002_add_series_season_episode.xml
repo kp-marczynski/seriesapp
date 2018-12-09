@@ -4,7 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
     <!--
-        Added 5 series with season with epiosode.
+        Added 5 series with season with episodes
     -->
     <changeSet id="20181208220002-1" author="marutan">
         <insert tableName="series">
