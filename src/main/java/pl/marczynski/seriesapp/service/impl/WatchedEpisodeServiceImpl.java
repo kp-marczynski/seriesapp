@@ -71,4 +71,9 @@ public class WatchedEpisodeServiceImpl implements WatchedEpisodeService {
     public Float getAverageRate(Long episodeId){
         return watchedEpisodeRepository.getAverageRateByEpisodeId(episodeId);
     }
+
+    @Override
+    public Integer getRateCount(Long episodeId) {
+        return watchedEpisodeRepository.getRateCountByEpisodeId(episodeId);
+    }
 }

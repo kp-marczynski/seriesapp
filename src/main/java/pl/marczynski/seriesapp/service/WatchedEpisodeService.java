@@ -18,4 +18,6 @@ public interface WatchedEpisodeService {
     WatchedEpisode update(WatchedEpisode watchedEpisode);
 
     Float getAverageRate(Long episodeId);
+
+    Integer getRateCount(Long episodeId);
 }

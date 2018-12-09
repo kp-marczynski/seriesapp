@@ -2,7 +2,11 @@
     <div class="col-11 no-padding">
         <div *ngIf="episode" class="row">
             <div class="col-md-9">
-                <h2><span>Episode</span> {{episode.id}}</h2>
+                <h2><span>Episode</span> {{episode.id}}
+                    <fa-icon *ngIf="watchedEpisode"
+                             [icon]="watchedEpisode.id?['fas','check-circle']:['far','check-circle']"
+                             (click)="setFollowed()"></fa-icon>
+                </h2>
                 <hr>
                 <jhi-alert-error></jhi-alert-error>
                 <dl class="row-md jh-entity-details">
@@ -50,18 +54,27 @@
                             Average: {{averageRate | number : '1.2-2'}}
                         </div>
                         <div>
+                            Votes: {{rateCount}}
+                        </div>
+                        <div>
                             Rate:{{watchedEpisode.rate}}
                         </div>
-                        <div class="row">
-                            <fa-icon *ngFor="let i of [1,2,3,4,5]" class="col-2"
-                                     [icon]="shouldStarBeFilled(i)?['fas','star']:['far','star']"></fa-icon>
+                        <div>
+                            <fa-icon *ngFor="let i of [1,2,3,4,5]"
+                                     [icon]="shouldStarBeFilled(i)?['fas','star']:['far','star']"
+                                     (click)="setRate(i)"></fa-icon>
                         </div>
                         <form>
                             <div class="form-group">
                                 <label for="comment">Comment:</label>
                                 <textarea class="form-control" rows="5"
-                                          id="comment" [disabled]="watchedEpisode.comment">{{watchedEpisode.comment}}</textarea>
-                                <button type="submit" class="btn btn-primary" [disabled]="watchedEpisode.comment">Submit comment</button>
+                                          id="comment"
+                                          #comment
+                                          (blur)="saveComment(comment.value)"
+                                          [disabled]="watchedEpisode.comment">{{watchedEpisode.comment}}</textarea>
+                                <!--<button type="submit" class="btn btn-primary" [disabled]="watchedEpisode.comment">Submit-->
+                                    <!--comment-->
+                                <!--</button>-->
                             </div>
                         </form>
                     </div>

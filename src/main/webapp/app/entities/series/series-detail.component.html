@@ -2,7 +2,7 @@
     <div class="col-11 no-padding">
         <div *ngIf="series" class="row">
             <div class="col-md-9">
-                <h2><span>Series</span> {{series.id}}</h2>
+                <h2><span>Series</span> {{series.id}} <fa-icon *ngIf="followedSeries" [icon]="followedSeries.id?['fas','heart']:['far','heart']" (click)="setFollowed()"></fa-icon></h2>
                 <hr>
                 <jhi-alert-error></jhi-alert-error>
                 <dl class="row-md jh-entity-details">
@@ -58,21 +58,25 @@
                             Average: {{averageRate | number : '1.2-2'}}
                         </div>
                         <div>
+                            Votes: {{rateCount}}
+                        </div>
+                        <div>
                             Rate:{{followedSeries.rate}}
                         </div>
-                        <div class="row">
-                            <fa-icon *ngFor="let i of [1,2,3,4,5]" class="col-2"
-                                     [icon]="shouldStarBeFilled(i)?['fas','star']:['far','star']"></fa-icon>
+                        <div>
+                            <fa-icon *ngFor="let i of [1,2,3,4,5]"
+                                     [icon]="shouldStarBeFilled(i)?['fas','star']:['far','star']" (click)="setRate(i)"></fa-icon>
                         </div>
                         <form>
                             <div class="form-group">
                                 <label for="comment">Comment:</label>
                                 <textarea class="form-control" rows="5"
                                           id="comment"
-                                          [disabled]="followedSeries.comment">{{followedSeries.comment}}</textarea>
-                                <button type="submit" class="btn btn-primary" [disabled]="followedSeries.comment">Submit
-                                    comment
-                                </button>
+                                          #comment
+                                          (blur)="saveComment(comment.value)" [disabled]="followedSeries.comment">{{followedSeries.comment}}</textarea>
+                                <!--<button type="submit" class="btn btn-primary" [disabled]="followedSeries.comment">Submit-->
+                                    <!--comment-->
+                                <!--</button>-->
                             </div>
                         </form>
                     </div>
