@@ -18,4 +18,6 @@ public interface FollowedSeriesService {
     FollowedSeries update(FollowedSeries followedSeries);
 
     Float getAverageRate(Long seriesId);
+
+    Integer getRateCount(Long seriesId);
 }

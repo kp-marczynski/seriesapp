@@ -119,6 +119,20 @@ public class WatchedEpisodeResource {
     }
 
     /**
+     * GET  /watched-episodes/:id/rate-count : get the "id" watchedEpisode.
+     *
+     * @param id the id of the watchedEpisode to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the watchedEpisode, or with status 404 (Not Found)
+     */
+    @GetMapping("/watched-episodes/{id}/rate-count")
+    @Timed
+    public Integer getRateCount(@PathVariable Long id) {
+        log.debug("REST request to get WatchedEpisode : {}", id);
+        return watchedEpisodeService.getRateCount(id);
+    }
+
+
+    /**
      * DELETE  /watched-episodes/:id : delete the "id" watchedEpisode.
      *
      * @param id the id of the watchedEpisode to delete

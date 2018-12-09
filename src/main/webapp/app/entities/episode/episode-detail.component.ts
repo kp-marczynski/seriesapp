@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 
 import {IEpisode} from 'app/shared/model/episode.model';
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
-import {IWatchedEpisode, WatchedEpisode} from "app/shared/model/watched-episode.model";
+import {IWatchedEpisode, Rate, WatchedEpisode} from "app/shared/model/watched-episode.model";
 import {JhiAlertService} from "ng-jhipster";
 import {EpisodeService} from "app/entities/episode/episode.service";
 import {WatchedEpisodeService} from "app/entities/watched-episode";
@@ -16,6 +16,7 @@ export class EpisodeDetailComponent implements OnInit {
     episode: IEpisode;
     watchedEpisode: IWatchedEpisode;
     averageRate: number;
+    private rateCount: number;
 
     constructor(private activatedRoute: ActivatedRoute, private episodeService: EpisodeService, private jhiAlertService: JhiAlertService, private watchedEpisodeService: WatchedEpisodeService) {
     }
@@ -24,7 +25,7 @@ export class EpisodeDetailComponent implements OnInit {
         this.activatedRoute.data.subscribe(({episode}) => {
             this.episode = episode;
             this.loadWatched();
-            this.getAverageRate();
+            this.updateComunityRate();
         });
     }
 
@@ -46,11 +47,74 @@ export class EpisodeDetailComponent implements OnInit {
         else return false;
     }
 
+    setRate(i: number) {
+        switch (i) {
+            case 1:
+                this.watchedEpisode.rate = Rate.BAD;
+                break;
+            case 2:
+                this.watchedEpisode.rate = Rate.MEDIOCRE;
+                break;
+            case 3:
+                this.watchedEpisode.rate = Rate.AVERAGE;
+                break;
+            case 4:
+                this.watchedEpisode.rate = Rate.GOOD;
+                break;
+            case 5:
+                this.watchedEpisode.rate = Rate.AWESOME;
+                break;
+        }
+        this.savewatchedEpisode();
+    }
+
+    savewatchedEpisode() {
+        if (this.watchedEpisode.id) {
+            this.watchedEpisodeService.update(this.watchedEpisode).subscribe(
+                (res: HttpResponse<IWatchedEpisode>) => {
+                    this.watchedEpisode = res.body;
+                    this.updateComunityRate();
+                    console.log("updated");
+                }
+            );
+        } else {
+            this.watchedEpisodeService.create(this.watchedEpisode).subscribe((res: HttpResponse<IWatchedEpisode>) => {
+                this.watchedEpisode = res.body;
+                this.updateComunityRate();
+                console.log("saved");
+            });
+        }
+    }
+
+    saveComment(value: string) {
+        this.watchedEpisode.comment = value;
+        this.savewatchedEpisode();
+    }
+
+    setFollowed() {
+        this.savewatchedEpisode();
+    }
+
+    updateComunityRate() {
+        this.getAverageRate();
+        this.getRateCount();
+    }
+
     getAverageRate() {
         if (this.episode && this.episode.id) {
             this.watchedEpisodeService.getAverageRate(this.episode.id).subscribe(
                 (res: HttpResponse<any>) => {
                     this.averageRate = res.body;
+                }
+            )
+        }
+    }
+
+    getRateCount() {
+        if (this.episode && this.episode.id) {
+            this.watchedEpisodeService.getRateCount(this.episode.id).subscribe(
+                (res: HttpResponse<any>) => {
+                    this.rateCount = res.body;
                 }
             )
         }

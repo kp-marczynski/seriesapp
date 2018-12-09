@@ -32,4 +32,7 @@ public interface WatchedEpisodeRepository extends JpaRepository<WatchedEpisode, 
         "when 'AWESOME' then 5 " +
         "else 0 END) from WatchedEpisode as watched_episode where watched_episode.episode.id = :episodeId and watched_episode.rate is not null")
     Float getAverageRateByEpisodeId(@Param("episodeId") Long episodeId);
+
+    @Query("select count(watched_episode) from WatchedEpisode as watched_episode where watched_episode.episode.id = :episodeId and watched_episode.rate is not null")
+    Integer getRateCountByEpisodeId(@Param("episodeId") Long episodeId);
 }

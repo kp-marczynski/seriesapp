@@ -3,7 +3,6 @@ package pl.marczynski.seriesapp.service.impl;
 import org.springframework.stereotype.Service;
 import pl.marczynski.seriesapp.domain.FollowedSeries;
 import pl.marczynski.seriesapp.domain.User;
-import pl.marczynski.seriesapp.domain.WatchedEpisode;
 import pl.marczynski.seriesapp.repository.FollowedSeriesRepository;
 import pl.marczynski.seriesapp.repository.UserRepository;
 import pl.marczynski.seriesapp.security.AuthoritiesConstants;
@@ -23,6 +22,7 @@ public class FollowedSeriesServiceImpl implements FollowedSeriesService {
         this.userRepository = userRepository;
     }
 
+    @Override
     public FollowedSeries save(FollowedSeries followedSeries) {
         FollowedSeries result = null;
         Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
@@ -38,6 +38,7 @@ public class FollowedSeriesServiceImpl implements FollowedSeriesService {
         return result;
     }
 
+    @Override
     public List<FollowedSeries> findAll() {
         if (SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) {
             return followedSeriesRepository.findAll();
@@ -46,19 +47,28 @@ public class FollowedSeriesServiceImpl implements FollowedSeriesService {
         }
     }
 
+    @Override
     public Optional<FollowedSeries> findById(Long id) {
         return followedSeriesRepository.findById(id);
     }
 
+    @Override
     public void deleteById(Long id) {
         followedSeriesRepository.deleteById(id);
     }
 
+    @Override
     public FollowedSeries update(FollowedSeries followedSeries) {
         return save(followedSeries);
     }
 
+    @Override
     public Float getAverageRate(Long seriesId){
         return followedSeriesRepository.getAverageRateBySeriesId(seriesId);
+    }
+
+    @Override
+    public Integer getRateCount(Long seriesId) {
+        return followedSeriesRepository.getRateCountBySeriesId(seriesId);
     }
 }

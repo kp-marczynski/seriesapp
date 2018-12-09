@@ -32,4 +32,7 @@ public interface FollowedSeriesRepository extends JpaRepository<FollowedSeries, 
         "when 'AWESOME' then 5 " +
         "else 0 END) from FollowedSeries as followed_series where followed_series.series.id = :seriesId and followed_series.rate is not null")
     Float getAverageRateBySeriesId(@Param("seriesId") Long seriesId);
+
+    @Query("select count(followed_series) from FollowedSeries as followed_series where followed_series.series.id = :seriesId and followed_series.rate is not null")
+    Integer getRateCountBySeriesId(@Param("seriesId") Long seriesId);
 }
