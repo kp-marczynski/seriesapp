@@ -19,7 +19,7 @@
                         <span>{{series.description}}</span>
                     </dd>
                     <dt *ngIf="series.seasons.length > 0"><span>Seasons</span></dt>
-                    <dd id="accordion" *ngFor="let season of series.seasons">
+                    <dd id="accordion" *ngFor="let season of series.seasons | orderBy: ['number']">
                         <div class="card no-padding">
                             <div class="card-header" (click)="setVisible(season.number)">
                                 <div class="card-link" data-toggle="collapse">

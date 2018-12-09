@@ -23,7 +23,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let followedSeries of followedSeries ;trackBy: trackId">
+            <tr *ngFor="let followedSeries of followedSeries | orderBy: ['series.releaseYear'] | orderBy: ['series.name']">
                 <td><a [routerLink]="['/followed-series', followedSeries.id, 'view' ]">{{followedSeries.id}}</a></td>
                 <td>{{followedSeries.rate}}</td>
                 <td>{{followedSeries.comment}}</td>

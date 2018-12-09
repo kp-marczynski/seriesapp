@@ -33,7 +33,7 @@
                 </dd>
                 <dt *ngIf="season.episodes.length > 0"><span>Episodes</span></dt>
                 <dd class="list-group">
-                    <a class="list-group-item waves-effect" *ngFor="let episode of season.episodes"
+                    <a class="list-group-item waves-effect" *ngFor="let episode of season.episodes | orderBy: ['number']"
                             [routerLink]="['/episode', episode.id, 'view' ]">
                         <div class="float-left">Episode {{episode.number}}</div>
                         <div class="float-right">{{episode.releaseDate}}</div>
