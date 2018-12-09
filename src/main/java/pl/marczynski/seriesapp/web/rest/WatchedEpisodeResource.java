@@ -115,8 +115,7 @@ public class WatchedEpisodeResource {
     @Timed
     public Float getAverageRate(@PathVariable Long id) {
         log.debug("REST request to get WatchedEpisode : {}", id);
-        Float averageRate = watchedEpisodeService.getAverageRate(id);
-        return averageRate;
+        return watchedEpisodeService.getAverageRate(id);
     }
 
     /**

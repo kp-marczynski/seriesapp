@@ -115,8 +115,7 @@ public class FollowedSeriesResource {
     @Timed
     public Float getAverageRate(@PathVariable Long id) {
         log.debug("REST request to get FollowedSeries : {}", id);
-        Float averageRate = followedSeriesService.getAverageRate(id);
-        return averageRate;
+        return followedSeriesService.getAverageRate(id);
     }
 
     /**
