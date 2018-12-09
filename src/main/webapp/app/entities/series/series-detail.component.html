@@ -2,29 +2,35 @@
     <div class="col-11 no-padding">
         <div *ngIf="series" class="row">
             <div class="col-md-9">
-                <h2><span>Series</span> {{series.id}} <fa-icon *ngIf="followedSeries" [icon]="followedSeries.id?['fas','heart']:['far','heart']" (click)="setFollowed()"></fa-icon></h2>
+                <h2 class="row">
+                    <span class="col-6">{{series.name}}</span>
+                    <span class="col-4 small">{{series.releaseYear}}</span>
+                    <fa-icon class="col-2" *ngIf="followedSeries" [icon]="followedSeries.id?['fas','heart']:['far','heart']"
+                             (click)="setFollowed()"></fa-icon>
+                </h2>
                 <hr>
                 <jhi-alert-error></jhi-alert-error>
                 <dl class="row-md jh-entity-details">
-                    <dt><span>Name</span></dt>
-                    <dd>
-                        <span>{{series.name}}</span>
-                    </dd>
-                    <dt><span>Release Year</span></dt>
-                    <dd>
-                        <span>{{series.releaseYear}}</span>
-                    </dd>
-                    <dt><span>Description</span></dt>
-                    <dd>
+                    <!--<dt><span>Name</span></dt>-->
+                    <!--<dd>-->
+                    <!--<span>{{series.name}}</span>-->
+                    <!--</dd>-->
+                    <!--<dt><span>Release Year</span></dt>-->
+                    <!--<dd>-->
+                    <!--<span>{{series.releaseYear}}</span>-->
+                    <!--</dd>-->
+                    <!--<dt><span>Description</span></dt>-->
+                    <dd class="content-description">
                         <span>{{series.description}}</span>
                     </dd>
-                    <dt *ngIf="series.seasons.length > 0"><span>Seasons</span></dt>
+                    <!--<dt *ngIf="series.seasons.length > 0"><span>Seasons</span></dt>-->
                     <dd id="accordion" *ngFor="let season of series.seasons | orderBy: ['number']">
-                        <div class="card no-padding">
+                        <div class="card seasons-list no-padding">
                             <div class="card-header" (click)="setVisible(season.number)">
                                 <div class="card-link" data-toggle="collapse">
                                     <div class="float-left">Season {{season.number}}</div>
-                                    <div class="float-right">{{season.releaseYear}}</div>
+                                    <div class="float-right" *ngIf="season.releaseYear">{{season.releaseYear}}</div>
+                                    <div class="float-right" *ngIf="!season.releaseYear">N/A</div>
                                     <!--Season {{season.number}} : {{season.releaseYear}}-->
                                 </div>
                             </div>
@@ -38,7 +44,7 @@
                     </dd>
                 </dl>
 
-                <button type="submit"
+                <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
                         (click)="previousState()"
                         class="btn btn-info">
                     <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
@@ -52,20 +58,22 @@
             </div>
             <div class="col-md-3">
                 <div class="card opinion" *ngIf="followedSeries">
-                    <span>FollowedSeries</span>
+                    <!--<span>FollowedSeries</span>-->
                     <div>
-                        <div>
-                            Average: {{averageRate | number : '1.2-2'}}
-                        </div>
+                        <h2>
+                            <fa-icon [icon]="['fas','star']"></fa-icon>
+                            {{averageRate | number : '1.2-2'}}
+                        </h2>
                         <div>
                             Votes: {{rateCount}}
                         </div>
                         <div>
-                            Rate:{{followedSeries.rate}}
+                            Rate: {{followedSeries.rate}}
                         </div>
-                        <div>
+                        <div class="stars">
                             <fa-icon *ngFor="let i of [1,2,3,4,5]"
-                                     [icon]="shouldStarBeFilled(i)?['fas','star']:['far','star']" (click)="setRate(i)"></fa-icon>
+                                     [icon]="shouldStarBeFilled(i)?['fas','star']:['far','star']"
+                                     (click)="setRate(i)"></fa-icon>
                         </div>
                         <form>
                             <div class="form-group">
@@ -75,7 +83,7 @@
                                           #comment
                                           (blur)="saveComment(comment.value)" [disabled]="followedSeries.comment">{{followedSeries.comment}}</textarea>
                                 <!--<button type="submit" class="btn btn-primary" [disabled]="followedSeries.comment">Submit-->
-                                    <!--comment-->
+                                <!--comment-->
                                 <!--</button>-->
                             </div>
                         </form>

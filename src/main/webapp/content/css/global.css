@@ -247,9 +247,20 @@ ui bootstrap tweaks
     background-color: whitesmoke;
     padding: 0.5rem;
 }
-.opinion fa-icon{
+
+.stars {
     font-size: 1.5rem;
 }
-.main-container{
+
+.main-container {
     padding: 2rem;
+}
+
+.seasons-list {
+    margin-left: 2rem;
+    margin-right: 4rem;
+}
+
+.content-description {
+    padding: 1rem;
 }

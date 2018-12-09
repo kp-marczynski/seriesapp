@@ -27,16 +27,17 @@
                 </dl>
             </div>
             <dl class="row-md jh-entity-details">
-                <dt><span>Description</span></dt>
-                <dd>
+                <dt *ngIf="standaloneView"><span>Description</span></dt>
+                <dd class="content-description">
                     <span>{{season.description}}</span>
                 </dd>
-                <dt *ngIf="season.episodes.length > 0"><span>Episodes</span></dt>
-                <dd class="list-group">
-                    <a class="list-group-item waves-effect" *ngFor="let episode of season.episodes | orderBy: ['number']"
+                <dt *ngIf="season.episodes.length > 0 && standaloneView"><span>Episodes</span></dt>
+                <dd class="card">
+                    <a class="card-header" *ngFor="let episode of season.episodes | orderBy: ['number']"
                             [routerLink]="['/episode', episode.id, 'view' ]">
                         <div class="float-left">Episode {{episode.number}}</div>
-                        <div class="float-right">{{episode.releaseDate}}</div>
+                        <div class="float-right" *ngIf="episode.releaseDate">{{episode.releaseDate}}</div>
+                        <div class="float-right" *ngIf="!episode.releaseDate">N/A</div>
                         <!--<span>Episode {{episode.number}} : {{episode.releaseDate}}</span>-->
                     </a>
                 </dd>
