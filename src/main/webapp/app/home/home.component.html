@@ -22,7 +22,7 @@
         </div>
 </div>
 <div *ngIf="account" class="text-center hello-user">
-    <span class="display-1"> Welcome, {{account.login}}!</span>
+    <span class="display-1"> Welcome, {{account.login | titlecase}}!</span>
     <br/>
     <span class="display-4">What have you watched lately?</span>
 </div>
