@@ -20,9 +20,23 @@
                     </span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="series" routerLinkActive="active"
+                   [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                    <span>Series</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="followed-series" routerLinkActive="active"
+                   [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                    <span>Followed Series</span>
+                </a>
+            </li>
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}">
+            <li ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}" *jhiHasAnyAuthority="'ROLE_ADMIN'">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
                     <span>
                         <fa-icon icon="th-list"></fa-icon>
@@ -32,13 +46,6 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>
-                    <li>
-                        <a class="dropdown-item" routerLink="series" routerLinkActive="active"
-                           [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span>Series</span>
-                        </a>
-                    </li>
                     <li>
                         <a class="dropdown-item" routerLink="season" routerLinkActive="active"
                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
@@ -51,13 +58,6 @@
                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span>Episode</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="followed-series" routerLinkActive="active"
-                           [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span>Followed Series</span>
                         </a>
                     </li>
                     <li>
@@ -325,17 +325,17 @@
                         <span>Home</span>
                     </span>
             </a>
-        </span>
-        <span *ngSwitchCase="true" class="list-group" routerLinkActive="active"
-              [routerLinkActiveOptions]="{exact: true}">
-        <span class="list-group-item-heading"> <!--id="entity-menu">-->
-                    <span>
-                        <fa-icon icon="th-list"></fa-icon>
-                        <span>
-                            Entities
-                        </span>
-                    </span>
-        </span>
+        <!--</span>-->
+        <!--<span *ngSwitchCase="true" routerLinkActive="active"-->
+              <!--[routerLinkActiveOptions]="{exact: true}">-->
+        <!--<span class="list-group-item-heading"> &lt;!&ndash;id="entity-menu">&ndash;&gt;-->
+                    <!--<span>-->
+                        <!--<fa-icon icon="th-list"></fa-icon>-->
+                        <!--<span>-->
+                            <!--Entities-->
+                        <!--</span>-->
+                    <!--</span>-->
+        <!--</span>-->
             <span>
                 <a class="list-group-item list-group-item-action waves-effect" routerLink="series"
                    routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
@@ -364,7 +364,7 @@
                     <span>Followed Series</span>
                 </a>
             </span>
-            <span>
+            <span *jhiHasAnyAuthority="'ROLE_ADMIN'">
                 <a class="list-group-item list-group-item-action waves-effect" routerLink="watched-episode"
                    routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                     <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
