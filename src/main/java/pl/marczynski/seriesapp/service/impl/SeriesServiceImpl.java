@@ -59,4 +59,9 @@ public class SeriesServiceImpl implements SeriesService {
         }
         return result;
     }
+
+    @Override
+    public Optional<Series> findByNameAndReleaseYear(String name, Integer releaseYear) {
+        return seriesRepository.findByNameAndReleaseYear(name, releaseYear);
+    }
 }

@@ -6,7 +6,7 @@
             <fa-icon icon="bars"></fa-icon>
         </a>
         <a class="navbar-brand waves-effect" (click)="collapseNavbar()">>
-            <strong class="blue-text">{{router.url}}</strong>
+            <strong class="blue-text">{{getUrl()}}</strong>
         </a>
     </div>
     <div class=" jh-navbar-responsive" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed"

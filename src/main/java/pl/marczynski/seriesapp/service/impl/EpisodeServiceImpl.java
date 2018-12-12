@@ -1,29 +1,31 @@
 package pl.marczynski.seriesapp.service.impl;
 
 import org.springframework.stereotype.Service;
-import pl.marczynski.seriesapp.domain.Episode;
-import pl.marczynski.seriesapp.domain.User;
-import pl.marczynski.seriesapp.domain.WatchedEpisode;
+import pl.marczynski.seriesapp.domain.*;
 import pl.marczynski.seriesapp.domain.builder.WatchedEpisodeBuilder;
 import pl.marczynski.seriesapp.repository.EpisodeRepository;
 import pl.marczynski.seriesapp.repository.UserRepository;
 import pl.marczynski.seriesapp.repository.WatchedEpisodeRepository;
 import pl.marczynski.seriesapp.security.SecurityUtils;
 import pl.marczynski.seriesapp.service.EpisodeService;
+import pl.marczynski.seriesapp.service.SeriesService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class EpisodeServiceImpl implements EpisodeService {
     private EpisodeRepository episodeRepository;
     private WatchedEpisodeRepository watchedEpisodeRepository;
     private UserRepository userRepository;
+    private SeriesService seriesService;
 
-    public EpisodeServiceImpl(EpisodeRepository episodeRepository, WatchedEpisodeRepository watchedEpisodeRepository, UserRepository userRepository) {
+    public EpisodeServiceImpl(EpisodeRepository episodeRepository, WatchedEpisodeRepository watchedEpisodeRepository, UserRepository userRepository, SeriesService seriesService) {
         this.episodeRepository = episodeRepository;
         this.watchedEpisodeRepository = watchedEpisodeRepository;
         this.userRepository = userRepository;
+        this.seriesService = seriesService;
     }
 
     public Episode save(Episode episode) {
@@ -60,6 +62,11 @@ public class EpisodeServiceImpl implements EpisodeService {
             }
         }
         return result;
+    }
+
+    @Override
+    public Optional<Episode> findEpisodeFromSeries(Integer year, String name, Integer seasonNumber, Integer episodeNumber) {
+        return episodeRepository.findBySeries(year, name, seasonNumber, episodeNumber);
     }
 
 }

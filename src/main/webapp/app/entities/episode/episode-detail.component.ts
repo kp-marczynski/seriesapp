@@ -23,6 +23,7 @@ export class EpisodeDetailComponent implements OnInit {
 
     ngOnInit() {
         this.activatedRoute.data.subscribe(({episode}) => {
+            console.log("Episode: " + episode);
             this.episode = episode;
             this.loadWatched();
             this.updateComunityRate();

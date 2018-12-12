@@ -34,7 +34,7 @@
                 <dt *ngIf="season.episodes.length > 0 && standaloneView"><span>Episodes</span></dt>
                 <dd class="card">
                     <a class="card-header" *ngFor="let episode of season.episodes | orderBy: ['number']"
-                            [routerLink]="['/episode', episode.id, 'view' ]">
+                       [routerLink]="['/series', season.series.releaseYear, season.series.name, 'season', season.number, 'episode',  episode.number]">
                         <div class="float-left">Episode {{episode.number}}</div>
                         <div class="float-right" *ngIf="episode.releaseDate">{{episode.releaseDate}}</div>
                         <div class="float-right" *ngIf="!episode.releaseDate">N/A</div>

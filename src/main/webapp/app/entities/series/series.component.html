@@ -14,7 +14,7 @@
         <div *ngFor="let series of series "
              class="list-group-item series-list">
             <div class="row">
-                <div class="col-md-4 series-link" [routerLink]="['/series', series.id, 'view' ]"><h3>
+                <div class="col-md-4 series-link" [routerLink]="['/series', series.releaseYear, series.name]"><h3>
                     {{series.name}}</h3></div>
                 <div class="col-md-6">{{series.releaseYear}}</div>
                 <div class="col-md-2">

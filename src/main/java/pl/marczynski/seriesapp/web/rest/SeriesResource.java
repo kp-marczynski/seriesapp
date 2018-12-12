@@ -109,6 +109,21 @@ public class SeriesResource {
     }
 
     /**
+     * GET  /series/:year/:name : get the "id" series.
+     *
+     * @param name the name of the series to retrieve
+     * @param year the year of the series to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the series, or with status 404 (Not Found)
+     */
+    @GetMapping("/series/{year}/{name}")
+    @Timed
+    public ResponseEntity<Series> getSeries(@PathVariable Integer year, @PathVariable String name) {
+        log.debug("REST request to get Series : {}/{}", year, name);
+        Optional<Series> series = seriesService.findByNameAndReleaseYear(name, year);
+        return ResponseUtil.wrapOrNotFound(series);
+    }
+
+    /**
      * GET  /series/:id/followed : get the "id" series.
      *
      * @param id the id of the series to retrieve

@@ -109,6 +109,23 @@ public class EpisodeResource {
     }
 
     /**
+     * GET  /series/:year/:name/season/:seasonNumber/episode/:episodeNumber : get the episode from series and season.
+     *
+     * @param year          the year of the series of episode to retrieve
+     * @param name          the name of the series of episode to retrieve
+     * @param seasonNumber  the number of the season of episode to retrieve
+     * @param episodeNumber the number of episode to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the episode, or with status 404 (Not Found)
+     */
+    @GetMapping("/series/{year}/{name}/season/{seasonNumber}/episode/{episodeNumber}")
+    @Timed
+    public ResponseEntity<Episode> getEpisodeFromSeries(@PathVariable Integer year, @PathVariable String name, @PathVariable Integer seasonNumber, @PathVariable Integer episodeNumber) {
+        log.debug("REST request to get Episode : {}/{}/season/{}/episode/{}", year, name, seasonNumber, episodeNumber);
+        Optional<Episode> episode = episodeService.findEpisodeFromSeries(year, name, seasonNumber, episodeNumber);
+        return ResponseUtil.wrapOrNotFound(episode);
+    }
+
+    /**
      * GET  /episodes/:id/watched : get the "id" watchedEpisode.
      *
      * @param id the id of the episode in the watchedEpisode to retrieve

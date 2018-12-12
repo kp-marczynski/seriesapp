@@ -30,6 +30,9 @@ export class NavbarComponent implements OnInit {
         this.isNavbarCollapsed = true;
     }
 
+    getUrl(){
+        return decodeURI(this.router.url);
+    }
     ngOnInit() {
         this.profileService.getProfileInfo().then(profileInfo => {
             this.inProduction = profileInfo.inProduction;

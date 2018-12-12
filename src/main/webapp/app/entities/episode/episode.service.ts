@@ -39,6 +39,12 @@ export class EpisodeService {
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
+    findFromSeries(year: number, name: string, seasonNumber: number, episodeNumber: number): Observable<EntityResponseType> {
+        return this.http
+            .get<IEpisode>(`${SERVER_API_URL}/api/series/${year}/${name}/season/${seasonNumber}/episode/${episodeNumber}`, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
+
     findWatched(id: number): Observable<EntityResponseType>{
         return this.http
             .get<IWatchedEpisode>(`${this.resourceUrl}/${id}/watched`, { observe: 'response' })

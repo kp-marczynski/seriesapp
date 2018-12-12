@@ -19,4 +19,6 @@ public interface EpisodeService {
     Episode update(Episode episode);
 
     Optional<WatchedEpisode> findWatchedByEpisodeId(Long id);
+
+    Optional<Episode> findEpisodeFromSeries(Integer year, String name, Integer seasonNumber, Integer episodeNumber);
 }
