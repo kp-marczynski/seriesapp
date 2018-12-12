@@ -5,7 +5,8 @@
                 <h2 class="row">
                     <span class="col-6">{{series.name}}</span>
                     <span class="col-4 small">{{series.releaseYear}}</span>
-                    <fa-icon class="col-2" *ngIf="followedSeries" [icon]="followedSeries.id?['fas','heart']:['far','heart']"
+                    <fa-icon class="col-2" *ngIf="followedSeries"
+                             [icon]="followedSeries.id?['fas','heart']:['far','heart']"
                              (click)="setFollowed()"></fa-icon>
                 </h2>
                 <hr>
@@ -62,7 +63,8 @@
                     <div>
                         <h2>
                             <fa-icon [icon]="['fas','star']"></fa-icon>
-                            {{averageRate | number : '1.2-2'}}
+                            <span *ngIf="averageRate"> {{averageRate | number : '1.2-2'}}</span>
+                            <span *ngIf="!averageRate"> N/A</span>
                         </h2>
                         <div>
                             Votes: {{rateCount}}

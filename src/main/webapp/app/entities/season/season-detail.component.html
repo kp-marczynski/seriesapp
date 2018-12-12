@@ -28,7 +28,7 @@
             </div>
             <dl class="row-md jh-entity-details">
                 <dt *ngIf="standaloneView"><span>Description</span></dt>
-                <dd class="content-description">
+                <dd class="content-description" *ngIf="season.description">
                     <span>{{season.description}}</span>
                 </dd>
                 <dt *ngIf="season.episodes.length > 0 && standaloneView"><span>Episodes</span></dt>

@@ -26,7 +26,8 @@
                     </dd>
                     <dt><span>Release Date</span></dt>
                     <dd>
-                        <span>{{episode.releaseDate | date : 'medium'}}</span>
+                        <span *ngIf="episode.releaseDate">{{episode.releaseDate | date : 'medium'}}</span>
+                        <span *ngIf="!episode.releaseDate">N/A</span>
                     </dd>
                     <dt><span>Duration</span></dt>
                     <dd>
@@ -58,7 +59,9 @@
                     <!--<span>WatchedEpisode</span>-->
                     <div>
                         <h3>
-                            <fa-icon [icon]="['fas','star']"></fa-icon> {{averageRate | number : '1.2-2'}}
+                            <fa-icon [icon]="['fas','star']"></fa-icon>
+                            <span *ngIf="averageRate"> {{averageRate | number : '1.2-2'}}</span>
+                            <span *ngIf="!averageRate"> N/A</span>
                         </h3>
                         <div>
                             Votes: {{rateCount}}

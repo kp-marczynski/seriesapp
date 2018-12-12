@@ -254,6 +254,7 @@ ui bootstrap tweaks
 
 .main-container {
     padding: 2rem;
+    margin-bottom: 2rem;
 }
 
 .seasons-list {
@@ -267,4 +268,24 @@ ui bootstrap tweaks
 
 .hello-user {
     padding: 5rem;
+}
+
+.series-list {
+    min-height: 10rem;
+    border: none;
+    border-bottom: 2px darkgray solid;
+    padding: 3rem;
+}
+
+.card-header, .series-link {
+    cursor: pointer;
+}
+
+.series-list:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.series-list:first-of-type {
+    padding-top: 0;
 }

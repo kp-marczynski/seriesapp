@@ -12,11 +12,12 @@ import {
     followedSeriesRoute,
     followedSeriesPopupRoute
 } from './';
+import {SeriesappSeriesModule} from "app/entities/series/series.module";
 
 const ENTITY_STATES = [...followedSeriesRoute, ...followedSeriesPopupRoute];
 
 @NgModule({
-    imports: [SeriesappSharedModule, SeriesappAdminModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [SeriesappSharedModule, SeriesappAdminModule, SeriesappSeriesModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         FollowedSeriesComponent,
         FollowedSeriesDetailComponent,

@@ -27,7 +27,6 @@ export class SeriesDetailComponent implements OnInit {
             this.series = series;
             this.loadFollowed();
             this.updateComunityRate();
-            console.log(series);
         });
     }
 

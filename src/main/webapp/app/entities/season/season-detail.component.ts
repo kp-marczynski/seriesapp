@@ -17,7 +17,6 @@ export class SeasonDetailComponent implements OnInit {
         if (this.season == null) {
             this.activatedRoute.data.subscribe(({season}) => {
                 this.season = season;
-                console.log(season);
             });
             this.standaloneView = true;
         } else{

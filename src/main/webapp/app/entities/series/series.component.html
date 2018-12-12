@@ -1,58 +1,60 @@
 <div>
-    <h2 id="page-heading">
+    <h2 id="page-heading" *jhiHasAnyAuthority="'ROLE_ADMIN'">
         <span>Series</span>
-        <button *jhiHasAnyAuthority="'ROLE_ADMIN'"  id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-series" [routerLink]="['/series/new']">
+        <button id="jh-create-entity"
+                class="btn btn-primary float-right jh-create-entity create-series" [routerLink]="['/series/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span >
+            <span>
             Create new Series
             </span>
         </button>
     </h2>
     <jhi-alert></jhi-alert>
-    <br/>
-    <div class="table-responsive" *ngIf="series">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-            <th><span>ID</span></th>
-            <th><span>Name</span></th>
-            <th><span>Release Year</span></th>
-            <th><span>Description</span></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let series of series | orderBy: ['releaseYear'] | orderBy: ['name']">
-                <td><a [routerLink]="['/series', series.id, 'view' ]">{{series.id}}</a></td>
-                <td>{{series.name}}</td>
-                <td>{{series.releaseYear}}</td>
-                <td>{{series.description}}</td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/series', series.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">View</span>
-                        </button>
-                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
-                                [routerLink]="['/series', series.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Edit</span>
-                        </button>
-                        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'series/'+ series.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="list-group series-list-group">
+        <div *ngFor="let series of series "
+             class="list-group-item series-list">
+            <div class="row">
+                <div class="col-md-4 series-link" [routerLink]="['/series', series.id, 'view' ]"><h3>
+                    {{series.name}}</h3></div>
+                <div class="col-md-6">{{series.releaseYear}}</div>
+                <div class="col-md-2">
+                    <h3 class="series-link">
+                        <fa-icon [icon]="followed.has(series.id)?['fas','heart']:['far','heart']"
+                                 (click)="setFollowed(series.id)"></fa-icon>
+                    </h3>
+                </div>
+            </div>
+            <p class="small">
+                Average: <span *ngIf="average.get(series.id)">{{average.get(series.id) | number : '1.2-2'}}</span>
+                <span *ngIf="!average.get(series.id)">N/A</span>
+            </p>
+            <p>
+                {{series.description}}
+            </p>
+            <div class="text-right" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                <div class="btn-group flex-btn-group-container">
+                    <button type="submit"
+                            [routerLink]="['/series', series.id, 'view' ]"
+                            class="btn btn-info btn-sm">
+                        <fa-icon [icon]="'eye'"></fa-icon>
+                        <span class="d-none d-md-inline">View</span>
+                    </button>
+                    <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                            [routerLink]="['/series', series.id, 'edit']"
+                            class="btn btn-primary btn-sm">
+                        <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                        <span class="d-none d-md-inline">Edit</span>
+                    </button>
+                    <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                            [routerLink]="['/', { outlets: { popup: 'series/'+ series.id + '/delete'} }]"
+                            replaceUrl="true"
+                            queryParamsHandling="merge"
+                            class="btn btn-danger btn-sm">
+                        <fa-icon [icon]="'times'"></fa-icon>
+                        <span class="d-none d-md-inline">Delete</span>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

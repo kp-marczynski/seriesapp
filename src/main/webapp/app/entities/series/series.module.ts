@@ -11,7 +11,6 @@ import {
     seriesRoute,
     seriesPopupRoute
 } from './';
-import {SeasonDetailComponent} from "app/entities/season";
 import {SeriesappSeasonModule} from "app/entities/season/season.module";
 
 const ENTITY_STATES = [...seriesRoute, ...seriesPopupRoute];
@@ -20,6 +19,7 @@ const ENTITY_STATES = [...seriesRoute, ...seriesPopupRoute];
     imports: [SeriesappSharedModule, SeriesappSeasonModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [SeriesComponent, SeriesDetailComponent, SeriesUpdateComponent, SeriesDeleteDialogComponent, SeriesDeletePopupComponent],
     entryComponents: [SeriesComponent, SeriesUpdateComponent, SeriesDeleteDialogComponent, SeriesDeletePopupComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    exports: [SeriesComponent]
 })
 export class SeriesappSeriesModule {}
