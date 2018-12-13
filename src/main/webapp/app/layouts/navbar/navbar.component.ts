@@ -6,6 +6,7 @@ import {VERSION} from 'app/app.constants';
 import {Account, LoginModalService, LoginService, Principal} from 'app/core';
 import {ProfileService} from '../profiles/profile.service';
 import {JhiEventManager} from "ng-jhipster";
+import {SeriesService} from "app/entities/series";
 
 @Component({
     selector: 'jhi-navbar',
@@ -39,6 +40,10 @@ export class NavbarComponent implements OnInit {
                 this.account = account;
             });
         });
+    }
+
+    searchSeries(searchString: string) {
+        this.router.navigate(['/search', searchString]);
     }
 
     getUrl() {

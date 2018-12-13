@@ -109,6 +109,19 @@ public class SeriesResource {
     }
 
     /**
+     * GET  /series/search/:search : get the "id" series.
+     *
+     * @param search the search of the series to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the series, or with status 404 (Not Found)
+     */
+    @GetMapping("/series/search/{search}")
+    @Timed
+    public List<Series> searchSeries(@PathVariable String search) {
+        log.debug("REST request to get Series : {}", search);
+        return seriesService.findByNameContaining(search);
+    }
+
+    /**
      * GET  /series/:year/:name : get the "id" series.
      *
      * @param name the name of the series to retrieve

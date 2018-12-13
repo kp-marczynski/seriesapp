@@ -26,12 +26,12 @@
                     </dd>
                     <dt><span>Release Date</span></dt>
                     <dd>
-                        <span *ngIf="episode.releaseDate">{{episode.releaseDate | date : 'medium'}}</span>
+                        <span *ngIf="episode.releaseDate">{{episode.releaseDate | date : 'fullDate'}}<br>{{episode.releaseDate | date : 'shortTime'}}</span>
                         <span *ngIf="!episode.releaseDate">N/A</span>
                     </dd>
                     <dt><span>Duration</span></dt>
                     <dd>
-                        <span *ngIf="episode.duration">{{episode.duration}}</span>
+                        <span *ngIf="episode.duration">{{episode.duration}} min</span>
                         <span *ngIf="!episode.duration">N/A</span>
                     </dd>
                     <!--<dt><span>Season</span></dt>-->

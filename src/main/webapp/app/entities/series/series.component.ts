@@ -8,6 +8,7 @@ import {Principal} from 'app/core';
 import {SeriesService} from './series.service';
 import {FollowedSeriesService} from "app/entities/followed-series";
 import {IFollowedSeries} from "app/shared/model/followed-series.model";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'jhi-series',
@@ -25,36 +26,48 @@ export class SeriesComponent implements OnInit, OnDestroy {
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
         private principal: Principal,
-        private followedSeriesService: FollowedSeriesService) {
+        private followedSeriesService: FollowedSeriesService, private activatedRoute: ActivatedRoute) {
     }
 
     loadAll() {
         if (!this.series) {
-            this.seriesService.query().subscribe(
-                (res: HttpResponse<ISeries[]>) => {
-                    this.series = res.body;
-                    this.series.sort((a, b) => {
-                        if (a.name > b.name) {
-                            return 1;
-                        }
-                        else if (a.name < b.name) {
-                            return -1;
-                        }
-                        else {
-                            if (a.releaseYear > b.releaseYear) {
+            let search = this.activatedRoute.snapshot.params['search'];
+            if(search){
+                this.seriesService.search(search).subscribe(
+                    (res: HttpResponse<ISeries[]>) => {
+                        this.series = res.body;
+                        this.getAverageForAllSeries();
+                        this.getAllFollowed();
+                    }
+                )
+            }
+            else {
+                this.seriesService.query().subscribe(
+                    (res: HttpResponse<ISeries[]>) => {
+                        this.series = res.body;
+                        this.series.sort((a, b) => {
+                            if (a.name > b.name) {
                                 return 1;
                             }
-                            else if (a.releaseYear < b.releaseYear) {
+                            else if (a.name < b.name) {
                                 return -1;
                             }
-                            else return 0;
-                        }
-                    });
-                    this.getAverageForAllSeries();
-                    this.getAllFollowed();
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+                            else {
+                                if (a.releaseYear > b.releaseYear) {
+                                    return 1;
+                                }
+                                else if (a.releaseYear < b.releaseYear) {
+                                    return -1;
+                                }
+                                else return 0;
+                            }
+                        });
+                        this.getAverageForAllSeries();
+                        this.getAllFollowed();
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+            }
         }
         else {
             this.getAverageForAllSeries();

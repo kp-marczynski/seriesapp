@@ -21,6 +21,7 @@ export class SeriesResolve implements Resolve<ISeries> {
         const id = route.params['id'] ? route.params['id'] : null;
         const year = route.params['year'] ? route.params['year'] : null;
         const name = route.params['name'] ? route.params['name'] : null;
+        const search = route.params['search'] ? route.params['search'] : null;
         if (id) {
             return this.service.find(id).pipe(
                 filter((response: HttpResponse<Series>) => response.ok),
@@ -40,6 +41,15 @@ export class SeriesResolve implements Resolve<ISeries> {
 export const seriesRoute: Routes = [
     {
         path: 'series',
+        component: SeriesComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'Series'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'search/:search',
         component: SeriesComponent,
         data: {
             authorities: ['ROLE_USER'],

@@ -64,4 +64,9 @@ public class SeriesServiceImpl implements SeriesService {
     public Optional<Series> findByNameAndReleaseYear(String name, Integer releaseYear) {
         return seriesRepository.findByNameAndReleaseYear(name, releaseYear);
     }
+
+    @Override
+    public List<Series> findByNameContaining(String search) {
+        return seriesRepository.findByNameContainingIgnoreCase(search);
+    }
 }

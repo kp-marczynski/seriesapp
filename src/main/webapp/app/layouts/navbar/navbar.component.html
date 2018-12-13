@@ -318,7 +318,7 @@
         </div>
     </div>
     <div class="list-group list-group-flush sidebar-body" [ngSwitch]="isAuthenticated()">
-        <input type="text" class="list-group-item search" placeholder="Search...">
+        <input type="text" class="list-group-item search" placeholder="Search..." #search (blur)="searchSeries(search.value)">
         <span routerLinkActive="active" class="list-group" [routerLinkActiveOptions]="{exact: true}">
             <a class="list-group-item list-group-item-action waves-effect" routerLink="/"
                (click)="collapseNavbar()">

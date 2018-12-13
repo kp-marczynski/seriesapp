@@ -29,6 +29,11 @@ export class SeriesService {
         return this.http.get<ISeries>(`${this.resourceUrl}/${id}`, {observe: 'response'});
     }
 
+    search(search: string): Observable<EntityArrayResponseType> {
+        return this.http.get<ISeries[]>(`${this.resourceUrl}/search/${search}`, {observe: 'response'});
+    }
+
+
     findByNameAndReleaseYear(name: string, year: number): Observable<EntityResponseType> {
         return this.http.get<ISeries>(`${this.resourceUrl}/${year}/${name}`, {observe: 'response'});
     }

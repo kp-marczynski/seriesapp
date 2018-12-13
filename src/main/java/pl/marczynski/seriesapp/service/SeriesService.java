@@ -21,4 +21,6 @@ public interface SeriesService {
     Optional<FollowedSeries> findFollowedBySeriesId(Long id);
 
     Optional<Series> findByNameAndReleaseYear(String name, Integer releaseYear);
+
+    List<Series> findByNameContaining(String search);
 }

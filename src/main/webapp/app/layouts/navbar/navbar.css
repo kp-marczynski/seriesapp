@@ -138,6 +138,7 @@ Logo styles
 
 .search {
     background-color: lightgray;
+    color: black;
 }
 .search:hover{
     background-color: whitesmoke;
