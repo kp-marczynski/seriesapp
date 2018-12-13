@@ -1,18 +1,12 @@
 package pl.marczynski.seriesapp.service.impl;
 
 import org.springframework.stereotype.Service;
-import pl.marczynski.seriesapp.domain.*;
-import pl.marczynski.seriesapp.domain.builder.WatchedEpisodeBuilder;
+import pl.marczynski.seriesapp.domain.Episode;
 import pl.marczynski.seriesapp.repository.EpisodeRepository;
-import pl.marczynski.seriesapp.repository.UserRepository;
-import pl.marczynski.seriesapp.repository.WatchedEpisodeRepository;
-import pl.marczynski.seriesapp.security.SecurityUtils;
 import pl.marczynski.seriesapp.service.EpisodeService;
-import pl.marczynski.seriesapp.service.SeriesService;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class EpisodeServiceImpl implements EpisodeService {
