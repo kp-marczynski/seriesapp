@@ -28,7 +28,7 @@ public class FollowedSeriesServiceImpl implements FollowedSeriesService {
         Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
         if (currentUserLogin.isPresent()) {
             Optional<User> user = userRepository.findOneByLogin(currentUserLogin.get());
-            Optional<FollowedSeries> followedSeriesOptional = followedSeriesRepository.findByUserLoginAndSeriesId(currentUserLogin.get(), followedSeries.getSeries().getId());
+            Optional<FollowedSeries> followedSeriesOptional = followedSeriesRepository.findBySeriesIdAndUserIsCurrentUser(followedSeries.getSeries().getId());
             followedSeriesOptional.ifPresent(followedSeries1 -> followedSeries.setId(followedSeries1.getId()));
             if (user.isPresent()) {
                 followedSeries.setUser(user.get());
@@ -63,7 +63,7 @@ public class FollowedSeriesServiceImpl implements FollowedSeriesService {
     }
 
     @Override
-    public Float getAverageRate(Long seriesId){
+    public Float getAverageRate(Long seriesId) {
         return followedSeriesRepository.getAverageRateBySeriesId(seriesId);
     }
 

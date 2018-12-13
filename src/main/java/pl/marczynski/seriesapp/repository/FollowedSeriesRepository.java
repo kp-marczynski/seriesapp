@@ -22,7 +22,8 @@ public interface FollowedSeriesRepository extends JpaRepository<FollowedSeries, 
     @Query("select followed_series from FollowedSeries followed_series where followed_series.user.login = ?#{principal.username}")
     List<FollowedSeries> findByUserIsCurrentUser();
 
-    Optional<FollowedSeries> findByUserLoginAndSeriesId(@NotNull @Pattern(regexp = Constants.LOGIN_REGEX) @Size(min = 1, max = 50) String user_login, Long series_id);
+    @Query("select followed_series from FollowedSeries followed_series where followed_series.user.login = ?#{principal.username} and followed_series.series.id = :seriesId")
+    Optional<FollowedSeries> findBySeriesIdAndUserIsCurrentUser(@Param("seriesId") Long seriesId);
 
     @Query("select avg(case followed_series.rate " +
         "when 'BAD' then 1 " +

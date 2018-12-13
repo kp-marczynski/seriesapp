@@ -48,7 +48,7 @@ public class SeriesServiceImpl implements SeriesService {
         Optional<FollowedSeries> result = Optional.empty();
         Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
         if (currentUserLogin.isPresent()) {
-            result = followedSeriesRepository.findByUserLoginAndSeriesId(currentUserLogin.get(), id);
+            result = followedSeriesRepository.findBySeriesIdAndUserIsCurrentUser(id);
             if (!result.isPresent()) {
                 Optional<User> user = userRepository.findOneByLogin(currentUserLogin.get());
                 Optional<Series> series = seriesRepository.findById(id);

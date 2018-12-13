@@ -22,7 +22,8 @@ public interface WatchedEpisodeRepository extends JpaRepository<WatchedEpisode, 
     @Query("select watched_episode from WatchedEpisode watched_episode where watched_episode.user.login = ?#{principal.username}")
     List<WatchedEpisode> findByUserIsCurrentUser();
 
-    Optional<WatchedEpisode> findByUserLoginAndEpisodeId(@NotNull @Pattern(regexp = Constants.LOGIN_REGEX) @Size(min = 1, max = 50) String user_login, Long episode_id);
+    @Query("select watched_episode from WatchedEpisode watched_episode where watched_episode.user.login = ?#{principal.username} and watched_episode.episode.id = :episodeId")
+    Optional<WatchedEpisode> findByEpisodeIdAndUserIsCurrentUser(@Param("episodeId") Long episodeId);
 
     @Query("select avg(case watched_episode.rate " +
         "when 'BAD' then 1 " +

@@ -50,7 +50,7 @@ public class EpisodeServiceImpl implements EpisodeService {
         Optional<WatchedEpisode> result = Optional.empty();
         Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
         if (currentUserLogin.isPresent()) {
-            result = watchedEpisodeRepository.findByUserLoginAndEpisodeId(currentUserLogin.get(), id);
+            result = watchedEpisodeRepository.findByEpisodeIdAndUserIsCurrentUser(id);
             if (!result.isPresent()) {
                 Optional<User> user = userRepository.findOneByLogin(currentUserLogin.get());
                 Optional<Episode> episode = episodeRepository.findById(id);

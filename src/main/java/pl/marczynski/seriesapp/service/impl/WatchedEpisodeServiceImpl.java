@@ -33,7 +33,7 @@ public class WatchedEpisodeServiceImpl implements WatchedEpisodeService {
         Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
         if (currentUserLogin.isPresent()) {
             Optional<User> user = userRepository.findOneByLogin(currentUserLogin.get());
-            Optional<WatchedEpisode> watchedEpisodeOptional = watchedEpisodeRepository.findByUserLoginAndEpisodeId(currentUserLogin.get(), watchedEpisode.getEpisode().getId());
+            Optional<WatchedEpisode> watchedEpisodeOptional = watchedEpisodeRepository.findByEpisodeIdAndUserIsCurrentUser(watchedEpisode.getEpisode().getId());
             watchedEpisodeOptional.ifPresent(watchedEpisode1 -> watchedEpisode.setId(watchedEpisode1.getId()));
 
             if (user.isPresent()) {
