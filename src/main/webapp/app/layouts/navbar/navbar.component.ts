@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
     modalRef: NgbModalRef;
     version: string;
     account: Account;
+    searchValue: string = null;
 
     constructor(
         private loginService: LoginService,
@@ -42,8 +43,15 @@ export class NavbarComponent implements OnInit {
         });
     }
 
-    searchSeries(searchString: string) {
-        this.router.navigate(['/search', searchString]);
+    searchSeries() {
+        if(this.searchValue && this.searchValue != "") {
+            let searchString: string = this.searchValue;
+            this.searchValue = null;
+
+            this.router.navigate(['/']).then(
+                () => this.router.navigate(['/search', searchString])
+            );
+        }
     }
 
     getUrl() {
