@@ -289,3 +289,7 @@ ui bootstrap tweaks
 .series-list:first-of-type {
     padding-top: 0;
 }
+
+.error-modal{
+    padding: 3rem;
+}
