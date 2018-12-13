@@ -5,21 +5,14 @@
                 <h2 class="d-block">
                     <div class="row">
                         <span class="col-10">Episode {{episode.number}}</span>
-                    <fa-icon class="col-2" *ngIf="watchedEpisode"
-                             [icon]="watchedEpisode.id?['fas','check-circle']:['far','check-circle']"
-                             (click)="setFollowed()"></fa-icon>
+                        <fa-icon class="col-2" *ngIf="watchedEpisode"
+                                 [icon]="watchedEpisode.id?['fas','check-circle']:['far','check-circle']"
+                                 (click)="setFollowed()"></fa-icon>
                     </div>
                 </h2>
                 <hr>
                 <jhi-alert-error></jhi-alert-error>
-                <!--<h3>-->
-                    <!--<span>{{episode.title}}</span>-->
-                <!--</h3>-->
                 <dl class="row-md jh-entity-details">
-                    <!--<dt><span>Number</span></dt>-->
-                    <!--<dd>-->
-                        <!--<span>{{episode.number}}</span>-->
-                    <!--</dd>-->
                     <dt><span>Title</span></dt>
                     <dd>
                         <span>{{episode.title}}</span>
@@ -34,12 +27,6 @@
                         <span *ngIf="episode.duration">{{episode.duration}} min</span>
                         <span *ngIf="!episode.duration">N/A</span>
                     </dd>
-                    <!--<dt><span>Season</span></dt>-->
-                    <!--<dd>-->
-                        <!--<div *ngIf="episode.season">-->
-                            <!--<a [routerLink]="['/season', episode.season?.id, 'view']">{{episode.season?.id}}</a>-->
-                        <!--</div>-->
-                    <!--</dd>-->
                 </dl>
 
                 <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
@@ -80,11 +67,8 @@
                                 <textarea class="form-control" rows="5"
                                           id="comment"
                                           #comment
-                                          (blur)="saveComment(comment.value)"
+                                          (keydown.enter)="saveComment(comment.value)"
                                           [disabled]="watchedEpisode.comment">{{watchedEpisode.comment}}</textarea>
-                                <!--<button type="submit" class="btn btn-primary" [disabled]="watchedEpisode.comment">Submit-->
-                                    <!--comment-->
-                                <!--</button>-->
                             </div>
                         </form>
                     </div>

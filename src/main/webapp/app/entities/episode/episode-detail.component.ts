@@ -3,10 +3,11 @@ import {ActivatedRoute} from '@angular/router';
 
 import {IEpisode} from 'app/shared/model/episode.model';
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
-import {IWatchedEpisode, Rate, WatchedEpisode} from "app/shared/model/watched-episode.model";
+import {IWatchedEpisode, Rate} from "app/shared/model/watched-episode.model";
 import {JhiAlertService} from "ng-jhipster";
 import {EpisodeService} from "app/entities/episode/episode.service";
 import {WatchedEpisodeService} from "app/entities/watched-episode";
+import {ErrorModalService} from "app/core/error-modal/error-modal.service";
 
 @Component({
     selector: 'jhi-episode-detail',
@@ -18,7 +19,7 @@ export class EpisodeDetailComponent implements OnInit {
     averageRate: number;
     private rateCount: number;
 
-    constructor(private activatedRoute: ActivatedRoute, private episodeService: EpisodeService, private jhiAlertService: JhiAlertService, private watchedEpisodeService: WatchedEpisodeService) {
+    constructor(private activatedRoute: ActivatedRoute, private episodeService: EpisodeService, private jhiAlertService: JhiAlertService, private watchedEpisodeService: WatchedEpisodeService, private errorModalService: ErrorModalService) {
     }
 
     ngOnInit() {
@@ -26,7 +27,7 @@ export class EpisodeDetailComponent implements OnInit {
             console.log("Episode: " + episode);
             this.episode = episode;
             this.loadWatched();
-            this.updateComunityRate();
+            this.updateCommunityRate();
         });
     }
 
@@ -49,54 +50,69 @@ export class EpisodeDetailComponent implements OnInit {
     }
 
     setRate(i: number) {
-        switch (i) {
-            case 1:
-                this.watchedEpisode.rate = Rate.BAD;
-                break;
-            case 2:
-                this.watchedEpisode.rate = Rate.MEDIOCRE;
-                break;
-            case 3:
-                this.watchedEpisode.rate = Rate.AVERAGE;
-                break;
-            case 4:
-                this.watchedEpisode.rate = Rate.GOOD;
-                break;
-            case 5:
-                this.watchedEpisode.rate = Rate.AWESOME;
-                break;
+        if (this.watchedEpisode.id && this.watchedEpisode.rate) {
+            this.errorModalService.open("Once rated, episode can't be rated again!");
         }
-        this.savewatchedEpisode();
+        else {
+            switch (i) {
+                case 1:
+                    this.watchedEpisode.rate = Rate.BAD;
+                    break;
+                case 2:
+                    this.watchedEpisode.rate = Rate.MEDIOCRE;
+                    break;
+                case 3:
+                    this.watchedEpisode.rate = Rate.AVERAGE;
+                    break;
+                case 4:
+                    this.watchedEpisode.rate = Rate.GOOD;
+                    break;
+                case 5:
+                    this.watchedEpisode.rate = Rate.AWESOME;
+                    break;
+            }
+            this.saveWatchedEpisode();
+        }
     }
 
-    savewatchedEpisode() {
+    saveWatchedEpisode() {
         if (this.watchedEpisode.id) {
             this.watchedEpisodeService.update(this.watchedEpisode).subscribe(
                 (res: HttpResponse<IWatchedEpisode>) => {
                     this.watchedEpisode = res.body;
-                    this.updateComunityRate();
+                    this.updateCommunityRate();
                     console.log("updated");
                 }
             );
         } else {
             this.watchedEpisodeService.create(this.watchedEpisode).subscribe((res: HttpResponse<IWatchedEpisode>) => {
                 this.watchedEpisode = res.body;
-                this.updateComunityRate();
+                this.updateCommunityRate();
                 console.log("saved");
             });
         }
     }
 
     saveComment(value: string) {
-        this.watchedEpisode.comment = value;
-        this.savewatchedEpisode();
+        if (this.watchedEpisode.id && this.watchedEpisode.comment) {
+            this.errorModalService.open("Once commented, episode can't be commented again!");
+        }
+        else {
+            this.watchedEpisode.comment = value;
+            this.saveWatchedEpisode();
+        }
     }
 
     setFollowed() {
-        this.savewatchedEpisode();
+        if (this.watchedEpisode && this.watchedEpisode.id) {
+            this.errorModalService.open("Once watched, episode can't be watched again!");
+        }
+        else {
+            this.saveWatchedEpisode();
+        }
     }
 
-    updateComunityRate() {
+    updateCommunityRate() {
         this.getAverageRate();
         this.getRateCount();
     }

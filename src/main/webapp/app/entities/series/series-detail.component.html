@@ -12,15 +12,6 @@
                 <hr>
                 <jhi-alert-error></jhi-alert-error>
                 <dl class="row-md jh-entity-details">
-                    <!--<dt><span>Name</span></dt>-->
-                    <!--<dd>-->
-                    <!--<span>{{series.name}}</span>-->
-                    <!--</dd>-->
-                    <!--<dt><span>Release Year</span></dt>-->
-                    <!--<dd>-->
-                    <!--<span>{{series.releaseYear}}</span>-->
-                    <!--</dd>-->
-                    <!--<dt><span>Description</span></dt>-->
                     <dd class="content-description">
                         <span>{{series.description}}</span>
                     </dd>
@@ -83,10 +74,7 @@
                                 <textarea class="form-control" rows="5"
                                           id="comment"
                                           #comment
-                                          (blur)="saveComment(comment.value)" [disabled]="followedSeries.comment">{{followedSeries.comment}}</textarea>
-                                <!--<button type="submit" class="btn btn-primary" [disabled]="followedSeries.comment">Submit-->
-                                <!--comment-->
-                                <!--</button>-->
+                                          (keydown.enter)="saveComment(comment.value)" [disabled]="followedSeries.comment">{{followedSeries.comment}}</textarea>
                             </div>
                         </form>
                     </div>

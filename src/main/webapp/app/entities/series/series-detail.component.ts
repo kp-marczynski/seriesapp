@@ -7,6 +7,7 @@ import {SeriesService} from "app/entities/series/series.service";
 import {IFollowedSeries, Rate} from "app/shared/model/followed-series.model";
 import {JhiAlertService} from "ng-jhipster";
 import {FollowedSeriesService} from "app/entities/followed-series";
+import {ErrorModalService} from "app/core/error-modal/error-modal.service";
 
 @Component({
     selector: 'jhi-series-detail',
@@ -19,7 +20,7 @@ export class SeriesDetailComponent implements OnInit {
     averageRate: number = null;
     private rateCount: number;
 
-    constructor(private activatedRoute: ActivatedRoute, private seriesService: SeriesService, private jhiAlertService: JhiAlertService, private followedSeriesService: FollowedSeriesService) {
+    constructor(private activatedRoute: ActivatedRoute, private seriesService: SeriesService, private jhiAlertService: JhiAlertService, private followedSeriesService: FollowedSeriesService, private errorModalService: ErrorModalService) {
     }
 
     ngOnInit() {
@@ -49,24 +50,29 @@ export class SeriesDetailComponent implements OnInit {
     }
 
     setRate(i: number) {
-        switch (i) {
-            case 1:
-                this.followedSeries.rate = Rate.BAD;
-                break;
-            case 2:
-                this.followedSeries.rate = Rate.MEDIOCRE;
-                break;
-            case 3:
-                this.followedSeries.rate = Rate.AVERAGE;
-                break;
-            case 4:
-                this.followedSeries.rate = Rate.GOOD;
-                break;
-            case 5:
-                this.followedSeries.rate = Rate.AWESOME;
-                break;
+        if (this.followedSeries.id && this.followedSeries.rate) {
+            this.errorModalService.open("Once rated, series can't be rated again!");
         }
-        this.saveFollowedSeries();
+        else {
+            switch (i) {
+                case 1:
+                    this.followedSeries.rate = Rate.BAD;
+                    break;
+                case 2:
+                    this.followedSeries.rate = Rate.MEDIOCRE;
+                    break;
+                case 3:
+                    this.followedSeries.rate = Rate.AVERAGE;
+                    break;
+                case 4:
+                    this.followedSeries.rate = Rate.GOOD;
+                    break;
+                case 5:
+                    this.followedSeries.rate = Rate.AWESOME;
+                    break;
+            }
+            this.saveFollowedSeries();
+        }
     }
 
     saveFollowedSeries() {
@@ -88,12 +94,22 @@ export class SeriesDetailComponent implements OnInit {
     }
 
     saveComment(value: string) {
-        this.followedSeries.comment = value;
-        this.saveFollowedSeries();
+        if (this.followedSeries.id && this.followedSeries.comment) {
+            this.errorModalService.open("Once commented, series can't be commented again!");
+        }
+        else {
+            this.followedSeries.comment = value;
+            this.saveFollowedSeries();
+        }
     }
 
     setFollowed() {
-        this.saveFollowedSeries();
+        if (this.followedSeries && this.followedSeries.id) {
+            this.errorModalService.open("Once followed, series can't be followed again!");
+        }
+        else {
+            this.saveFollowedSeries();
+        }
     }
 
     updateComunityRate() {

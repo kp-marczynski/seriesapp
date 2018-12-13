@@ -9,6 +9,7 @@ import {SeriesService} from './series.service';
 import {FollowedSeriesService} from "app/entities/followed-series";
 import {IFollowedSeries} from "app/shared/model/followed-series.model";
 import {ActivatedRoute} from "@angular/router";
+import {ErrorModalService} from "app/core/error-modal/error-modal.service";
 
 @Component({
     selector: 'jhi-series',
@@ -26,7 +27,7 @@ export class SeriesComponent implements OnInit, OnDestroy {
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
         private principal: Principal,
-        private followedSeriesService: FollowedSeriesService, private activatedRoute: ActivatedRoute) {
+        private followedSeriesService: FollowedSeriesService, private activatedRoute: ActivatedRoute, private errorModalService: ErrorModalService) {
     }
 
     loadAll() {
@@ -103,6 +104,9 @@ export class SeriesComponent implements OnInit, OnDestroy {
                         }
                     )
                 })
+        }
+        else{
+            this.errorModalService.open("Once followed, series can't be followed again!");
         }
     }
 
