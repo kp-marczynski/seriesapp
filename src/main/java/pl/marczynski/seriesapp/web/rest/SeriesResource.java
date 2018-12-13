@@ -137,20 +137,6 @@ public class SeriesResource {
     }
 
     /**
-     * GET  /series/:id/followed : get the "id" series.
-     *
-     * @param id the id of the series to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the series, or with status 404 (Not Found)
-     */
-    @GetMapping("/series/{id}/followed")
-    @Timed
-    public ResponseEntity<FollowedSeries> getFollowedSeriesForSeriesId(@PathVariable Long id) {
-        log.debug("REST request to get Series : {}", id);
-        Optional<FollowedSeries> series = seriesService.findFollowedBySeriesId(id);
-        return ResponseUtil.wrapOrNotFound(series);
-    }
-
-    /**
      * DELETE  /series/:id : delete the "id" series.
      *
      * @param id the id of the series to delete

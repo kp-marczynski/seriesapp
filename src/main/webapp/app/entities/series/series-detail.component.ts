@@ -122,7 +122,7 @@ export class SeriesDetailComponent implements OnInit {
     }
 
     loadFollowed() {
-        this.seriesService.findFollowed(this.series.id).subscribe(
+        this.followedSeriesService.findBySeriesId(this.series.id).subscribe(
             (res: HttpResponse<IFollowedSeries>) => {
                 this.followedSeries = res.body;
             },

@@ -95,7 +95,7 @@ export class SeriesComponent implements OnInit, OnDestroy {
 
     setFollowed(seriesId: number) {
         if (!this.followed.has(seriesId)) {
-            this.seriesService.findFollowed(seriesId).subscribe(
+            this.followedSeriesService.findBySeriesId(seriesId).subscribe(
                 (res: HttpResponse<IFollowedSeries>) => {
                     this.followedSeriesService.create(res.body).subscribe(
                         (res2: HttpResponse<IFollowedSeries>) => {

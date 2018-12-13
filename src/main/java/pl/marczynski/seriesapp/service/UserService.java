@@ -43,4 +43,6 @@ public interface UserService {
     void removeNotActivatedUsers();
 
     List<String> getAuthorities();
+
+    Optional<User> findCurrentUser();
 }

@@ -122,7 +122,7 @@ export class EpisodeDetailComponent implements OnInit {
     }
 
     loadWatched() {
-        this.episodeService.findWatched(this.episode.id).subscribe(
+        this.watchedEpisodeService.findByEpisodeId(this.episode.id).subscribe(
             (res: HttpResponse<IWatchedEpisode>) => {
                 this.watchedEpisode = res.body;
             },

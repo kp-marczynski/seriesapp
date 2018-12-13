@@ -17,49 +17,34 @@ import java.util.Set;
 @Service
 public class EpisodeServiceImpl implements EpisodeService {
     private EpisodeRepository episodeRepository;
-    private WatchedEpisodeRepository watchedEpisodeRepository;
-    private UserRepository userRepository;
 
-    public EpisodeServiceImpl(EpisodeRepository episodeRepository, WatchedEpisodeRepository watchedEpisodeRepository, UserRepository userRepository) {
+    public EpisodeServiceImpl(EpisodeRepository episodeRepository) {
         this.episodeRepository = episodeRepository;
-        this.watchedEpisodeRepository = watchedEpisodeRepository;
-        this.userRepository = userRepository;
     }
 
+    @Override
     public Episode save(Episode episode) {
         return episodeRepository.save(episode);
     }
 
+    @Override
     public List<Episode> findAll() {
         return episodeRepository.findAll();
     }
 
+    @Override
     public Optional<Episode> findById(Long id) {
         return episodeRepository.findById(id);
     }
 
+    @Override
     public void deleteById(Long id) {
         episodeRepository.deleteById(id);
     }
 
+    @Override
     public Episode update(Episode episode) {
         return episodeRepository.save(episode);
-    }
-
-    public Optional<WatchedEpisode> findWatchedByEpisodeId(Long id) {
-        Optional<WatchedEpisode> result = Optional.empty();
-        Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
-        if (currentUserLogin.isPresent()) {
-            result = watchedEpisodeRepository.findByEpisodeIdAndUserIsCurrentUser(id);
-            if (!result.isPresent()) {
-                Optional<User> user = userRepository.findOneByLogin(currentUserLogin.get());
-                Optional<Episode> episode = episodeRepository.findById(id);
-                if (user.isPresent() && episode.isPresent()) {
-                    result = Optional.of(new WatchedEpisodeBuilder().user(user.get()).episode(episode.get()).build());
-                }
-            }
-        }
-        return result;
     }
 
     @Override

@@ -106,6 +106,20 @@ public class WatchedEpisodeResource {
     }
 
     /**
+     * GET  /watched-episodes/episode/:id : get the "id" watchedEpisode.
+     *
+     * @param id the id of the episode in the watchedEpisode to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the watchedEpisode, or with status 404 (Not Found)
+     */
+    @GetMapping("/watched-episodes/episode/{id}")
+    @Timed
+    public ResponseEntity<WatchedEpisode> getWatchedEpisodeForEpisodeId(@PathVariable Long id) {
+        log.debug("REST request to get WatchedEpisode by Episode: {}", id);
+        Optional<WatchedEpisode> watchedEpisode = watchedEpisodeService.findWatchedByEpisodeId(id);
+        return ResponseUtil.wrapOrNotFound(watchedEpisode);
+    }
+
+    /**
      * GET  /watched-episodes/:id/average-rate : get the "id" watchedEpisode.
      *
      * @param id the id of the watchedEpisode to retrieve

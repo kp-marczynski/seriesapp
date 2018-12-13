@@ -2,12 +2,15 @@ package pl.marczynski.seriesapp.service.impl;
 
 import org.springframework.stereotype.Service;
 import pl.marczynski.seriesapp.domain.FollowedSeries;
+import pl.marczynski.seriesapp.domain.Series;
 import pl.marczynski.seriesapp.domain.User;
+import pl.marczynski.seriesapp.domain.builder.FollowedSeriesBuilder;
 import pl.marczynski.seriesapp.repository.FollowedSeriesRepository;
-import pl.marczynski.seriesapp.repository.UserRepository;
 import pl.marczynski.seriesapp.security.AuthoritiesConstants;
 import pl.marczynski.seriesapp.security.SecurityUtils;
 import pl.marczynski.seriesapp.service.FollowedSeriesService;
+import pl.marczynski.seriesapp.service.SeriesService;
+import pl.marczynski.seriesapp.service.UserService;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,26 +18,26 @@ import java.util.Optional;
 @Service
 public class FollowedSeriesServiceImpl implements FollowedSeriesService {
     private FollowedSeriesRepository followedSeriesRepository;
-    private UserRepository userRepository;
+    private UserService userService;
+    private SeriesService seriesService;
 
-    public FollowedSeriesServiceImpl(FollowedSeriesRepository FollowedSeriesRepository, UserRepository userRepository) {
+    public FollowedSeriesServiceImpl(FollowedSeriesRepository FollowedSeriesRepository, UserService userService, SeriesService seriesService) {
         this.followedSeriesRepository = FollowedSeriesRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
+        this.seriesService = seriesService;
     }
 
     @Override
     public FollowedSeries save(FollowedSeries followedSeries) {
         FollowedSeries result = null;
-        Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
-        if (currentUserLogin.isPresent()) {
-            Optional<User> user = userRepository.findOneByLogin(currentUserLogin.get());
-            Optional<FollowedSeries> followedSeriesOptional = followedSeriesRepository.findBySeriesIdAndUserIsCurrentUser(followedSeries.getSeries().getId());
-            followedSeriesOptional.ifPresent(followedSeries1 -> followedSeries.setId(followedSeries1.getId()));
-            if (user.isPresent()) {
-                followedSeries.setUser(user.get());
-                result = followedSeriesRepository.save(followedSeries);
-            }
+        Optional<User> user = userService.findCurrentUser();
+        Optional<FollowedSeries> followedSeriesOptional = followedSeriesRepository.findBySeriesIdAndUserIsCurrentUser(followedSeries.getSeries().getId());
+        followedSeriesOptional.ifPresent(followedSeries1 -> followedSeries.setId(followedSeries1.getId()));
+        if (user.isPresent()) {
+            followedSeries.setUser(user.get());
+            result = followedSeriesRepository.save(followedSeries);
         }
+
         return result;
     }
 
@@ -70,5 +73,19 @@ public class FollowedSeriesServiceImpl implements FollowedSeriesService {
     @Override
     public Integer getRateCount(Long seriesId) {
         return followedSeriesRepository.getRateCountBySeriesId(seriesId);
+    }
+
+    @Override
+    public Optional<FollowedSeries> findFollowedBySeriesId(Long id) {
+        Optional<FollowedSeries> result;
+        result = followedSeriesRepository.findBySeriesIdAndUserIsCurrentUser(id);
+        if (!result.isPresent()) {
+            Optional<User> user = userService.findCurrentUser();
+            Optional<Series> series = seriesService.findById(id);
+            if (user.isPresent() && series.isPresent()) {
+                result = Optional.of(new FollowedSeriesBuilder().user(user.get()).series(series.get()).build());
+            }
+        }
+        return result;
     }
 }

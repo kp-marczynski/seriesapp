@@ -106,6 +106,20 @@ public class FollowedSeriesResource {
     }
 
     /**
+     * GET  /followed-series/series/:id : get the "id" series.
+     *
+     * @param id the id of the series to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the series, or with status 404 (Not Found)
+     */
+    @GetMapping("/followed-series/series/{id}")
+    @Timed
+    public ResponseEntity<FollowedSeries> getFollowedSeriesForSeriesId(@PathVariable Long id) {
+        log.debug("REST request to get Series : {}", id);
+        Optional<FollowedSeries> series = followedSeriesService.findFollowedBySeriesId(id);
+        return ResponseUtil.wrapOrNotFound(series);
+    }
+
+    /**
      * GET  /followed-series/:id/average-rate : get the "id" followedSeries.
      *
      * @param id the id of the followedSeries to retrieve

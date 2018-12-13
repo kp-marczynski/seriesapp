@@ -24,40 +24,29 @@ public class SeriesServiceImpl implements SeriesService {
         this.userRepository = userRepository;
     }
 
+    @Override
     public Series save(Series Series) {
         return seriesRepository.save(Series);
     }
 
+    @Override
     public List<Series> findAll() {
         return seriesRepository.findAll();
     }
 
+    @Override
     public Optional<Series> findById(Long id) {
         return seriesRepository.findById(id);
     }
 
+    @Override
     public void deleteById(Long id) {
         seriesRepository.deleteById(id);
     }
 
+    @Override
     public Series update(Series series) {
         return seriesRepository.save(series);
-    }
-
-    public Optional<FollowedSeries> findFollowedBySeriesId(Long id) {
-        Optional<FollowedSeries> result = Optional.empty();
-        Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
-        if (currentUserLogin.isPresent()) {
-            result = followedSeriesRepository.findBySeriesIdAndUserIsCurrentUser(id);
-            if (!result.isPresent()) {
-                Optional<User> user = userRepository.findOneByLogin(currentUserLogin.get());
-                Optional<Series> series = seriesRepository.findById(id);
-                if (user.isPresent() && series.isPresent()) {
-                    result = Optional.of(new FollowedSeriesBuilder().user(user.get()).series(series.get()).build());
-                }
-            }
-        }
-        return result;
     }
 
     @Override

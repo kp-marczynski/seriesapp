@@ -126,20 +126,6 @@ public class EpisodeResource {
     }
 
     /**
-     * GET  /episodes/:id/watched : get the "id" watchedEpisode.
-     *
-     * @param id the id of the episode in the watchedEpisode to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the watchedEpisode, or with status 404 (Not Found)
-     */
-    @GetMapping("/episodes/{id}/watched")
-    @Timed
-    public ResponseEntity<WatchedEpisode> getWatchedEpisodeForEpisodeId(@PathVariable Long id) {
-        log.debug("REST request to get WatchedEpisode by Episode: {}", id);
-        Optional<WatchedEpisode> watchedEpisode = episodeService.findWatchedByEpisodeId(id);
-        return ResponseUtil.wrapOrNotFound(watchedEpisode);
-    }
-
-    /**
      * DELETE  /episodes/:id : delete the "id" episode.
      *
      * @param id the id of the episode to delete

@@ -27,6 +27,11 @@ export class FollowedSeriesService {
         return this.http.get<IFollowedSeries>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 
+    findBySeriesId(id: number): Observable<EntityResponseType> {
+        return this.http
+            .get<IFollowedSeries>(`${this.resourceUrl}/series/${id}`, {observe: 'response'});
+    }
+
     getAverageRate(seriesId: number): Observable<EntityResponseType> {
         return this.http.get<any>(`${this.resourceUrl}/${seriesId}/average-rate`, { observe: 'response' });
     }

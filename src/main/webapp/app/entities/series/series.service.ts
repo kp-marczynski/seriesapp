@@ -38,11 +38,6 @@ export class SeriesService {
         return this.http.get<ISeries>(`${this.resourceUrl}/${year}/${name}`, {observe: 'response'});
     }
 
-    findFollowed(id: number): Observable<EntityResponseType> {
-        return this.http
-            .get<IFollowedSeries>(`${this.resourceUrl}/${id}/followed`, {observe: 'response'});
-    }
-
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http.get<ISeries[]>(this.resourceUrl, {params: options, observe: 'response'});

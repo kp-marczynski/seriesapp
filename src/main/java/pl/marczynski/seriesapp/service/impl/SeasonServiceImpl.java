@@ -16,22 +16,27 @@ public class SeasonServiceImpl implements SeasonService {
         this.seasonRepository = SeasonRepository;
     }
 
+    @Override
     public Season save(Season Season) {
         return seasonRepository.save(Season);
     }
 
+    @Override
     public List<Season> findAll() {
         return seasonRepository.findAll();
     }
 
+    @Override
     public Optional<Season> findById(Long id) {
         return seasonRepository.findById(id);
     }
 
+    @Override
     public void deleteById(Long id) {
         seasonRepository.deleteById(id);
     }
 
+    @Override
     public Season update(Season season) {
         return seasonRepository.save(season);
     }

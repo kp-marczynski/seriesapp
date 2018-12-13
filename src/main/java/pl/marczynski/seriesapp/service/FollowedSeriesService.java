@@ -20,4 +20,6 @@ public interface FollowedSeriesService {
     Float getAverageRate(Long seriesId);
 
     Integer getRateCount(Long seriesId);
+
+    Optional<FollowedSeries> findFollowedBySeriesId(Long id);
 }

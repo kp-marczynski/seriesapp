@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IWatchedEpisode } from 'app/shared/model/watched-episode.model';
+import {map} from "rxjs/operators";
+import * as moment from "moment";
 
 type EntityResponseType = HttpResponse<IWatchedEpisode>;
 type EntityArrayResponseType = HttpResponse<IWatchedEpisode[]>;
@@ -27,6 +29,12 @@ export class WatchedEpisodeService {
         return this.http.get<IWatchedEpisode>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 
+    findByEpisodeId(id: number): Observable<EntityResponseType>{
+        return this.http
+            .get<IWatchedEpisode>(`${this.resourceUrl}/episode/${id}`, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => WatchedEpisodeService.convertDateFromServer(res)));
+    }
+
     getAverageRate(episodeId: number): Observable<EntityResponseType> {
         return this.http.get<IWatchedEpisode>(`${this.resourceUrl}/${episodeId}/average-rate`, { observe: 'response' });
     }
@@ -42,5 +50,12 @@ export class WatchedEpisodeService {
 
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    }
+
+    protected static convertDateFromServer(res: EntityResponseType): EntityResponseType {
+        if (res.body) {
+            res.body.episode.releaseDate = res.body.episode.releaseDate != null ? moment(res.body.episode.releaseDate) : null;
+        }
+        return res;
     }
 }
