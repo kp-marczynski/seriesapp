@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
-import { VERSION } from 'app/app.constants';
-import { Principal, LoginModalService, LoginService } from 'app/core';
-import { ProfileService } from '../profiles/profile.service';
+import {VERSION} from 'app/app.constants';
+import {Account, LoginModalService, LoginService, Principal} from 'app/core';
+import {ProfileService} from '../profiles/profile.service';
+import {JhiEventManager} from "ng-jhipster";
 
 @Component({
     selector: 'jhi-navbar',
@@ -18,26 +19,41 @@ export class NavbarComponent implements OnInit {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
+    account: Account;
 
     constructor(
         private loginService: LoginService,
         private principal: Principal,
         private loginModalService: LoginModalService,
         private profileService: ProfileService,
-        private router: Router
+        private router: Router,
+        private eventManager: JhiEventManager
     ) {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
     }
 
-    getUrl(){
+    registerAuthenticationSuccess() {
+        this.eventManager.subscribe('authenticationSuccess', message => {
+            this.principal.identity().then(account => {
+                this.account = account;
+            });
+        });
+    }
+
+    getUrl() {
         return decodeURI(this.router.url);
     }
+
     ngOnInit() {
         this.profileService.getProfileInfo().then(profileInfo => {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
+        this.principal.identity().then(account => {
+            this.account = account;
+        });
+        this.registerAuthenticationSuccess();
     }
 
     collapseNavbar() {

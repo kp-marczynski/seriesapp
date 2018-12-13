@@ -23,14 +23,14 @@
             <li class="nav-item">
                 <a class="nav-link" routerLink="series" routerLinkActive="active"
                    [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                    <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                    <fa-icon icon="bars" fixedWidth="true"></fa-icon>
                     <span>Series</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" routerLink="followed-series" routerLinkActive="active"
                    [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                    <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                    <fa-icon icon="heart" fixedWidth="true"></fa-icon>
                     <span>Followed Series</span>
                 </a>
             </li>
@@ -269,9 +269,10 @@
             <span routerLinkActive="active" class="list-group" ngbDropdown [routerLinkActiveOptions]="{exact: true}">
             <a class="list-group-item-heading" ngbDropdownToggle> <!--id="account-menu" >-->
                   <span *ngIf="!getImageUrl()">
-                    <fa-icon icon="user"></fa-icon>
-                    <span>
-                      Account
+                    <span [ngSwitch]="isAuthenticated()">
+                      <span *ngSwitchCase="false"><fa-icon icon="user"></fa-icon> Account</span>
+                        <span *ngSwitchCase="true"><span
+                            *ngIf="account">{{account.login}}<br><span>{{account.email}}</span></span></span>
                     </span>
                   </span>
                 <span *ngIf="getImageUrl()">
@@ -317,6 +318,7 @@
         </div>
     </div>
     <div class="list-group list-group-flush sidebar-body" [ngSwitch]="isAuthenticated()">
+        <input type="text" class="list-group-item search" placeholder="Search...">
         <span routerLinkActive="active" class="list-group" [routerLinkActiveOptions]="{exact: true}">
             <a class="list-group-item list-group-item-action waves-effect" routerLink="/"
                (click)="collapseNavbar()">
@@ -325,21 +327,21 @@
                         <span>Home</span>
                     </span>
             </a>
-        <!--</span>-->
-        <!--<span *ngSwitchCase="true" routerLinkActive="active"-->
-              <!--[routerLinkActiveOptions]="{exact: true}">-->
-        <!--<span class="list-group-item-heading"> &lt;!&ndash;id="entity-menu">&ndash;&gt;-->
-                    <!--<span>-->
-                        <!--<fa-icon icon="th-list"></fa-icon>-->
-                        <!--<span>-->
-                            <!--Entities-->
-                        <!--</span>-->
-                    <!--</span>-->
-        <!--</span>-->
+            <!--</span>-->
+            <!--<span *ngSwitchCase="true" routerLinkActive="active"-->
+            <!--[routerLinkActiveOptions]="{exact: true}">-->
+            <!--<span class="list-group-item-heading"> &lt;!&ndash;id="entity-menu">&ndash;&gt;-->
+            <!--<span>-->
+            <!--<fa-icon icon="th-list"></fa-icon>-->
+            <!--<span>-->
+            <!--Entities-->
+            <!--</span>-->
+            <!--</span>-->
+            <!--</span>-->
             <span>
                 <a class="list-group-item list-group-item-action waves-effect" routerLink="series"
                    routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                    <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                    <fa-icon icon="bars" fixedWidth="true"></fa-icon>
                     <span>Series</span>
                 </a>
             </span>
@@ -360,14 +362,14 @@
             <span>
                 <a class="list-group-item list-group-item-action waves-effect" routerLink="followed-series"
                    routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                    <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                    <fa-icon icon="heart" fixedWidth="true"></fa-icon>
                     <span>Followed Series</span>
                 </a>
             </span>
             <span *jhiHasAnyAuthority="'ROLE_ADMIN'">
                 <a class="list-group-item list-group-item-action waves-effect" routerLink="watched-episode"
                    routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                    <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                    <fa-icon icon="check-circle" fixedWidth="true"></fa-icon>
                     <span>Watched Episode</span>
                 </a>
             </span>

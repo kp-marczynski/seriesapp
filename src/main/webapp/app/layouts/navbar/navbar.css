@@ -135,3 +135,10 @@ Logo styles
 .logo-wrapper fa-icon{
     font-size: 3.5rem;
 }
+
+.search {
+    background-color: lightgray;
+}
+.search:hover{
+    background-color: whitesmoke;
+}

@@ -19,13 +19,11 @@ public class EpisodeServiceImpl implements EpisodeService {
     private EpisodeRepository episodeRepository;
     private WatchedEpisodeRepository watchedEpisodeRepository;
     private UserRepository userRepository;
-    private SeriesService seriesService;
 
-    public EpisodeServiceImpl(EpisodeRepository episodeRepository, WatchedEpisodeRepository watchedEpisodeRepository, UserRepository userRepository, SeriesService seriesService) {
+    public EpisodeServiceImpl(EpisodeRepository episodeRepository, WatchedEpisodeRepository watchedEpisodeRepository, UserRepository userRepository) {
         this.episodeRepository = episodeRepository;
         this.watchedEpisodeRepository = watchedEpisodeRepository;
         this.userRepository = userRepository;
-        this.seriesService = seriesService;
     }
 
     public Episode save(Episode episode) {
