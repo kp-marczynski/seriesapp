@@ -95,7 +95,7 @@ public class EpisodeResource {
     }
 
     /**
-     * GET  /episodes/:id : get the "id" episode.
+     * GET  /episodes/:id : get the episode by "id"
      *
      * @param id the id of the episode to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the episode, or with status 404 (Not Found)
@@ -126,7 +126,7 @@ public class EpisodeResource {
     }
 
     /**
-     * DELETE  /episodes/:id : delete the "id" episode.
+     * DELETE  /episodes/:id : delete episode by "id"
      *
      * @param id the id of the episode to delete
      * @return the ResponseEntity with status 200 (OK)
