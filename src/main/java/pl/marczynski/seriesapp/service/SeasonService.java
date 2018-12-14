@@ -4,7 +4,9 @@ import pl.marczynski.seriesapp.domain.Season;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Service interface for Season.
+ */
 public interface SeasonService {
 
     /**

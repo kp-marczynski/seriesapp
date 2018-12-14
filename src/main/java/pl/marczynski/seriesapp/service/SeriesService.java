@@ -5,7 +5,9 @@ import pl.marczynski.seriesapp.domain.Series;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Service interface for Series.
+ */
 public interface SeriesService {
 
     /**
