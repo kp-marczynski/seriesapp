@@ -19,12 +19,26 @@ import java.util.Optional;
 @Repository
 public interface FollowedSeriesRepository extends JpaRepository<FollowedSeries, Long> {
 
+    /**
+     * Find list of FollowedSeries for current user
+     * @return List of FollowedSeries
+     */
     @Query("select followed_series from FollowedSeries followed_series where followed_series.user.login = ?#{principal.username}")
     List<FollowedSeries> findByUserIsCurrentUser();
 
+    /**
+     * Find if current user is following series, which id is seriesId
+     * @param seriesId the id of the Series to check
+     * @return Optional of FollowedSeries
+     */
     @Query("select followed_series from FollowedSeries followed_series where followed_series.user.login = ?#{principal.username} and followed_series.series.id = :seriesId")
     Optional<FollowedSeries> findBySeriesIdAndUserIsCurrentUser(@Param("seriesId") Long seriesId);
 
+    /**
+     * Get an average rate for series, which id is seriesId
+     * @param seriesId the id of the Series to check
+     * @return Float
+     */
     @Query("select avg(case followed_series.rate " +
         "when 'BAD' then 1 " +
         "when 'MEDIOCRE' then 2 " +
@@ -34,6 +48,11 @@ public interface FollowedSeriesRepository extends JpaRepository<FollowedSeries, 
         "else 0 END) from FollowedSeries as followed_series where followed_series.series.id = :seriesId and followed_series.rate is not null")
     Float getAverageRateBySeriesId(@Param("seriesId") Long seriesId);
 
+    /**
+     * Get a count of how many users are following series, which id is seriesId
+     * @param seriesId the id of the Series to check
+     * @return Integer
+     */
     @Query("select count(followed_series) from FollowedSeries as followed_series where followed_series.series.id = :seriesId and followed_series.rate is not null")
     Integer getRateCountBySeriesId(@Param("seriesId") Long seriesId);
 }

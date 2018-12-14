@@ -27,6 +27,11 @@ public class FollowedSeriesServiceImpl implements FollowedSeriesService {
         this.seriesService = seriesService;
     }
 
+    /**
+     * Save FollowedSeries
+     * @param followedSeries followedSeries to save
+     * @return FollowedSerie
+     */
     @Override
     public FollowedSeries save(FollowedSeries followedSeries) {
         FollowedSeries result = null;
@@ -41,6 +46,10 @@ public class FollowedSeriesServiceImpl implements FollowedSeriesService {
         return result;
     }
 
+    /**
+     * Find all FollowedSeries
+     * @return List of FollowedSeries
+     */
     @Override
     public List<FollowedSeries> findAll() {
         if (SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) {
@@ -50,31 +59,61 @@ public class FollowedSeriesServiceImpl implements FollowedSeriesService {
         }
     }
 
+    /**
+     * Find FollowedSeries by id
+     * @param id the id of the FollowedSeries to find
+     * @return Optional of FollowedSeries
+     */
     @Override
     public Optional<FollowedSeries> findById(Long id) {
         return followedSeriesRepository.findById(id);
     }
 
+    /**
+     * Delete FollowedSeries by id
+     * @param id the id of the FollowedSeries to delete
+     */
     @Override
     public void deleteById(Long id) {
         followedSeriesRepository.deleteById(id);
     }
 
+    /**
+     * Update an existing followedSeries
+     *
+     * @param followedSeries followedSeries to update
+     * @return FollowedSeries
+     */
     @Override
     public FollowedSeries update(FollowedSeries followedSeries) {
         return save(followedSeries);
     }
 
+    /**
+     * Get an average rate for series, which id is seriesId
+     * @param seriesId the id of the Series to check
+     * @return Float
+     */
     @Override
     public Float getAverageRate(Long seriesId) {
         return followedSeriesRepository.getAverageRateBySeriesId(seriesId);
     }
 
+    /**
+     * Get a count of how many users are following series, which id is seriesId
+     * @param seriesId the id of the Series to check
+     * @return Integer
+     */
     @Override
     public Integer getRateCount(Long seriesId) {
         return followedSeriesRepository.getRateCountBySeriesId(seriesId);
     }
 
+    /**
+     * Find if current user is following series, which id is id
+     * @param id the id of the Series to check
+     * @return Optional of FollowedSeries
+     */
     @Override
     public Optional<FollowedSeries> findFollowedBySeriesId(Long id) {
         Optional<FollowedSeries> result;
