@@ -92,7 +92,7 @@ public class WatchedEpisodeResource {
     }
 
     /**
-     * GET  /watched-episodes/:id : get the "id" watchedEpisode.
+     * GET  /watched-episodes/:id : get the watchedEpisode by "id".
      *
      * @param id the id of the watchedEpisode to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the watchedEpisode, or with status 404 (Not Found)
@@ -106,7 +106,7 @@ public class WatchedEpisodeResource {
     }
 
     /**
-     * GET  /watched-episodes/episode/:id : get the "id" watchedEpisode.
+     * GET  /watched-episodes/episode/:id : get the watchedEpisode by "id".
      *
      * @param id the id of the episode in the watchedEpisode to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the watchedEpisode, or with status 404 (Not Found)
@@ -120,9 +120,9 @@ public class WatchedEpisodeResource {
     }
 
     /**
-     * GET  /watched-episodes/:id/average-rate : get the "id" watchedEpisode.
+     * GET  /watched-episodes/:id/average-rate : Get an average rate for episodes, which id is episodeId
      *
-     * @param id the id of the watchedEpisode to retrieve
+     * @param id the id of the watchedEpisode to check
      * @return the ResponseEntity with status 200 (OK) and with body the watchedEpisode, or with status 404 (Not Found)
      */
     @GetMapping("/watched-episodes/{id}/average-rate")
@@ -133,7 +133,7 @@ public class WatchedEpisodeResource {
     }
 
     /**
-     * GET  /watched-episodes/:id/rate-count : get the "id" watchedEpisode.
+     * GET  /watched-episodes/:id/rate-count : Get a count of how many users watched episode, which id is episodeId
      *
      * @param id the id of the watchedEpisode to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the watchedEpisode, or with status 404 (Not Found)
@@ -147,7 +147,7 @@ public class WatchedEpisodeResource {
 
 
     /**
-     * DELETE  /watched-episodes/:id : delete the "id" watchedEpisode.
+     * DELETE  /watched-episodes/:id : delete the watchedEpisode by "id".
      *
      * @param id the id of the watchedEpisode to delete
      * @return the ResponseEntity with status 200 (OK)
