@@ -95,7 +95,7 @@ public class SeriesResource {
     }
 
     /**
-     * GET  /series/:id : get the "id" series.
+     * GET  /series/:id : get the series by "id".
      *
      * @param id the id of the series to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the series, or with status 404 (Not Found)
@@ -109,9 +109,9 @@ public class SeriesResource {
     }
 
     /**
-     * GET  /series/search/:search : get the "id" series.
+     * GET  /series/search/:search : get the series by name(case doesn't matter).
      *
-     * @param search the search of the series to retrieve
+     * @param search the name of the series to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the series, or with status 404 (Not Found)
      */
     @GetMapping("/series/search/{search}")
@@ -122,7 +122,7 @@ public class SeriesResource {
     }
 
     /**
-     * GET  /series/:year/:name : get the "id" series.
+     * GET  /series/:year/:name : get the series by year and name.
      *
      * @param name the name of the series to retrieve
      * @param year the year of the series to retrieve
@@ -137,7 +137,7 @@ public class SeriesResource {
     }
 
     /**
-     * DELETE  /series/:id : delete the "id" series.
+     * DELETE  /series/:id : delete the series by "id".
      *
      * @param id the id of the series to delete
      * @return the ResponseEntity with status 200 (OK)
