@@ -71,10 +71,12 @@
                         <form>
                             <div class="form-group">
                                 <label for="comment">Your comment:</label>
+                                <div (click)="showErrorModal()">
                                 <textarea class="form-control" rows="5"
                                           id="comment"
                                           #comment
                                           (keydown.enter)="saveComment(comment.value)" [disabled]="followedSeries.comment">{{followedSeries.comment}}</textarea>
+                                </div>
                             </div>
                         </form>
                     </div>

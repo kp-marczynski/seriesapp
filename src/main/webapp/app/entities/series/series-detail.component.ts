@@ -157,4 +157,10 @@ export class SeriesDetailComponent implements OnInit {
     setVisible(seasonNumber: number) {
         this.visibleSeason = (this.visibleSeason == seasonNumber) ? null : seasonNumber;
     }
+
+    showErrorModal() {
+        if (this.followedSeries.id && this.followedSeries.comment) {
+            this.errorModalService.open("Once commented, series can't be commented again!");
+        }
+    }
 }

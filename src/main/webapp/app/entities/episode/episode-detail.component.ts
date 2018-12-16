@@ -153,4 +153,10 @@ export class EpisodeDetailComponent implements OnInit {
     previousState() {
         window.history.back();
     }
+
+    showErrorModal() {
+        if (this.watchedEpisode.id && this.watchedEpisode.comment) {
+            this.errorModalService.open("Once commented, episode can't be commented again!");
+        }
+    }
 }
