@@ -1,5 +1,6 @@
 package pl.marczynski.seriesapp.web.rest;
 
+import org.springframework.security.test.context.support.WithMockUser;
 import pl.marczynski.seriesapp.SeriesappApp;
 
 import pl.marczynski.seriesapp.domain.FollowedSeries;
@@ -7,6 +8,8 @@ import pl.marczynski.seriesapp.domain.User;
 import pl.marczynski.seriesapp.domain.Series;
 import pl.marczynski.seriesapp.domain.builder.FollowedSeriesBuilder;
 import pl.marczynski.seriesapp.repository.FollowedSeriesRepository;
+import pl.marczynski.seriesapp.repository.UserRepository;
+import pl.marczynski.seriesapp.security.SecurityUtils;
 import pl.marczynski.seriesapp.service.FollowedSeriesService;
 import pl.marczynski.seriesapp.web.rest.errors.ExceptionTranslator;
 
@@ -44,6 +47,7 @@ import pl.marczynski.seriesapp.web.rest.jhipster.TestUtil;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SeriesappApp.class)
+@WithMockUser(username = "mysterious_developer", authorities = {"ROLE_USER"}, password = "user")
 public class FollowedSeriesResourceIntTest {
 
     private static final Rate DEFAULT_RATE = Rate.BAD;
@@ -68,11 +72,16 @@ public class FollowedSeriesResourceIntTest {
     private ExceptionTranslator exceptionTranslator;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private EntityManager em;
 
     private MockMvc restFollowedSeriesMockMvc;
 
     private FollowedSeries followedSeries;
+
+    private User user;
 
     @Before
     public void setup() {
@@ -83,11 +92,12 @@ public class FollowedSeriesResourceIntTest {
             .setControllerAdvice(exceptionTranslator)
             .setConversionService(createFormattingConversionService())
             .setMessageConverters(jacksonMessageConverter).build();
+        user = userRepository.findOneByLogin("mysterious_developer").get();
     }
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -153,8 +163,9 @@ public class FollowedSeriesResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllFollowedSeries() throws Exception {
+    public void getAllFollowedSeriesForCurrentUser() throws Exception {
         // Initialize the database
+        followedSeries.setUser(user);
         followedSeriesRepository.saveAndFlush(followedSeries);
 
         // Get all the followedSeriesList
@@ -163,13 +174,14 @@ public class FollowedSeriesResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(followedSeries.getId().intValue())))
             .andExpect(jsonPath("$.[*].rate").value(hasItem(DEFAULT_RATE.toString())))
-            .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT.toString())));
+            .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT)));
     }
-    
+
     @Test
     @Transactional
     public void getFollowedSeries() throws Exception {
         // Initialize the database
+
         followedSeriesRepository.saveAndFlush(followedSeries);
 
         // Get the followedSeries
@@ -178,7 +190,7 @@ public class FollowedSeriesResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(followedSeries.getId().intValue()))
             .andExpect(jsonPath("$.rate").value(DEFAULT_RATE.toString()))
-            .andExpect(jsonPath("$.comment").value(DEFAULT_COMMENT.toString()));
+            .andExpect(jsonPath("$.comment").value(DEFAULT_COMMENT));
     }
 
     @Test

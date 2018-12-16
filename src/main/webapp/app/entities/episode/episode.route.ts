@@ -23,14 +23,12 @@ export class EpisodeResolve implements Resolve<IEpisode> {
         const seasonNumber = route.params['seasonNumber'] ? route.params['seasonNumber'] : null;
         const episodeNumber = route.params['episodeNumber'] ? route.params['episodeNumber'] : null;
         if (id) {
-            console.log("id route");
             return this.service.find(id).pipe(
                 filter((response: HttpResponse<Episode>) => response.ok),
                 map((episode: HttpResponse<Episode>) => episode.body)
             );
         }
         else if (year && name && seasonNumber && episodeNumber) {
-            console.log("series route");
             return this.service.findFromSeries(year, name, seasonNumber, episodeNumber).pipe(
                 filter((response: HttpResponse<Episode>) => response.ok),
                 map((episode: HttpResponse<Episode>) => episode.body)

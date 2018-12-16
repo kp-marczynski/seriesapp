@@ -21,4 +21,5 @@
     <include file="config/liquibase/changelog/20181208220002_add_series_season_episode.xml"  relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181208220003_add_followed_watched.xml"  relativeToChangelogFile="false"/>
 
+    <include file="config/liquibase/changelog/20181216220001_add_test_user.xml"  relativeToChangelogFile="false"/>
 </databaseChangeLog>

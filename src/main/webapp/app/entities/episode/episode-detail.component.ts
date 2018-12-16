@@ -24,7 +24,6 @@ export class EpisodeDetailComponent implements OnInit {
 
     ngOnInit() {
         this.activatedRoute.data.subscribe(({episode}) => {
-            console.log("Episode: " + episode);
             this.episode = episode;
             this.loadWatched();
             this.updateCommunityRate();
@@ -81,14 +80,12 @@ export class EpisodeDetailComponent implements OnInit {
                 (res: HttpResponse<IWatchedEpisode>) => {
                     this.watchedEpisode = res.body;
                     this.updateCommunityRate();
-                    console.log("updated");
                 }
             );
         } else {
             this.watchedEpisodeService.create(this.watchedEpisode).subscribe((res: HttpResponse<IWatchedEpisode>) => {
                 this.watchedEpisode = res.body;
                 this.updateCommunityRate();
-                console.log("saved");
             });
         }
     }

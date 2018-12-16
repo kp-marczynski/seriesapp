@@ -66,12 +66,11 @@ public class SeriesResource {
      * @return the ResponseEntity with status 200 (OK) and with body the updated series,
      * or with status 400 (Bad Request) if the series is not valid,
      * or with status 500 (Internal Server Error) if the series couldn't be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/series")
     @Timed
     @PreAuthorize("hasRole(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public ResponseEntity<Series> updateSeries(@Valid @RequestBody Series series) throws URISyntaxException {
+    public ResponseEntity<Series> updateSeries(@Valid @RequestBody Series series) {
         log.debug("REST request to update Series : {}", series);
         if (series.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

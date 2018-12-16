@@ -64,11 +64,10 @@ public class WatchedEpisodeResource {
      * @return the ResponseEntity with status 200 (OK) and with body the updated watchedEpisode,
      * or with status 400 (Bad Request) if the watchedEpisode is not valid,
      * or with status 500 (Internal Server Error) if the watchedEpisode couldn't be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/watched-episodes")
     @Timed
-    public ResponseEntity<WatchedEpisode> updateWatchedEpisode(@Valid @RequestBody WatchedEpisode watchedEpisode) throws URISyntaxException {
+    public ResponseEntity<WatchedEpisode> updateWatchedEpisode(@Valid @RequestBody WatchedEpisode watchedEpisode) {
         log.debug("REST request to update WatchedEpisode : {}", watchedEpisode);
         if (watchedEpisode.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

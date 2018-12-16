@@ -64,11 +64,10 @@ public class FollowedSeriesResource {
      * @return the ResponseEntity with status 200 (OK) and with body the updated followedSeries,
      * or with status 400 (Bad Request) if the followedSeries is not valid,
      * or with status 500 (Internal Server Error) if the followedSeries couldn't be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/followed-series")
     @Timed
-    public ResponseEntity<FollowedSeries> updateFollowedSeries(@Valid @RequestBody FollowedSeries followedSeries) throws URISyntaxException {
+    public ResponseEntity<FollowedSeries> updateFollowedSeries(@Valid @RequestBody FollowedSeries followedSeries) {
         log.debug("REST request to update FollowedSeries : {}", followedSeries);
         if (followedSeries.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

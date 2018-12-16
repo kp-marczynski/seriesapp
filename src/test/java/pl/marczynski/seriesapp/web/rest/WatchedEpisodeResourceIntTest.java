@@ -1,11 +1,13 @@
 package pl.marczynski.seriesapp.web.rest;
 
+import org.springframework.security.test.context.support.WithMockUser;
 import pl.marczynski.seriesapp.SeriesappApp;
 
 import pl.marczynski.seriesapp.domain.WatchedEpisode;
 import pl.marczynski.seriesapp.domain.User;
 import pl.marczynski.seriesapp.domain.Episode;
 import pl.marczynski.seriesapp.domain.builder.WatchedEpisodeBuilder;
+import pl.marczynski.seriesapp.repository.UserRepository;
 import pl.marczynski.seriesapp.repository.WatchedEpisodeRepository;
 import pl.marczynski.seriesapp.service.WatchedEpisodeService;
 import pl.marczynski.seriesapp.web.rest.errors.ExceptionTranslator;
@@ -44,6 +46,7 @@ import pl.marczynski.seriesapp.web.rest.jhipster.TestUtil;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SeriesappApp.class)
+@WithMockUser(username = "mysterious_developer", authorities = {"ROLE_USER"}, password = "user")
 public class WatchedEpisodeResourceIntTest {
 
     private static final Rate DEFAULT_RATE = Rate.BAD;
@@ -68,11 +71,16 @@ public class WatchedEpisodeResourceIntTest {
     private ExceptionTranslator exceptionTranslator;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private EntityManager em;
 
     private MockMvc restWatchedEpisodeMockMvc;
 
     private WatchedEpisode watchedEpisode;
+
+    private User user;
 
     @Before
     public void setup() {
@@ -83,6 +91,7 @@ public class WatchedEpisodeResourceIntTest {
             .setControllerAdvice(exceptionTranslator)
             .setConversionService(createFormattingConversionService())
             .setMessageConverters(jacksonMessageConverter).build();
+        user = userRepository.findOneByLogin("mysterious_developer").get();
     }
 
     /**
@@ -153,8 +162,9 @@ public class WatchedEpisodeResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllWatchedEpisodes() throws Exception {
+    public void getAllWatchedEpisodesForCurrentUser() throws Exception {
         // Initialize the database
+        watchedEpisode.setUser(user);
         watchedEpisodeRepository.saveAndFlush(watchedEpisode);
 
         // Get all the watchedEpisodeList
@@ -163,7 +173,7 @@ public class WatchedEpisodeResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(watchedEpisode.getId().intValue())))
             .andExpect(jsonPath("$.[*].rate").value(hasItem(DEFAULT_RATE.toString())))
-            .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT.toString())));
+            .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT)));
     }
 
     @Test
@@ -178,7 +188,7 @@ public class WatchedEpisodeResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(watchedEpisode.getId().intValue()))
             .andExpect(jsonPath("$.rate").value(DEFAULT_RATE.toString()))
-            .andExpect(jsonPath("$.comment").value(DEFAULT_COMMENT.toString()));
+            .andExpect(jsonPath("$.comment").value(DEFAULT_COMMENT));
     }
 
     @Test

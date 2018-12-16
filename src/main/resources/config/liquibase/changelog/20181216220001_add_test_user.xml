@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added Users.
+        Password for all: "user"
+    -->
+    <changeSet id="201812161828" author="kpmarczynski">
+        <insert tableName="jhi_user">
+            <column name="id" value="666"></column>
+            <column name="login" value="mysterious_developer"></column>
+            <column name="password_hash" value="$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K"></column>
+            <column name="first_name" value="Mysterious"></column>
+            <column name="last_name" value="Developer"></column>
+            <column name="email" value="mysterious@developer.com"></column>
+            <column name="activated" value="TRUE"></column>
+            <column name="lang_key" value="en"></column>
+            <column name="created_by" value="admin"></column>
+            <column name="created_date" value="2018-12-08 16:31:30.861"></column>
+            <column name="reset_date" value="2018-12-08 16:31:30.759"></column>
+            <column name="last_modified_by" value="admin"></column>
+            <column name="last_modified_date" value="2018-12-08 16:31:30.861"></column>
+        </insert>
+        <insert tableName="jhi_user_authority">
+            <column name="user_id" value="666"></column>
+            <column name="authority_name" value="ROLE_USER"></column>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

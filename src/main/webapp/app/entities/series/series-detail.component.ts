@@ -2,12 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
 import {ISeries} from 'app/shared/model/series.model';
-import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
-import {SeriesService} from "app/entities/series/series.service";
-import {IFollowedSeries, Rate} from "app/shared/model/followed-series.model";
-import {JhiAlertService} from "ng-jhipster";
-import {FollowedSeriesService} from "app/entities/followed-series";
-import {ErrorModalService} from "app/core/error-modal/error-modal.service";
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import {SeriesService} from 'app/entities/series/series.service';
+import {IFollowedSeries, Rate} from 'app/shared/model/followed-series.model';
+import {JhiAlertService} from 'ng-jhipster';
+import {FollowedSeriesService} from 'app/entities/followed-series';
+import {ErrorModalService} from 'app/core/error-modal/error-modal.service';
 
 @Component({
     selector: 'jhi-series-detail',
@@ -20,7 +20,11 @@ export class SeriesDetailComponent implements OnInit {
     averageRate: number = null;
     private rateCount: number;
 
-    constructor(private activatedRoute: ActivatedRoute, private seriesService: SeriesService, private jhiAlertService: JhiAlertService, private followedSeriesService: FollowedSeriesService, private errorModalService: ErrorModalService) {
+    constructor(private activatedRoute: ActivatedRoute,
+                private seriesService: SeriesService,
+                private jhiAlertService: JhiAlertService,
+                private followedSeriesService: FollowedSeriesService,
+                private errorModalService: ErrorModalService) {
     }
 
     ngOnInit() {
@@ -81,14 +85,12 @@ export class SeriesDetailComponent implements OnInit {
                 (res: HttpResponse<IFollowedSeries>) => {
                     this.followedSeries = res.body;
                     this.updateComunityRate();
-                    console.log("updated");
                 }
             );
         } else {
             this.followedSeriesService.create(this.followedSeries).subscribe((res: HttpResponse<IFollowedSeries>) => {
                 this.followedSeries = res.body;
                 this.updateComunityRate();
-                console.log("saved");
             });
         }
     }
