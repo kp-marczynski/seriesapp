@@ -94,7 +94,7 @@ public class SeasonResource {
     }
 
     /**
-     * GET  /seasons/:id : get the "id" season.
+     * GET  /seasons/:id : get the season by "id".
      *
      * @param id the id of the season to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the season, or with status 404 (Not Found)
@@ -108,7 +108,7 @@ public class SeasonResource {
     }
 
     /**
-     * DELETE  /seasons/:id : delete the "id" season.
+     * DELETE  /seasons/:id : delete the season by "id".
      *
      * @param id the id of the season to delete
      * @return the ResponseEntity with status 200 (OK)

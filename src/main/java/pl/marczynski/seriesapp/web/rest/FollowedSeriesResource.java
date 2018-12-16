@@ -92,7 +92,7 @@ public class FollowedSeriesResource {
     }
 
     /**
-     * GET  /followed-series/:id : get the "id" followedSeries.
+     * GET  /followed-series/:id : get the followedSeries by "id".
      *
      * @param id the id of the followedSeries to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the followedSeries, or with status 404 (Not Found)
@@ -106,7 +106,7 @@ public class FollowedSeriesResource {
     }
 
     /**
-     * GET  /followed-series/series/:id : get the "id" series.
+     * GET  /followed-series/series/:id : get the followed series by series "id".
      *
      * @param id the id of the series to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the series, or with status 404 (Not Found)
@@ -120,9 +120,9 @@ public class FollowedSeriesResource {
     }
 
     /**
-     * GET  /followed-series/:id/average-rate : get the "id" followedSeries.
+     * GET  /followed-series/:id/average-rate : Get an average rate for series, which id is id
      *
-     * @param id the id of the followedSeries to retrieve
+     * @param id the id of the followedSeries to check
      * @return the ResponseEntity with status 200 (OK) and with body the followedSeries, or with status 404 (Not Found)
      */
     @GetMapping("/followed-series/{id}/average-rate")
@@ -134,9 +134,9 @@ public class FollowedSeriesResource {
 
 
     /**
-     * GET  /followed-series/:id/rate-count : get the "id" followedSeries.
+     * GET  /followed-series/:id/rate-count : Get a count of how many users are following series, which id is id
      *
-     * @param id the id of the followedSeries to retrieve
+     * @param id the id of the followedSeries to check
      * @return the ResponseEntity with status 200 (OK) and with body the followedSeries, or with status 404 (Not Found)
      */
     @GetMapping("/followed-series/{id}/rate-count")
@@ -146,7 +146,7 @@ public class FollowedSeriesResource {
         return followedSeriesService.getRateCount(id);
     }
     /**
-     * DELETE  /followed-series/:id : delete the "id" followedSeries.
+     * DELETE  /followed-series/:id : delete the followedSeries by "id".
      *
      * @param id the id of the followedSeries to delete
      * @return the ResponseEntity with status 200 (OK)

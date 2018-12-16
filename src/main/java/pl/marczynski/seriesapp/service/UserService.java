@@ -7,7 +7,9 @@ import pl.marczynski.seriesapp.service.jhipster.dto.UserDTO;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Service interface for User.
+ */
 public interface UserService {
 
     Optional<User> activateRegistration(String key);

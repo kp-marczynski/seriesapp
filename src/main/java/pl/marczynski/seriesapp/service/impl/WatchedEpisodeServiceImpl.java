@@ -13,7 +13,9 @@ import pl.marczynski.seriesapp.service.WatchedEpisodeService;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Service class for managing WatchedEpisode.
+ */
 @Service
 public class WatchedEpisodeServiceImpl implements WatchedEpisodeService {
     private WatchedEpisodeRepository watchedEpisodeRepository;
@@ -28,6 +30,11 @@ public class WatchedEpisodeServiceImpl implements WatchedEpisodeService {
         this.episodeService = episodeService;
     }
 
+    /**
+     * Save WatchedEpisode
+     * @param watchedEpisode WatchedEpisode to save
+     * @return WatchedEpisode
+     */
     @Override
     public WatchedEpisode save(WatchedEpisode watchedEpisode) {
         WatchedEpisode result = null;
@@ -46,6 +53,10 @@ public class WatchedEpisodeServiceImpl implements WatchedEpisodeService {
         return result;
     }
 
+    /**
+     * Find all watchedEpisode
+     * @return List of watchedEpisode
+     */
     @Override
     public List<WatchedEpisode> findAll() {
         if (SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) {
@@ -55,31 +66,61 @@ public class WatchedEpisodeServiceImpl implements WatchedEpisodeService {
         }
     }
 
+    /**
+     * Find WatchedEpisode by id
+     * @param id the id of the WatchedEpisode to find
+     * @return Optional of WatchedEpisode
+     */
     @Override
     public Optional<WatchedEpisode> findById(Long id) {
         return watchedEpisodeRepository.findById(id);
     }
 
+    /**
+     * Delete WatchedEpisode by id
+     * @param id the id of the WatchedEpisode to delete
+     */
     @Override
     public void deleteById(Long id) {
         watchedEpisodeRepository.deleteById(id);
     }
 
+    /**
+     * Update an existing WatchedEpisode
+     *
+     * @param watchedEpisode WatchedEpisode to update
+     * @return WatchedEpisode
+     */
     @Override
     public WatchedEpisode update(WatchedEpisode watchedEpisode) {
         return save(watchedEpisode);
     }
 
+    /**
+     * Get an average rate for episodes, which id is episodeId
+     * @param episodeId the id of the episode to check
+     * @return Float
+     */
     @Override
     public Float getAverageRate(Long episodeId) {
         return watchedEpisodeRepository.getAverageRateByEpisodeId(episodeId);
     }
 
+    /**
+     * Get a count of how many users watched episode, which id is episodeId
+     * @param episodeId the id of the episode to check
+     * @return Integer
+     */
     @Override
     public Integer getRateCount(Long episodeId) {
         return watchedEpisodeRepository.getRateCountByEpisodeId(episodeId);
     }
 
+    /**
+     * Find if current user watched episode, which id is id
+     * @param id the id of the episode to check
+     * @return Optional of WatchedEpisode
+     */
     @Override
     public Optional<WatchedEpisode> findWatchedByEpisodeId(Long id) {
         Optional<WatchedEpisode> result;
