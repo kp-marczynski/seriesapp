@@ -15,13 +15,9 @@ import java.util.Optional;
 @Service
 public class SeriesServiceImpl implements SeriesService {
     private SeriesRepository seriesRepository;
-    private FollowedSeriesRepository followedSeriesRepository;
-    private UserRepository userRepository;
 
-    public SeriesServiceImpl(SeriesRepository SeriesRepository, FollowedSeriesRepository followedSeriesRepository, UserRepository userRepository) {
+    public SeriesServiceImpl(SeriesRepository SeriesRepository) {
         this.seriesRepository = SeriesRepository;
-        this.followedSeriesRepository = followedSeriesRepository;
-        this.userRepository = userRepository;
     }
 
     /**

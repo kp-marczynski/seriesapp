@@ -18,6 +18,7 @@ import java.util.Optional;
 @Service
 public class FollowedSeriesServiceImpl implements FollowedSeriesService {
     private FollowedSeriesRepository followedSeriesRepository;
+
     private UserService userService;
     private SeriesService seriesService;
 

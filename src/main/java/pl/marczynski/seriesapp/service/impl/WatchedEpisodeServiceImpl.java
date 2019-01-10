@@ -8,6 +8,7 @@ import pl.marczynski.seriesapp.repository.WatchedEpisodeRepository;
 import pl.marczynski.seriesapp.security.AuthoritiesConstants;
 import pl.marczynski.seriesapp.security.SecurityUtils;
 import pl.marczynski.seriesapp.service.EpisodeService;
+import pl.marczynski.seriesapp.service.FollowedSeriesService;
 import pl.marczynski.seriesapp.service.UserService;
 import pl.marczynski.seriesapp.service.WatchedEpisodeService;
 
@@ -19,11 +20,12 @@ import java.util.Optional;
 @Service
 public class WatchedEpisodeServiceImpl implements WatchedEpisodeService {
     private WatchedEpisodeRepository watchedEpisodeRepository;
-    private FollowedSeriesServiceImpl followedSeriesService;
+
+    private FollowedSeriesService followedSeriesService;
     private UserService userService;
     private EpisodeService episodeService;
 
-    public WatchedEpisodeServiceImpl(WatchedEpisodeRepository watchedEpisodeRepository, UserService userService, FollowedSeriesServiceImpl followedSeriesService, EpisodeService episodeService) {
+    public WatchedEpisodeServiceImpl(WatchedEpisodeRepository watchedEpisodeRepository, UserService userService, FollowedSeriesService followedSeriesService, EpisodeService episodeService) {
         this.watchedEpisodeRepository = watchedEpisodeRepository;
         this.userService = userService;
         this.followedSeriesService = followedSeriesService;
