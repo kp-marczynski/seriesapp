@@ -62,5 +62,5 @@ public interface WatchedEpisodeService {
      * @param id the id of the episode to check
      * @return Optional of WatchedEpisode
      */
-    Optional<WatchedEpisode> findWatchedByEpisodeId(Long id);
+    Optional<WatchedEpisode> getWatchedEpisodeForCurrentUserByEpisodeId(Long id);
 }

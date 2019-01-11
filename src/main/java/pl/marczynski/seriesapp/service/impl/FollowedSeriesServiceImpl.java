@@ -31,7 +31,7 @@ public class FollowedSeriesServiceImpl implements FollowedSeriesService {
     /**
      * Save FollowedSeries
      * @param followedSeries followedSeries to save
-     * @return FollowedSerie
+     * @return FollowedSeries
      */
     @Override
     public FollowedSeries save(FollowedSeries followedSeries) {

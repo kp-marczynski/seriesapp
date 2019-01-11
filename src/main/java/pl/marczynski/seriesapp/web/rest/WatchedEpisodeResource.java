@@ -1,9 +1,7 @@
 package pl.marczynski.seriesapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import org.springframework.security.access.prepost.PreAuthorize;
 import pl.marczynski.seriesapp.domain.WatchedEpisode;
-import pl.marczynski.seriesapp.security.AuthoritiesConstants;
 import pl.marczynski.seriesapp.service.WatchedEpisodeService;
 import pl.marczynski.seriesapp.web.rest.errors.BadRequestAlertException;
 import pl.marczynski.seriesapp.web.rest.jhipster.util.HeaderUtil;
@@ -114,7 +112,7 @@ public class WatchedEpisodeResource {
     @Timed
     public ResponseEntity<WatchedEpisode> getWatchedEpisodeForEpisodeId(@PathVariable Long id) {
         log.debug("REST request to get WatchedEpisode by Episode: {}", id);
-        Optional<WatchedEpisode> watchedEpisode = watchedEpisodeService.findWatchedByEpisodeId(id);
+        Optional<WatchedEpisode> watchedEpisode = watchedEpisodeService.getWatchedEpisodeForCurrentUserByEpisodeId(id);
         return ResponseUtil.wrapOrNotFound(watchedEpisode);
     }
 

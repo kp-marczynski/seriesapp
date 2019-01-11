@@ -14,6 +14,7 @@ import pl.marczynski.seriesapp.service.WatchedEpisodeService;
 
 import java.util.List;
 import java.util.Optional;
+
 /**
  * Service class for managing WatchedEpisode.
  */
@@ -34,11 +35,14 @@ public class WatchedEpisodeServiceImpl implements WatchedEpisodeService {
 
     /**
      * Save WatchedEpisode
+     *
      * @param watchedEpisode WatchedEpisode to save
      * @return WatchedEpisode
      */
     @Override
     public WatchedEpisode save(WatchedEpisode watchedEpisode) {
+        if (watchedEpisode == null) return null;
+
         WatchedEpisode result = null;
         Optional<User> user = userService.findCurrentUser();
         Optional<WatchedEpisode> watchedEpisodeOptional = watchedEpisodeRepository.findByEpisodeIdAndUserIsCurrentUser(watchedEpisode.getEpisode().getId());
@@ -57,6 +61,7 @@ public class WatchedEpisodeServiceImpl implements WatchedEpisodeService {
 
     /**
      * Find all watchedEpisode
+     *
      * @return List of watchedEpisode
      */
     @Override
@@ -70,6 +75,7 @@ public class WatchedEpisodeServiceImpl implements WatchedEpisodeService {
 
     /**
      * Find WatchedEpisode by id
+     *
      * @param id the id of the WatchedEpisode to find
      * @return Optional of WatchedEpisode
      */
@@ -80,6 +86,7 @@ public class WatchedEpisodeServiceImpl implements WatchedEpisodeService {
 
     /**
      * Delete WatchedEpisode by id
+     *
      * @param id the id of the WatchedEpisode to delete
      */
     @Override
@@ -100,6 +107,7 @@ public class WatchedEpisodeServiceImpl implements WatchedEpisodeService {
 
     /**
      * Get an average rate for episodes, which id is episodeId
+     *
      * @param episodeId the id of the episode to check
      * @return Float
      */
@@ -110,6 +118,7 @@ public class WatchedEpisodeServiceImpl implements WatchedEpisodeService {
 
     /**
      * Get a count of how many users watched episode, which id is episodeId
+     *
      * @param episodeId the id of the episode to check
      * @return Integer
      */
@@ -119,19 +128,27 @@ public class WatchedEpisodeServiceImpl implements WatchedEpisodeService {
     }
 
     /**
-     * Find if current user watched episode, which id is id
+     * Find or create watchedEpisode for current user by episode id
+     *
      * @param id the id of the episode to check
      * @return Optional of WatchedEpisode
      */
     @Override
-    public Optional<WatchedEpisode> findWatchedByEpisodeId(Long id) {
-        Optional<WatchedEpisode> result;
-        result = watchedEpisodeRepository.findByEpisodeIdAndUserIsCurrentUser(id);
-        if (!result.isPresent()) {
-            Optional<User> user = userService.findCurrentUser();
-            Optional<Episode> episode = episodeService.findById(id);
-            if (user.isPresent() && episode.isPresent()) {
-                result = Optional.of(new WatchedEpisodeBuilder().user(user.get()).episode(episode.get()).build());
+    public Optional<WatchedEpisode> getWatchedEpisodeForCurrentUserByEpisodeId(Long id) {
+        if(id == null) return Optional.empty();
+
+        Optional<User> user = userService.findCurrentUser();
+        Optional<WatchedEpisode> result = Optional.empty();
+
+        if (user.isPresent()) {
+            result = watchedEpisodeRepository.findByEpisodeIdAndUserIsCurrentUser(id);
+
+            if (!result.isPresent()) {
+                Optional<Episode> episode = episodeService.findById(id);
+
+                if (episode.isPresent()) {
+                    result = Optional.of(new WatchedEpisodeBuilder().user(user.get()).episode(episode.get()).build());
+                }
             }
         }
         return result;
