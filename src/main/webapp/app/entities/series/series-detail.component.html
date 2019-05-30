@@ -43,7 +43,7 @@
                 </button>
 
                 <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button"
-                        [routerLink]="['/series', series.id, 'edit']"
+                        [routerLink]="['/series', series.releaseYear, series.name, 'edit']"
                         class="btn btn-primary">
                     <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
                 </button>
@@ -75,7 +75,8 @@
                                 <textarea class="form-control" rows="5"
                                           id="comment"
                                           #comment
-                                          (keydown.enter)="saveComment(comment.value)" [disabled]="followedSeries.comment">{{followedSeries.comment}}</textarea>
+                                          (keydown.enter)="saveComment(comment.value)"
+                                          [disabled]="followedSeries.comment">{{followedSeries.comment}}</textarea>
                                 </div>
                             </div>
                         </form>

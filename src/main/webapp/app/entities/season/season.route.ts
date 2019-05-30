@@ -57,7 +57,7 @@ export const seasonRoute: Routes = [
             season: SeasonResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Seasons'
         },
         canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const seasonRoute: Routes = [
             season: SeasonResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Seasons'
         },
         canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const seasonPopupRoute: Routes = [
             season: SeasonResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Seasons'
         },
         canActivate: [UserRouteAccessService],

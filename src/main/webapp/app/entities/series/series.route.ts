@@ -1,21 +1,20 @@
-import {Injectable} from '@angular/core';
-import {HttpResponse} from '@angular/common/http';
-import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes} from '@angular/router';
-import {UserRouteAccessService} from 'app/core';
-import {Observable, of} from 'rxjs';
-import {filter, map} from 'rxjs/operators';
-import {Series} from 'app/shared/model/series.model';
-import {SeriesService} from './series.service';
-import {SeriesComponent} from './series.component';
-import {SeriesDetailComponent} from './series-detail.component';
-import {SeriesUpdateComponent} from './series-update.component';
-import {SeriesDeletePopupComponent} from './series-delete-dialog.component';
-import {ISeries} from 'app/shared/model/series.model';
+import { Injectable } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
+import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
+import { UserRouteAccessService } from 'app/core';
+import { Observable, of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import { Series } from 'app/shared/model/series.model';
+import { SeriesService } from './series.service';
+import { SeriesComponent } from './series.component';
+import { SeriesDetailComponent } from './series-detail.component';
+import { SeriesUpdateComponent } from './series-update.component';
+import { SeriesDeletePopupComponent } from './series-delete-dialog.component';
+import { ISeries } from 'app/shared/model/series.model';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class SeriesResolve implements Resolve<ISeries> {
-    constructor(private service: SeriesService) {
-    }
+    constructor(private service: SeriesService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Series> {
         const id = route.params['id'] ? route.params['id'] : null;
@@ -27,8 +26,7 @@ export class SeriesResolve implements Resolve<ISeries> {
                 filter((response: HttpResponse<Series>) => response.ok),
                 map((series: HttpResponse<Series>) => series.body)
             );
-        }
-        else if (name && year) {
+        } else if (name && year) {
             return this.service.findByNameAndReleaseYear(name, year).pipe(
                 filter((response: HttpResponse<Series>) => response.ok),
                 map((series: HttpResponse<Series>) => series.body)
@@ -88,19 +86,19 @@ export const seriesRoute: Routes = [
             series: SeriesResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Series'
         },
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'series/:id/edit',
+        path: 'series/:year/:name/edit',
         component: SeriesUpdateComponent,
         resolve: {
             series: SeriesResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Series'
         },
         canActivate: [UserRouteAccessService]
@@ -115,7 +113,7 @@ export const seriesPopupRoute: Routes = [
             series: SeriesResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Series'
         },
         canActivate: [UserRouteAccessService],
