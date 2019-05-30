@@ -41,7 +41,7 @@ export const episodeRoute: Routes = [
         path: 'episode',
         component: EpisodeComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Episodes'
         },
         canActivate: [UserRouteAccessService]
@@ -53,7 +53,7 @@ export const episodeRoute: Routes = [
             episode: EpisodeResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Episodes'
         },
         canActivate: [UserRouteAccessService]

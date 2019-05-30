@@ -33,7 +33,7 @@ export const watchedEpisodeRoute: Routes = [
         path: 'watched-episode',
         component: WatchedEpisodeComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'WatchedEpisodes'
         },
         canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const watchedEpisodeRoute: Routes = [
             watchedEpisode: WatchedEpisodeResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'WatchedEpisodes'
         },
         canActivate: [UserRouteAccessService]
@@ -57,7 +57,7 @@ export const watchedEpisodeRoute: Routes = [
             watchedEpisode: WatchedEpisodeResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'WatchedEpisodes'
         },
         canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const watchedEpisodeRoute: Routes = [
             watchedEpisode: WatchedEpisodeResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'WatchedEpisodes'
         },
         canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const watchedEpisodePopupRoute: Routes = [
             watchedEpisode: WatchedEpisodeResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'WatchedEpisodes'
         },
         canActivate: [UserRouteAccessService],

@@ -33,7 +33,7 @@ export const seasonRoute: Routes = [
         path: 'season',
         component: SeasonComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Seasons'
         },
         canActivate: [UserRouteAccessService]

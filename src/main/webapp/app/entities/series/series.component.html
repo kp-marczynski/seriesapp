@@ -1,14 +1,16 @@
 <div>
-    <h2 id="page-heading" *jhiHasAnyAuthority="'ROLE_ADMIN'">
-        <span>Series</span>
-        <button id="jh-create-entity"
-                class="btn btn-primary float-right jh-create-entity create-series" [routerLink]="['/series/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span>
+    <div style="padding:1rem;">
+        <h2 id="page-heading" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+            <span>Series</span>
+            <button id="jh-create-entity"
+                    class="btn btn-primary float-right jh-create-entity create-series" [routerLink]="['/series/new']">
+                <fa-icon [icon]="'plus'"></fa-icon>
+                <span>
             Create new Series
             </span>
-        </button>
-    </h2>
+            </button>
+        </h2>
+    </div>
     <jhi-alert></jhi-alert>
     <div class="list-group series-list-group">
         <div *ngFor="let series of series "

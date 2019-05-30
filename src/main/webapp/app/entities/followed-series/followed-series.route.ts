@@ -57,7 +57,7 @@ export const followedSeriesRoute: Routes = [
             followedSeries: FollowedSeriesResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'FollowedSeries'
         },
         canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const followedSeriesRoute: Routes = [
             followedSeries: FollowedSeriesResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'FollowedSeries'
         },
         canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const followedSeriesPopupRoute: Routes = [
             followedSeries: FollowedSeriesResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'FollowedSeries'
         },
         canActivate: [UserRouteAccessService],
